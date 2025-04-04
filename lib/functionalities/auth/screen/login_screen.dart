@@ -133,7 +133,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       GradientText(
-                        AppLocalizations.of(context)!.swiftBite,
+                        // AppLocalizations.of(context)!.swiftBite,
+                        "Swift Bite",
                         style: GoogleFonts.viga(
                             fontSize: 40, fontWeight: FontWeight.w400),
                         gradient: const LinearGradient(
@@ -144,7 +145,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       Text(
-                        AppLocalizations.of(context)!.slogun,
+                        // AppLocalizations.of(context)!.slogun,
+                        "Deliver Favorite Food",
                         style: GoogleFonts.inter(
                             fontWeight: FontWeight.w600, fontSize: 13),
                       ),
@@ -152,7 +154,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: height * 0.10,
                       ),
                       GradientText(
-                        AppLocalizations.of(context)!.loginAccount,
+                        // AppLocalizations.of(context)!.loginAccount,
+                        "Login To Your Account",
                         style: GoogleFonts.viga(
                             fontSize: 20, fontWeight: FontWeight.w400),
                         gradient: const LinearGradient(
@@ -170,7 +173,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: CustomeTextFormField(
                           maxline: 1,
                           textEditingController: emailController,
-                          hintText: AppLocalizations.of(context)!.email,
+                          hintText: "Email",
+                          //  AppLocalizations.of(context)!.email,
                           obscureText: false,
                           fillColor: const Color.fromARGB(255, 252, 255, 252),
                           borderColor: const Color.fromARGB(255, 252, 255, 252),
@@ -199,7 +203,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: CustomeTextFormField(
                           maxline: 1,
                           textEditingController: passwordController,
-                          hintText: AppLocalizations.of(context)!.password,
+                          hintText: "Password",
+                          // AppLocalizations.of(context)!.password,
                           obscureText: true,
                           borderColor: const Color.fromARGB(255, 252, 255, 252),
                           disabledColor:
@@ -235,7 +240,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             );
                           },
                           child: GradientText(
-                            AppLocalizations.of(context)!.forgotPass,
+                            // AppLocalizations.of(context)!.forgotPass,
+                            "Forgot Your Password",
                             style: GoogleFonts.poppins(
                                 fontSize: 16, fontWeight: FontWeight.w600),
                             gradient: const LinearGradient(
@@ -255,7 +261,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       kIsWeb
                           ? SizedBox()
                           : GradientText(
-                              AppLocalizations.of(context)!.countinueWith,
+                              // AppLocalizations.of(context)!.countinueWith,
+                              "or Continue With",
                               style: GoogleFonts.viga(
                                   fontSize: 12, fontWeight: FontWeight.w400),
                               gradient: const LinearGradient(
@@ -309,8 +316,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                             width: width / 60,
                                           ),
                                           Text(
-                                            AppLocalizations.of(context)!
-                                                .facebook,
+                                            // AppLocalizations.of(context)!
+                                            //     .facebook,
+                                            'Facebook',
                                             style: GoogleFonts.poppins(
                                               color: AppColors.blackColor,
                                               fontSize: 16,
@@ -373,8 +381,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                               width: width / 60,
                                             ),
                                             Text(
-                                              AppLocalizations.of(context)!
-                                                  .google,
+                                              // AppLocalizations.of(context)!
+                                              //     .google,
+                                              "Google",
                                               style: GoogleFonts.poppins(
                                                 color: AppColors.blackColor,
                                                 fontSize: 16,
@@ -413,7 +422,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           child: Center(
                             child: Text(
-                              AppLocalizations.of(context)!.login,
+                              // AppLocalizations.of(context)!.login,
+                              "Login",
                               style: GoogleFonts.poppins(
                                   color: AppColors.whiteColor,
                                   fontSize: 16,
@@ -438,7 +448,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           );
                         },
                         child: GradientText(
-                          AppLocalizations.of(context)!.dontHaveAccount,
+                          // AppLocalizations.of(context)!.dontHaveAccount,
+                          "Don't Have An Account?",
                           style: GoogleFonts.poppins(
                               fontSize: 16, fontWeight: FontWeight.w600),
                           gradient: const LinearGradient(

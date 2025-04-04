@@ -130,7 +130,8 @@ class _SignupProcessState extends State<SignupProcess> {
                         height: height * 0.02,
                       ),
                       GradientText(
-                        AppLocalizations.of(context)!.signupProcessTitle,
+                        // AppLocalizations.of(context)!.signupProcessTitle,
+                        "Fill in your bio to get started,",
                         style: GoogleFonts.poppins(
                             fontSize: 30, fontWeight: FontWeight.w600),
                         gradient: const LinearGradient(
@@ -144,7 +145,8 @@ class _SignupProcessState extends State<SignupProcess> {
                         height: height * 0.02,
                       ),
                       GradientText(
-                        AppLocalizations.of(context)!.proccessData,
+                        // AppLocalizations.of(context)!.proccessData,
+                        "This data will be displayed in your account profile for security,",
                         style: GoogleFonts.poppins(
                           fontSize: 16,
                           fontWeight: FontWeight.w400,
@@ -165,7 +167,8 @@ class _SignupProcessState extends State<SignupProcess> {
                           child: CustomeTextFormField(
                             maxline: 1,
                             textEditingController: fNameController,
-                            hintText: AppLocalizations.of(context)!.firstName,
+                            hintText: " Firsrt Name",
+                            //  AppLocalizations.of(context)!.firstName,
                             obscureText: false,
                             fillColor: const Color.fromARGB(255, 252, 255, 252),
                             borderColor:
@@ -190,7 +193,8 @@ class _SignupProcessState extends State<SignupProcess> {
                           child: CustomeTextFormField(
                             maxline: 1,
                             textEditingController: lNameController,
-                            hintText: AppLocalizations.of(context)!.lastName,
+                            hintText: "Last Name",
+                            //  AppLocalizations.of(context)!.lastName,
                             obscureText: false,
                             fillColor: const Color.fromARGB(255, 252, 255, 252),
                             borderColor:
@@ -215,8 +219,8 @@ class _SignupProcessState extends State<SignupProcess> {
                           child: CustomeTextFormField(
                             maxline: 1,
                             textEditingController: mobileController,
-                            hintText:
-                                AppLocalizations.of(context)!.mobileNumber,
+                            hintText: "Mobile Number",
+                            // AppLocalizations.of(context)!.mobileNumber,
                             obscureText: false,
                             fillColor: const Color.fromARGB(255, 252, 255, 252),
                             borderColor:
@@ -265,7 +269,8 @@ class _SignupProcessState extends State<SignupProcess> {
           ),
           child: Center(
             child: Text(
-              AppLocalizations.of(context)!.next,
+              "Next",
+              // AppLocalizations.of(context)!.next,
               style: GoogleFonts.poppins(
                   color: AppColors.whiteColor,
                   fontSize: 16,

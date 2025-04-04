@@ -385,20 +385,26 @@ class _SetLocationState extends State<SetLocation> {
   Future<bool> handleLocationPermission() async {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      showSnackBar(AppLocalizations.of(context)!.locationServiceDisabled);
+      showSnackBar(
+          // AppLocalizations.of(context)!.locationServiceDisabled
+          "Location services are disabled. Please enable the services.");
       return false;
     }
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        showSnackBar(AppLocalizations.of(context)!.locationPermissionDenied);
+        showSnackBar(
+          // AppLocalizations.of(context)!.locationPermissionDenied
+          "Location permissions are denied",
+        );
         return false;
       }
     }
     if (permission == LocationPermission.deniedForever) {
       showSnackBar(
-          AppLocalizations.of(context)!.locationPermissionPermanentlyDenied);
+          // AppLocalizations.of(context)!.locationPermissionPermanentlyDenied,
+          "Location permissions are permanently denied, we cannot request permissions.");
       return false;
     }
     return true;

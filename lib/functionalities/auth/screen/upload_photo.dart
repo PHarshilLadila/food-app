@@ -152,7 +152,7 @@ class _UploadPhotoState extends State<UploadPhoto> {
                     height: height * 0.02,
                   ),
                   GradientText(
-                    AppLocalizations.of(context)!.uploadYourProfile,
+                    "Upload Your Photo Profile,", // AppLocalizations.of(context)!.uploadYourProfile,
                     style: GoogleFonts.poppins(
                         fontSize: 30, fontWeight: FontWeight.w600),
                     gradient: const LinearGradient(
@@ -166,7 +166,8 @@ class _UploadPhotoState extends State<UploadPhoto> {
                     height: height * 0.02,
                   ),
                   GradientText(
-                    AppLocalizations.of(context)!.proccessData,
+                    "This data will be displayed in your account profile for security,",
+                    // AppLocalizations.of(context)!.proccessData,
                     style: GoogleFonts.poppins(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
@@ -211,7 +212,8 @@ class _UploadPhotoState extends State<UploadPhoto> {
                                 height: height * 0.01,
                               ),
                               GradientText(
-                                AppLocalizations.of(context)!.fromGallery,
+                                "From Gallery",
+                                // AppLocalizations.of(context)!.fromGallery,
                                 style: GoogleFonts.poppins(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
@@ -262,7 +264,8 @@ class _UploadPhotoState extends State<UploadPhoto> {
                                 height: height * 0.01,
                               ),
                               GradientText(
-                                AppLocalizations.of(context)!.takePhoto,
+                                "Take Photo",
+                                // AppLocalizations.of(context)!.takePhoto,
                                 style: GoogleFonts.poppins(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,

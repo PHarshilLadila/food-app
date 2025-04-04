@@ -104,7 +104,8 @@ class _ViewAuthProfileState extends State<ViewAuthProfile> {
                     height: height * 0.02,
                   ),
                   GradientText(
-                    AppLocalizations.of(context)!.yourUploadedPhoto,
+                    "Your Uploaded Profile Picture,",
+                    // AppLocalizations.of(context)!.yourUploadedPhoto,
                     style: GoogleFonts.poppins(
                         fontSize: 30, fontWeight: FontWeight.w600),
                     gradient: const LinearGradient(
@@ -118,7 +119,8 @@ class _ViewAuthProfileState extends State<ViewAuthProfile> {
                     height: height * 0.02,
                   ),
                   GradientText(
-                    AppLocalizations.of(context)!.proccessData,
+                    "This data will be displayed in your account profile for security,",
+                    // AppLocalizations.of(context)!.proccessData,
                     style: GoogleFonts.poppins(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,

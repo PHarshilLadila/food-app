@@ -46,7 +46,8 @@ class _ProfileDoneState extends State<ProfileDone> {
                 height: height * 0.03,
               ),
               GradientText(
-                AppLocalizations.of(context)!.congrats,
+                // AppLocalizations.of(context)!.congrats,
+                "Congrats!",
                 style: GoogleFonts.poppins(
                     fontSize: 40, fontWeight: FontWeight.w600),
                 gradient: const LinearGradient(
@@ -60,7 +61,8 @@ class _ProfileDoneState extends State<ProfileDone> {
                 height: height * 0.01,
               ),
               GradientText(
-                AppLocalizations.of(context)!.profileReady,
+                // AppLocalizations.of(context)!.profileReady,
+                "Your Profile Is Ready To Use",
                 style: GoogleFonts.poppins(
                     fontSize: 20, fontWeight: FontWeight.w400),
                 gradient: const LinearGradient(
@@ -97,7 +99,9 @@ class _ProfileDoneState extends State<ProfileDone> {
           ),
           child: Center(
             child: Text(
-              AppLocalizations.of(context)!.letsStarts,
+              // AppLocalizations.of(context)!.letsStarts,
+
+              "Let's Start",
               style: GoogleFonts.poppins(
                   color: AppColors.whiteColor,
                   fontSize: 16,

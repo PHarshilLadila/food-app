@@ -149,15 +149,17 @@ class _UpdateProfileState extends State<UpdateProfile> {
                             children: [
                               Flexible(
                                 child: Semantics(
-                                  value: AppLocalizations.of(context)!
-                                      .profileTitle,
+                                  value: "Here Your Profile",
+                                  //  AppLocalizations.of(context)!
+                                  //       .profileTitle,
                                   readOnly: true,
                                   label: "Profile Page Title'",
                                   header: true,
                                   hint: 'Profile Page Title',
                                   onTapHint: 'Profile Page Title',
                                   child: GradientText(
-                                    AppLocalizations.of(context)!.updateProfile,
+                                    "Update Your Profile Here",
+                                    // AppLocalizations.of(context)!.updateProfile,
                                     // 'Find Your \nFavorite Food',
                                     style: GoogleFonts.poppins(
                                         fontSize: 30,
@@ -259,7 +261,8 @@ class _UpdateProfileState extends State<UpdateProfile> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                AppLocalizations.of(context)!.userName,
+                                "User Name",
+                                // AppLocalizations.of(context)!.userName,
                                 style: GoogleFonts.poppins(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w700,
@@ -274,7 +277,8 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                 height: height / 60,
                               ),
                               Text(
-                                AppLocalizations.of(context)!.email,
+                                "Email",
+                                // AppLocalizations.of(context)!.email,
                                 style: GoogleFonts.poppins(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w700,
@@ -288,7 +292,8 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                 height: height / 60,
                               ),
                               Text(
-                                AppLocalizations.of(context)!.firstName,
+                                "First Name",
+                                // AppLocalizations.of(context)!.firstName,
                                 style: GoogleFonts.poppins(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w700,
@@ -302,7 +307,8 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                 height: height / 60,
                               ),
                               Text(
-                                AppLocalizations.of(context)!.lastName,
+                                "Last Name",
+                                // AppLocalizations.of(context)!.lastName,
                                 style: GoogleFonts.poppins(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w700,
@@ -316,7 +322,8 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                 height: height / 60,
                               ),
                               Text(
-                                AppLocalizations.of(context)!.mobileNumber,
+                                "Mobile Number",
+                                // AppLocalizations.of(context)!.mobileNumber,
                                 style: GoogleFonts.poppins(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w700,
@@ -330,7 +337,8 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                 height: height / 60,
                               ),
                               Text(
-                                AppLocalizations.of(context)!.location,
+                                "Location",
+                                // AppLocalizations.of(context)!.location,
                                 style: GoogleFonts.poppins(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w700,
