@@ -7,7 +7,7 @@ import 'package:food_app/constant/app_textform_field.dart';
 import 'package:food_app/functionalities/profile/help%20&%20support/provider/query_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RaisedComplainTab extends StatelessWidget {
   final double height;
@@ -37,7 +37,8 @@ class RaisedComplainTab extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AutoSizeText(
-              AppLocalizations.of(context)!.help,
+              "Help & Support",
+              // AppLocalizations.of(context)!.help,
               minFontSize: 16,
               maxFontSize: 18,
               style: GoogleFonts.poppins(
@@ -60,7 +61,8 @@ class RaisedComplainTab extends StatelessWidget {
                     disabledColor: AppColors.darkGreen.withOpacity(1.0),
                     enabledColor: AppColors.darkGreen.withOpacity(1.0),
                     focusedColor: AppColors.darkGreen.withOpacity(1.0),
-                    hintText: AppLocalizations.of(context)!.explainQuery,
+                    hintText: "Explain Your Query",
+                    //  AppLocalizations.of(context)!.explainQuery,
                     fillColor: const Color.fromARGB(55, 232, 255, 227),
                     hintcolors: AppColors.darkGreen.withOpacity(1.0),
                   ),

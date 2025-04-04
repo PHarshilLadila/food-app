@@ -12,7 +12,7 @@ import 'package:food_app/functionalities/bottom%20navigation%20bar/bottom_naviga
 import 'package:food_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 class LoginScreen extends StatefulWidget {

@@ -336,7 +336,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SetLocation extends StatefulWidget {
   const SetLocation({super.key});
@@ -468,7 +468,8 @@ class _SetLocationState extends State<SetLocation> {
           children: [
             SizedBox(height: height * 0.02),
             GradientText(
-              AppLocalizations.of(context)!.setYourLocation,
+              // AppLocalizations.of(context)!.setYourLocation,
+              "Set Your Location",
               style: GoogleFonts.poppins(
                   fontSize: 30, fontWeight: FontWeight.w600),
               gradient: const LinearGradient(
@@ -476,7 +477,8 @@ class _SetLocationState extends State<SetLocation> {
             ),
             SizedBox(height: height * 0.02),
             GradientText(
-              AppLocalizations.of(context)!.proccessData,
+              // AppLocalizations.of(context)!.proccessData,
+              "This data will be displayed in your account profile for security,",
               style: GoogleFonts.poppins(
                   fontSize: 16, fontWeight: FontWeight.w400),
               gradient: const LinearGradient(
@@ -510,8 +512,9 @@ class _SetLocationState extends State<SetLocation> {
                             ? myProccesser()
                             : GradientText(
                                 currentAddress ??
-                                    AppLocalizations.of(context)!
-                                        .setYourLocation,
+                                    // AppLocalizations.of(context)!
+                                    //     .setYourLocation,
+                                    "Set Your Location",
                                 style: GoogleFonts.poppins(
                                     fontSize: 16, fontWeight: FontWeight.w600),
                                 gradient: const LinearGradient(colors: [
@@ -541,7 +544,8 @@ class _SetLocationState extends State<SetLocation> {
                       ),
                       child: Center(
                         child: Text(
-                          AppLocalizations.of(context)!.setLocation,
+                          // AppLocalizations.of(context)!.setLocation,
+                          "Set Location",
                           style: GoogleFonts.poppins(
                               color: AppColors.blackColor,
                               fontSize: 16,
@@ -571,7 +575,8 @@ class _SetLocationState extends State<SetLocation> {
           ),
           child: Center(
             child: Text(
-              AppLocalizations.of(context)!.next,
+              // AppLocalizations.of(context)!.next,
+              "Next",
               style: GoogleFonts.poppins(
                   color: AppColors.whiteColor,
                   fontSize: 16,

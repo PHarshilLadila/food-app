@@ -11,7 +11,7 @@ import 'package:food_app/functionalities/profile/help%20&%20support/widget/conta
 import 'package:food_app/functionalities/profile/help%20&%20support/widget/faq_tab.dart';
 import 'package:food_app/functionalities/profile/help%20&%20support/widget/raised_complain_tab.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
@@ -87,7 +87,8 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
           automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
           title: GradientText(
-            AppLocalizations.of(context)!.helpAndSupportTitle,
+            "Raised Your Query Here",
+            // AppLocalizations.of(context)!.helpAndSupportTitle,
             style:
                 GoogleFonts.poppins(fontSize: 25, fontWeight: FontWeight.w400),
             gradient: const LinearGradient(

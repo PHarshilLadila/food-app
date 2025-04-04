@@ -18,7 +18,7 @@ import 'package:food_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class CartScreen extends StatefulWidget {
@@ -132,7 +132,8 @@ class _CartScreenState extends State<CartScreen> {
                     children: [
                       Flexible(
                         child: GradientText(
-                          AppLocalizations.of(context)!.cartTitle,
+                          "Manage Your Cart Here",
+                          // AppLocalizations.of(context)!.cartTitle,
                           style: GoogleFonts.poppins(
                               fontSize: 30, fontWeight: FontWeight.bold),
                           gradient: const LinearGradient(
@@ -178,7 +179,8 @@ class _CartScreenState extends State<CartScreen> {
                     height: height / 40,
                   ),
                   Text(
-                    AppLocalizations.of(context)!.cartItem,
+                    "Cart Items",
+                    // AppLocalizations.of(context)!.cartItem,
                     style: GoogleFonts.poppins(
                       fontSize: 18,
                       color: AppColors.blackColor,
@@ -271,9 +273,9 @@ class _CartScreenState extends State<CartScreen> {
                                 child: Column(
                                   children: [
                                     Text(
-                                      AppLocalizations.of(context)!.cartEmpty,
+                                      // AppLocalizations.of(context)!.cartEmpty,
 
-                                      // "Your cart is empty!",
+                                      "Your cart is empty!",
                                       style: GoogleFonts.poppins(
                                         fontSize: 18,
                                       ),
@@ -284,8 +286,9 @@ class _CartScreenState extends State<CartScreen> {
                                     CustomeButton(
                                       heights: height / 20,
                                       widths: width / 3,
-                                      name: AppLocalizations.of(context)!
-                                          .exploreFood,
+                                      name: "Explore Foods",
+                                      // AppLocalizations.of(context)!
+                                      // .exploreFood,
                                       ontap: () {
                                         Navigator.push(
                                           context,
@@ -810,17 +813,20 @@ class _MyFloatingActionButtonState extends State<MyFloatingActionButton> {
             child: Column(
               children: [
                 OrderRow(
-                  keys: AppLocalizations.of(context)!.subTotal,
+                  keys: "Sub Total",
+                  // AppLocalizations.of(context)!.subTotal,
                   amount: "${widget.totalofIndexItems!.toStringAsFixed(2)} \$",
                   fontSizes: 18,
                 ),
                 OrderRow(
-                  keys: AppLocalizations.of(context)!.deliveryCharge,
+                  keys: "Delivery Charge",
+                  //  AppLocalizations.of(context)!.deliveryCharge,
                   amount: "6 \$",
                   fontSizes: 18,
                 ),
                 OrderRow(
-                  keys: AppLocalizations.of(context)!.discount,
+                  keys: "Discount (5%)",
+                  //  AppLocalizations.of(context)!.discount,
                   amount: "${widget.itemdiscount?.toStringAsFixed(2)}\$",
                   fontSizes: 18,
                 ),
@@ -828,7 +834,8 @@ class _MyFloatingActionButtonState extends State<MyFloatingActionButton> {
                   height: widget.height / 100,
                 ),
                 OrderRow(
-                  keys: AppLocalizations.of(context)!.total,
+                  keys: "Total Amount",
+                  // AppLocalizations.of(context)!.total,
                   amount: "${widget.finalTotal!.toStringAsFixed(2)}\$",
                   fontSizes: 22,
                 ),
@@ -891,7 +898,8 @@ class _MyFloatingActionButtonState extends State<MyFloatingActionButton> {
                         ),
                         child: Center(
                           child: GradientText(
-                            AppLocalizations.of(context)!.placeOrder,
+                            "Place Your Order",
+                            // AppLocalizations.of(context)!.placeOrder,
                             style: GoogleFonts.poppins(
                                 fontSize: 18, fontWeight: FontWeight.bold),
                             gradient: const LinearGradient(

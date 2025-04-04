@@ -12,7 +12,7 @@ import 'package:food_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FavoriteItems extends StatefulWidget {
   final String? itemDescription;
@@ -108,8 +108,8 @@ class _FavoriteItemsState extends State<FavoriteItems> {
                       children: [
                         Flexible(
                           child: GradientText(
-                            AppLocalizations.of(context)!.favTitle,
-                            // 'Find Your \nFavorite Food',
+                            // AppLocalizations.of(context)!.favTitle,
+                            'Find Your Favorite Food',
                             style: GoogleFonts.poppins(
                                 fontSize: 30, fontWeight: FontWeight.bold),
                             gradient: const LinearGradient(
@@ -147,7 +147,8 @@ class _FavoriteItemsState extends State<FavoriteItems> {
                     ),
                     const SizedBox(height: 20),
                     Text(
-                      AppLocalizations.of(context)!.favoriteItems,
+                      "Favorite Items",
+                      // AppLocalizations.of(context)!.favoriteItems,
                       style: GoogleFonts.poppins(
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
@@ -167,15 +168,17 @@ class _FavoriteItemsState extends State<FavoriteItems> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    AppLocalizations.of(context)!.emptyFav,
+                                    "Your Favorite List is Empty",
+                                    // AppLocalizations.of(context)!.emptyFav,
                                     style: GoogleFonts.poppins(fontSize: 18),
                                   ),
                                   const SizedBox(height: 10),
                                   CustomeButton(
                                     heights: height / 20,
                                     widths: width / 2.5,
-                                    name: AppLocalizations.of(context)!
-                                        .exploreFood,
+                                    name: "Explore Foods",
+                                    // AppLocalizations.of(context)!
+                                    // .exploreFood,
                                     ontap: () {
                                       Navigator.push(
                                         context,

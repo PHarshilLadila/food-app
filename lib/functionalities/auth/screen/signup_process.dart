@@ -8,7 +8,7 @@ import 'package:food_app/functionalities/auth/providers/auth_provider.dart';
 import 'package:food_app/functionalities/auth/screen/upload_photo.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignupProcess extends StatefulWidget {
   const SignupProcess({super.key});

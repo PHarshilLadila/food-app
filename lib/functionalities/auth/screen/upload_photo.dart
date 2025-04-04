@@ -9,7 +9,7 @@ import 'package:food_app/functionalities/auth/screen/view_auth_profile.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UploadPhoto extends StatefulWidget {
   const UploadPhoto({super.key});

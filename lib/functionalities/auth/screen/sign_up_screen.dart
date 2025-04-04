@@ -9,7 +9,7 @@ import 'package:food_app/functionalities/auth/screen/login_screen.dart';
 import 'package:food_app/functionalities/auth/screen/signup_process.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -116,7 +116,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
                     GradientText(
-                      AppLocalizations.of(context)!.swiftBite,
+                      // AppLocalizations.of(context)!.swiftBite,
+                      "Swift Bite",
                       style: GoogleFonts.viga(
                           fontSize: 40, fontWeight: FontWeight.w400),
                       gradient: const LinearGradient(
@@ -127,7 +128,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
                     Text(
-                      AppLocalizations.of(context)!.slogun,
+                      // AppLocalizations.of(context)!.slogun,
+                      "Deliver Favorite Food",
                       style: GoogleFonts.inter(
                           fontWeight: FontWeight.w600, fontSize: 13),
                     ),
@@ -152,7 +154,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       width: textFieldWidth,
                       child: CustomeTextFormField(
                         maxline: 1,
-                        hintText: AppLocalizations.of(context)!.userName,
+                        hintText: "User Name",
+                        // AppLocalizations.of(context)!.userName,
                         textEditingController: userNameController,
                         obscureText: false,
                         fillColor: const Color.fromARGB(255, 252, 255, 252),
@@ -181,7 +184,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: CustomeTextFormField(
                         maxline: 1,
                         textEditingController: emailController,
-                        hintText: AppLocalizations.of(context)!.email,
+                        hintText: "Email",
+                        //  AppLocalizations.of(context)!.email,
                         obscureText: false,
                         fillColor: const Color.fromARGB(255, 252, 255, 252),
                         borderColor: const Color.fromARGB(255, 252, 255, 252),
@@ -209,7 +213,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: CustomeTextFormField(
                         maxline: 1,
                         textEditingController: passwordController,
-                        hintText: AppLocalizations.of(context)!.password,
+                        hintText: "Password",
+                        //  AppLocalizations.of(context)!.password,
                         obscureText: true,
                         fillColor: const Color.fromARGB(255, 252, 255, 252),
                         borderColor: const Color.fromARGB(255, 252, 255, 252),
@@ -253,7 +258,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         child: Center(
                           child: Text(
-                            AppLocalizations.of(context)!.createAccount,
+                            // AppLocalizations.of(context)!.createAccount,
+                            "Create Account",
                             style: GoogleFonts.poppins(
                               color: AppColors.whiteColor,
                               fontSize: 16,

@@ -7,7 +7,7 @@ import 'package:food_app/constant/app_sctring.dart';
 import 'package:food_app/functionalities/auth/screen/set_location.dart';
 import 'package:food_app/functionalities/auth/screen/upload_photo.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ViewAuthProfile extends StatefulWidget {
   final String? profileUrl;
@@ -174,7 +174,8 @@ class _ViewAuthProfileState extends State<ViewAuthProfile> {
                         );
                       },
                       child: Text(
-                        AppLocalizations.of(context)!.isUploadImage,
+                        "Update Image?",
+                        // AppLocalizations.of(context)!.isUploadImage,
                         style: GoogleFonts.poppins(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -216,7 +217,8 @@ class _ViewAuthProfileState extends State<ViewAuthProfile> {
           ),
           child: Center(
             child: Text(
-              AppLocalizations.of(context)!.next,
+              "Next",
+              // AppLocalizations.of(context)!.next,
               style: GoogleFonts.poppins(
                   color: AppColors.whiteColor,
                   fontSize: 16,

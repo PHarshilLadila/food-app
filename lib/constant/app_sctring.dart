@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppString {
-  static String mealsDescription(BuildContext context) =>
-      AppLocalizations.of(context)!.mealDiscription;
+  static String mealsDescription(BuildContext context) => "Meal Discription";
+  // AppLocalizations.of(context)!.mealDiscription;
 
   static String sentryDNS =
       "https://29c9093eb9665092e65e27b93b792cd9@o4509071050407936.ingest.de.sentry.io/4509071060369488";
