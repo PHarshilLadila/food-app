@@ -16,7 +16,6 @@ import 'package:food_app/functionalities/home/widget/category%20pages/cat_main_m
 import 'package:food_app/functionalities/home/widget/category%20pages/cat_pasta.dart';
 import 'package:food_app/functionalities/home/widget/grid%20and%20lists/meals_categories.dart';
 import 'package:food_app/functionalities/home/widget/populer_menu.dart';
-import 'package:food_app/functionalities/rest%20api%20with%20dio/get_data.dart';
 import 'package:food_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
