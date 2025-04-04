@@ -9,7 +9,6 @@ import 'package:food_app/functionalities/home/helper/list_data.dart';
 import 'package:food_app/functionalities/home/provider/home_provider.dart';
 import 'package:food_app/functionalities/home/screen/item_details.dart';
 import 'package:food_app/functionalities/home/widget/drag_note.dart';
-import 'package:food_app/functionalities/home/widget/dropped_cart_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
