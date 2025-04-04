@@ -121,7 +121,7 @@ class _MyAppState extends State<MyApp> {
       child: Consumer<LocalProvider>(
         builder: (BuildContext context, LocalProvider value, Widget? child) {
           return MaterialApp(
-            title: 'Flutter Demo',
+            title: 'Swift Bite',
             navigatorKey: globalNavigatorKey,
             // -- locale: value.appLocal,
             showSemanticsDebugger: false,
