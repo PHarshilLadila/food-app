@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/constant/app_colors.dart';
 import 'package:food_app/constant/app_gredient_text.dart';
@@ -39,9 +40,14 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           image: DecorationImage(
             fit: BoxFit.cover,
+            colorFilter: kIsWeb
+                ? ColorFilter.mode(
+                    Colors.white.withOpacity(0.2), BlendMode.dstATop)
+                : ColorFilter.mode(
+                    Colors.white.withOpacity(0.6), BlendMode.dstATop),
             alignment: Alignment.topCenter,
             image: AssetImage(
               "assets/images/newpattern.png",

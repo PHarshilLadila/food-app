@@ -20,7 +20,9 @@ import 'package:food_app/functionalities/custom%20paint/snow_fall.dart';
 import 'package:food_app/functionalities/profile/screen/fevorite_items.dart';
 import 'package:food_app/functionalities/profile/help%20&%20support/screen/help_support.dart';
 import 'package:food_app/functionalities/profile/screen/my_profile.dart';
+import 'package:food_app/functionalities/profile/screen/privacy.dart';
 import 'package:food_app/functionalities/profile/screen/setting.dart';
+import 'package:food_app/functionalities/profile/screen/term_and_condition.dart';
 import 'package:food_app/functionalities/profile/screen/three_avatar_error_handler.dart';
 import 'package:food_app/functionalities/profile/widgets/vertocal_container_button.dart';
 import 'package:food_app/functionalities/profile/widgets/widgets.dart';
@@ -478,11 +480,12 @@ class ProfileScreenState extends State<ProfileScreen>
               alignment: Alignment.topCenter,
               colorFilter: ColorFilter.mode(
                   // ignore: deprecated_member_use
-                  Colors.white.withOpacity(0.4),
+                  Colors.white.withOpacity(0.2),
                   BlendMode.dstATop),
               image: const AssetImage(
                 "assets/images/Pattern.png",
               ),
+              fit: kIsWeb ? BoxFit.cover : BoxFit.none,
             ),
           ),
           child: SafeArea(
@@ -902,6 +905,69 @@ class ProfileScreenState extends State<ProfileScreen>
                         icons: Icons.help_rounded,
                         name: "Help & Support",
                         //  AppLocalizations.of(context)!.help,
+                        colors: AppColors.darkGreen,
+                      ),
+                    ),
+                    SizedBox(height: height / 80),
+                    Semantics(
+                      label: "setting Button",
+                      button: true,
+                      hint:
+                          'manage your application settings onPress of settings button',
+                      onTapHint:
+                          'manage your application settings onPress of settings button',
+                      child: ContainerButton(
+                        height: height,
+                        width: width,
+                        onTap: () {
+                          Sentry.addBreadcrumb(
+                            Breadcrumb(
+                              message: "User clicked on Setting Screen.",
+                              level: SentryLevel.info,
+                            ),
+                          );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const PrivacyPolicyPage(),
+                            ),
+                          );
+                        },
+                        icons: Icons.privacy_tip,
+                        name: "Privacy & Policy",
+                        // AppLocalizations.of(context)!.setting,
+                        colors: AppColors.darkGreen,
+                      ),
+                    ),
+                    SizedBox(height: height / 80),
+                    Semantics(
+                      label: "setting Button",
+                      button: true,
+                      hint:
+                          'manage your application settings onPress of settings button',
+                      onTapHint:
+                          'manage your application settings onPress of settings button',
+                      child: ContainerButton(
+                        height: height,
+                        width: width,
+                        onTap: () {
+                          Sentry.addBreadcrumb(
+                            Breadcrumb(
+                              message: "User clicked on Setting Screen.",
+                              level: SentryLevel.info,
+                            ),
+                          );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const TermsAndConditionsPage(),
+                            ),
+                          );
+                        },
+                        icons: Icons.description,
+                        name: "Terms & Conditions",
+                        // AppLocalizations.of(context)!.setting,
                         colors: AppColors.darkGreen,
                       ),
                     ),

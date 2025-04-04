@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously, deprecated_member_use
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:food_app/constant/app_button.dart';
@@ -90,11 +91,11 @@ class _FavoriteItemsState extends State<FavoriteItems> {
             width: double.infinity,
             decoration: BoxDecoration(
               image: DecorationImage(
-                alignment: Alignment.topCenter,
-                colorFilter: ColorFilter.mode(
-                    Colors.white.withOpacity(0.4), BlendMode.dstATop),
-                image: const AssetImage("assets/images/Pattern.png"),
-              ),
+                  alignment: Alignment.topCenter,
+                  colorFilter: ColorFilter.mode(
+                      Colors.white.withOpacity(0.2), BlendMode.dstATop),
+                  image: const AssetImage("assets/images/Pattern.png"),
+                  fit: kIsWeb ? BoxFit.cover : BoxFit.none),
             ),
             child: SafeArea(
               child: Padding(

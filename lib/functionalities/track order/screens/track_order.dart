@@ -3,6 +3,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_stepper/easy_stepper.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/constant/app_button.dart';
 import 'package:food_app/functionalities/file%20operation/order_provider.dart';
@@ -79,10 +80,11 @@ class _TrackOrderState extends State<TrackOrder> {
           image: DecorationImage(
             alignment: Alignment.topCenter,
             colorFilter: ColorFilter.mode(
-                Colors.white.withOpacity(0.4), BlendMode.dstATop),
+                Colors.white.withOpacity(0.2), BlendMode.dstATop),
             image: const AssetImage(
               "assets/images/Pattern.png",
             ),
+            fit: kIsWeb ? BoxFit.cover : BoxFit.none,
           ),
         ),
         child: SafeArea(

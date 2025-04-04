@@ -1,5 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:country_pickers/country.dart';
+import 'package:country_pickers/country_picker_dropdown.dart';
+import 'package:country_pickers/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/constant/app_colors.dart';
 import 'package:food_app/constant/app_gredient_text.dart';
@@ -21,32 +24,39 @@ class _SignupProcessState extends State<SignupProcess> {
   final TextEditingController fNameController = TextEditingController();
   final TextEditingController lNameController = TextEditingController();
   final TextEditingController mobileController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   Future<void> proccess() async {
-    try {
-      await Provider.of<AuthProviders>(context, listen: false).addUserDetails(
-        fNameController.text.trim(),
-        lNameController.text.trim(),
-        mobileController.text.trim(),
-      );
-      debugPrint(fNameController.text.trim());
-      debugPrint(lNameController.text.trim());
-      debugPrint(mobileController.text.trim());
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const UploadPhoto(),
-        ),
-      );
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            e.toString(),
+    final FormState? form = _formKey.currentState;
+
+    if (form != null && form.validate()) {
+      try {
+        await Provider.of<AuthProviders>(context, listen: false).addUserDetails(
+          fNameController.text.trim(),
+          lNameController.text.trim(),
+          mobileController.text.trim(),
+        );
+        debugPrint(fNameController.text.trim());
+        debugPrint(lNameController.text.trim());
+        debugPrint(mobileController.text.trim());
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const UploadPhoto(),
           ),
-        ),
-      );
-      throw e.toString();
+        );
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              e.toString(),
+            ),
+          ),
+        );
+        throw e.toString();
+      }
+    } else {
+      setState(() {});
     }
   }
 
@@ -122,124 +132,180 @@ class _SignupProcessState extends State<SignupProcess> {
                     textFieldWidth = double.infinity;
                     debugPrint("screenWidth > 350");
                   }
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: height * 0.02,
-                      ),
-                      GradientText(
-                        // AppLocalizations.of(context)!.signupProcessTitle,
-                        "Fill in your bio to get started,",
-                        style: GoogleFonts.poppins(
-                            fontSize: 30, fontWeight: FontWeight.w600),
-                        gradient: const LinearGradient(
-                          colors: [
-                            AppColors.blackColor,
-                            AppColors.blackColor,
-                          ],
+                  return Form(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    key: _formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: height * 0.02,
                         ),
-                      ),
-                      SizedBox(
-                        height: height * 0.02,
-                      ),
-                      GradientText(
-                        // AppLocalizations.of(context)!.proccessData,
-                        "This data will be displayed in your account profile for security,",
-                        style: GoogleFonts.poppins(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        gradient: const LinearGradient(
-                          colors: [
-                            AppColors.blackColor,
-                            AppColors.blackColor,
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: height * 0.02,
-                      ),
-                      Center(
-                        child: SizedBox(
-                          width: textFieldWidth,
-                          child: CustomeTextFormField(
-                            maxline: 1,
-                            textEditingController: fNameController,
-                            hintText: " Firsrt Name",
-                            //  AppLocalizations.of(context)!.firstName,
-                            obscureText: false,
-                            fillColor: const Color.fromARGB(255, 252, 255, 252),
-                            borderColor:
-                                const Color.fromARGB(255, 252, 255, 252),
-                            disabledColor:
-                                const Color.fromARGB(255, 252, 255, 252),
-                            enabledColor: AppColors.darkGreen,
-                            focusedColor: AppColors.darkGreen,
-                            hintcolors: const Color(
-                              0xff3B3B3B,
-                            ),
-                            keyboradType: TextInputType.name,
+                        GradientText(
+                          // AppLocalizations.of(context)!.signupProcessTitle,
+                          "Fill in your bio to get started,",
+                          style: GoogleFonts.poppins(
+                              fontSize: 30, fontWeight: FontWeight.w600),
+                          gradient: const LinearGradient(
+                            colors: [
+                              AppColors.blackColor,
+                              AppColors.blackColor,
+                            ],
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: height * 0.02,
-                      ),
-                      Center(
-                        child: SizedBox(
-                          width: textFieldWidth,
-                          child: CustomeTextFormField(
-                            maxline: 1,
-                            textEditingController: lNameController,
-                            hintText: "Last Name",
-                            //  AppLocalizations.of(context)!.lastName,
-                            obscureText: false,
-                            fillColor: const Color.fromARGB(255, 252, 255, 252),
-                            borderColor:
-                                const Color.fromARGB(255, 252, 255, 252),
-                            disabledColor:
-                                const Color.fromARGB(255, 252, 255, 252),
-                            enabledColor: AppColors.darkGreen,
-                            focusedColor: AppColors.darkGreen,
-                            hintcolors: const Color(
-                              0xff3B3B3B,
-                            ),
-                            keyboradType: TextInputType.name,
+                        SizedBox(
+                          height: height * 0.02,
+                        ),
+                        GradientText(
+                          // AppLocalizations.of(context)!.proccessData,
+                          "This data will be displayed in your account profile for security,",
+                          style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          gradient: const LinearGradient(
+                            colors: [
+                              AppColors.blackColor,
+                              AppColors.blackColor,
+                            ],
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: height * 0.02,
-                      ),
-                      Center(
-                        child: SizedBox(
-                          width: textFieldWidth,
-                          child: CustomeTextFormField(
-                            maxline: 1,
-                            textEditingController: mobileController,
-                            hintText: "Mobile Number",
-                            // AppLocalizations.of(context)!.mobileNumber,
-                            obscureText: false,
-                            fillColor: const Color.fromARGB(255, 252, 255, 252),
-                            borderColor:
-                                const Color.fromARGB(255, 252, 255, 252),
-                            disabledColor:
-                                const Color.fromARGB(255, 252, 255, 252),
-                            enabledColor: AppColors.darkGreen,
-                            focusedColor: AppColors.darkGreen,
-                            hintcolors: const Color(
-                              0xff3B3B3B,
+                        SizedBox(
+                          height: height * 0.02,
+                        ),
+                        Center(
+                          child: SizedBox(
+                            width: textFieldWidth,
+                            child: CustomeTextFormField(
+                              maxline: 1,
+                              textEditingController: fNameController,
+                              hintText: " Firsrt Name",
+                              //  AppLocalizations.of(context)!.firstName,
+                              obscureText: false,
+                              fillColor:
+                                  const Color.fromARGB(255, 252, 255, 252),
+                              borderColor:
+                                  const Color.fromARGB(255, 252, 255, 252),
+                              disabledColor:
+                                  const Color.fromARGB(255, 252, 255, 252),
+                              enabledColor: AppColors.darkGreen,
+                              focusedColor: AppColors.darkGreen,
+                              hintcolors: const Color(
+                                0xff3B3B3B,
+                              ),
+                              keyboradType: TextInputType.name,
                             ),
-                            keyboradType: TextInputType.number,
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: height * 0.3,
-                      ),
-                    ],
+                        SizedBox(
+                          height: height * 0.02,
+                        ),
+                        Center(
+                          child: SizedBox(
+                            width: textFieldWidth,
+                            child: CustomeTextFormField(
+                              maxline: 1,
+                              textEditingController: lNameController,
+                              hintText: "Last Name",
+                              //  AppLocalizations.of(context)!.lastName,
+                              obscureText: false,
+                              fillColor:
+                                  const Color.fromARGB(255, 252, 255, 252),
+                              borderColor:
+                                  const Color.fromARGB(255, 252, 255, 252),
+                              disabledColor:
+                                  const Color.fromARGB(255, 252, 255, 252),
+                              enabledColor: AppColors.darkGreen,
+                              focusedColor: AppColors.darkGreen,
+                              hintcolors: const Color(
+                                0xff3B3B3B,
+                              ),
+                              keyboradType: TextInputType.name,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: height * 0.02,
+                        ),
+                        Center(
+                          child: SizedBox(
+                            width: textFieldWidth,
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: 170,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                      color: AppColors.darkGreen,
+                                      width: 1,
+                                    ),
+                                    color: const Color.fromARGB(
+                                        255, 252, 255, 252),
+                                  ),
+                                  child: CountryPickerDropdown(
+                                    initialValue: 'IN',
+                                    priorityList: [
+                                      CountryPickerUtils.getCountryByIsoCode(
+                                          'GB'),
+                                      CountryPickerUtils.getCountryByIsoCode(
+                                          'CN'),
+                                    ],
+                                    sortComparator: (Country a, Country b) =>
+                                        a.isoCode.compareTo(b.isoCode),
+                                    onValuePicked: (Country country) {
+                                      debugPrint(country.name);
+                                    },
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Flexible(
+                                  flex: 3,
+                                  fit: FlexFit.loose,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 15.0),
+                                    child: CustomeTextFormField(
+                                      maxline: 1,
+                                      textEditingController: mobileController,
+                                      hintText: "Mobile Number",
+                                      // AppLocalizations.of(context)!.mobileNumber,
+                                      obscureText: false,
+                                      fillColor: const Color.fromARGB(
+                                          255, 252, 255, 252),
+                                      borderColor: const Color.fromARGB(
+                                          255, 252, 255, 252),
+                                      disabledColor: const Color.fromARGB(
+                                          255, 252, 255, 252),
+                                      enabledColor: AppColors.darkGreen,
+                                      focusedColor: AppColors.darkGreen,
+                                      hintcolors: const Color(
+                                        0xff3B3B3B,
+                                      ),
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Please enter your Mobile Number';
+                                        }
+                                        if (value.length != 10) {
+                                          return 'Mobile Number must be of 10 digit';
+                                        }
+                                        return null;
+                                      },
+                                      keyboradType: TextInputType.number,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: height * 0.3,
+                        ),
+                      ],
+                    ),
                   );
                 },
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/constant/app_button.dart';
 import 'package:food_app/constant/app_colors.dart';
 import 'package:food_app/functionalities/bottom%20navigation%20bar/bottom_navigation_bar.dart';
 import 'dart:convert';
@@ -8,19 +9,12 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-void showAlertDialog(BuildContext context, String title, String message,
+void showAlertDialog(
+    BuildContext context, String title, String message, String buttonText,
     {required List<Widget> actions}) {
-  Widget continueButton = ElevatedButton(
-    style: const ButtonStyle(
-      backgroundColor: WidgetStatePropertyAll(
-        Color(0x80102A5B),
-      ),
-    ),
-    child: const Text(
-      "Continue",
-      style: TextStyle(color: Colors.white),
-    ),
-    onPressed: () {
+  Widget continueButton = CustomeButton(
+    name: buttonText,
+    ontap: () {
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -28,6 +22,8 @@ void showAlertDialog(BuildContext context, String title, String message,
         ),
       );
     },
+    heights: 45,
+    widths: 150,
   );
   AlertDialog alert = AlertDialog(
     title: Text(title),

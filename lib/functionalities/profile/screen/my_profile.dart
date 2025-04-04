@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:food_app/constant/app_button.dart';
 import 'package:food_app/constant/app_colors.dart';
 import 'package:food_app/constant/app_gredient_text.dart';
 import 'package:food_app/constant/app_sctring.dart';
@@ -98,10 +100,11 @@ class _UpdateProfileState extends State<UpdateProfile> {
               image: DecorationImage(
                 alignment: Alignment.topCenter,
                 colorFilter: ColorFilter.mode(
-                    Colors.white.withOpacity(0.4), BlendMode.dstATop),
+                    Colors.white.withOpacity(0.2), BlendMode.dstATop),
                 image: const AssetImage(
                   "assets/images/Pattern.png",
                 ),
+                fit: kIsWeb ? BoxFit.cover : BoxFit.none,
               ),
             ),
             child: SafeArea(
@@ -351,18 +354,11 @@ class _UpdateProfileState extends State<UpdateProfile> {
                             ],
                           ),
                           const SizedBox(height: 30),
-                          ElevatedButton(
-                            onPressed: updateProfile,
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.darkGreen,
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 50, vertical: 15),
-                            ),
-                            child: Text(
-                              "Done",
-                              style: GoogleFonts.poppins(
-                                  fontSize: 18, color: Colors.white),
-                            ),
+                          CustomeButton(
+                            heights: 50,
+                            widths: textFieldWidth,
+                            name: "Done",
+                            ontap: updateProfile,
                           ),
                         ],
                       );

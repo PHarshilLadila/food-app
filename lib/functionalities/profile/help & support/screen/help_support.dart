@@ -79,7 +79,9 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
         appBar: AppBar(
           centerTitle: false,
           toolbarHeight: 70,
-          flexibleSpace: const Image(
+          flexibleSpace: Image(
+            opacity: const AlwaysStoppedAnimation(0.3),
+            alignment: Alignment.topCenter,
             image: AssetImage('assets/images/Pattern.png'),
             fit: BoxFit.cover,
           ),

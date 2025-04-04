@@ -679,6 +679,7 @@ class _MyFloatingActionButtonState extends State<MyFloatingActionButton> {
       context,
       "Payment Failed",
       "Code: ${response.code}\nDescription: ${response.message}\nMetadata:${response.error.toString()}",
+      "Continue",
       actions: [
         TextButton(
           style: const ButtonStyle(
@@ -708,6 +709,7 @@ class _MyFloatingActionButtonState extends State<MyFloatingActionButton> {
       context,
       "External Wallet Selected",
       "${response.walletName}",
+      "Continue",
       actions: <Widget>[
         TextButton(
           style: const ButtonStyle(
@@ -849,38 +851,56 @@ class _MyFloatingActionButtonState extends State<MyFloatingActionButton> {
                     onTapHint: "Make Your Payment & Plcae yor order.",
                     child: GestureDetector(
                       onTap: () {
-                        int totalAmountPaisa =
-                            (widget.finalTotal! * 87.33).toInt();
+                        if (kDebugMode == false) {
+                          int totalAmountPaisa =
+                              (widget.finalTotal! * 87.33).toInt();
 
-                        debugPrint("$totalAmountPaisa");
+                          debugPrint("$totalAmountPaisa");
 
-                        Razorpay razorpay = Razorpay();
+                          Razorpay razorpay = Razorpay();
 
-                        var options = {
-                          'key': 'rzp_test_cYIYutCiDu13Ut',
-                          "currency": "INR",
-                          "amount": totalAmountPaisa * 100,
-                          'name': 'Swift Bite',
-                          'description': 'Pay your food bills',
-                          "theme.color": "#abffb0",
-                          'retry': {'enabled': true, 'max_count': 1},
-                          'send_sms_hash': true,
-                          'prefill': {
-                            'contact': '9613811624',
-                            'email': 'harshilgajipara006@gmail.com'
-                          },
-                          'external': {
-                            'wallets': ['paytm'],
-                          },
-                        };
+                          var options = {
+                            'key': 'rzp_test_cYIYutCiDu13Ut',
+                            "currency": "INR",
+                            "amount": totalAmountPaisa * 100,
+                            'name': 'Swift Bite',
+                            'description': 'Pay your food bills',
+                            "theme.color": "#abffb0",
+                            'retry': {'enabled': true, 'max_count': 1},
+                            'send_sms_hash': true,
+                            'prefill': {
+                              'contact': '9613811624',
+                              'email': 'harshilgajipara006@gmail.com'
+                            },
+                            'external': {
+                              'wallets': ['paytm'],
+                            },
+                          };
 
-                        razorpay.on(Razorpay.EVENT_PAYMENT_ERROR,
-                            handlePaymentErrorResponse);
-                        razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS,
-                            handlePaymentSuccessResponse);
-                        razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET,
-                            handleExternalWalletSelected);
-                        razorpay.open(options);
+                          razorpay.on(Razorpay.EVENT_PAYMENT_ERROR,
+                              handlePaymentErrorResponse);
+                          razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS,
+                              handlePaymentSuccessResponse);
+                          razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET,
+                              handleExternalWalletSelected);
+                          razorpay.open(options);
+                        } else if (kIsWeb == true) {
+                          showAlertDialog(
+                            context,
+                            "Payment",
+                            "This is a demo version. Payment is not available in the web version.",
+                            "Ok",
+                            actions: [],
+                          );
+                        } else {
+                          showAlertDialog(
+                            context,
+                            "Payment",
+                            "This is a demo version. Payment is not available in the web version.",
+                            "Ok",
+                            actions: [],
+                          );
+                        }
                       },
                       child: Container(
                         height: widget.height / 20,
