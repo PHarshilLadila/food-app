@@ -1,0 +1,2 @@
+C:/harshil-pr/food_app/android/app/.cxx/RelWithDebInfo/406ou4t5/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/harshil-pr/food_app/android/app/.cxx/RelWithDebInfo/406ou4t5/arm64-v8a/CMakeFiles/rebuild_cache.dir

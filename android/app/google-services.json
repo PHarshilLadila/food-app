@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "648059370095",
+    "project_id": "swift-bite-690e5",
+    "storage_bucket": "swift-bite-690e5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:648059370095:android:20ebe851b1b2f62d0eeb9a",
+        "android_client_info": {
+          "package_name": "com.example.food_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "648059370095-1bgk2gtltgn03t3ujj75st3ogd4n99e9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.food_app",
+            "certificate_hash": "33af7aa4e92dcff8c351aab6ff384b6d386be72c"
+          }
+        },
+        {
+          "client_id": "648059370095-v8qu4k980lrkl6b2grpkp2iairnosb69.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDd7nGB-xviu_GBQzrzFPq4CzcVGzfxs04"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "648059370095-v8qu4k980lrkl6b2grpkp2iairnosb69.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
