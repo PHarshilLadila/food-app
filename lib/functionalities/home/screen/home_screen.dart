@@ -20,7 +20,7 @@ import 'package:food_app/functionalities/rest%20api%20with%20dio/get_data.dart';
 import 'package:food_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -118,8 +118,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Flexible(
                             child: GradientText(
-                              // AppLocalizations.of(context)!.homeTitle,
-                              'Find Your Favorite Food',
+                              AppLocalizations.of(context)!.homeTitle,
+                              // 'Find Your Favorite Food',
                               style: GoogleFonts.poppins(
                                   fontSize: 30, fontWeight: FontWeight.bold),
                               gradient: const LinearGradient(
