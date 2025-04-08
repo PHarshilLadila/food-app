@@ -2,7 +2,6 @@
 
 import 'dart:convert';
 import 'dart:math';
-import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -505,7 +504,7 @@ class ProfileScreenState extends State<ProfileScreen>
                                 padding: const EdgeInsets.all(8.0),
                                 child: Image.asset(
                                   "assets/images/privacy/dots.png",
-                                  width: width / 20,
+                                  width: kIsWeb ? width / 60 : width / 20,
                                 ),
                               ),
                             ),
@@ -574,35 +573,6 @@ class ProfileScreenState extends State<ProfileScreen>
                                 ),
                               )
                         : const SizedBox(),
-
-                    // !is3DImage
-                    //     ? kIsWeb
-                    //         ? SizedBox()
-                    //         : Center(
-                    //             child: CustomeButton(
-                    //               heights: 36,
-                    //               widths: 180,
-                    //               name: "View 3D Avatar",
-                    //               ontap: () {
-                    //                 Sentry.addBreadcrumb(
-                    //                   Breadcrumb(
-                    //                     message:
-                    //                         "User clicked on Local 3D model",
-                    //                     level: SentryLevel.info,
-                    //                   ),
-                    //                 );
-                    //                 Navigator.push(
-                    //                   context,
-                    //                   MaterialPageRoute(
-                    //                     builder: (context) => Local3dModel(
-                    //                       threeDImageUrl: "$threeDImage",
-                    //                     ),
-                    //                   ),
-                    //                 );
-                    //               },
-                    //             ),
-                    //           )
-                    //     : SizedBox(),
                     const SizedBox(height: 10),
                     Center(
                       child: Semantics(
