@@ -166,12 +166,7 @@ class _ViewAuthProfileState extends State<ViewAuthProfile> {
                   Center(
                     child: TextButton(
                       onPressed: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const UploadPhoto(),
-                          ),
-                        );
+                        Navigator.pop(context);
                       },
                       child: Text(
                         "Update Image?",
@@ -193,10 +188,18 @@ class _ViewAuthProfileState extends State<ViewAuthProfile> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: GestureDetector(
         onTap: () {
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) => const SetLocation(),
+            ),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              backgroundColor: AppColors.darkGreen,
+              behavior: SnackBarBehavior.floating,
+              content: Text("Your Profile picture added successfully."),
+              duration: Duration(seconds: 2),
             ),
           );
         },

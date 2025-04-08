@@ -574,14 +574,31 @@ class _CartScreenState extends State<CartScreen> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: MyFloatingActionButton(
-        height: height,
-        width: width,
-        totalofIndexItems: totalofIndexItems,
-        itemdiscount: itemdiscount,
-        finalTotal: finalTotal,
-        cartData: allCartData,
-        itemList: itemList,
+      floatingActionButton: FutureBuilder(
+        future: _fetchCartItems(),
+        builder: (context, AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: myProccesser());
+          }
+          if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const SizedBox.shrink();
+          }
+
+          List<Map<String, dynamic>> cartItems = snapshot.data!;
+          allCartData = cartItems;
+
+          return cartItems.isEmpty
+              ? SizedBox()
+              : MyFloatingActionButton(
+                  height: height,
+                  width: width,
+                  totalofIndexItems: totalofIndexItems,
+                  itemdiscount: itemdiscount,
+                  finalTotal: finalTotal,
+                  cartData: allCartData,
+                  itemList: itemList,
+                );
+        },
       ),
     );
   }

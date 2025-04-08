@@ -21,6 +21,7 @@ import 'package:food_app/functionalities/profile/screen/fevorite_items.dart';
 import 'package:food_app/functionalities/profile/help%20&%20support/screen/help_support.dart';
 import 'package:food_app/functionalities/profile/screen/my_profile.dart';
 import 'package:food_app/functionalities/profile/screen/privacy.dart';
+import 'package:food_app/functionalities/profile/screen/profile_full_view.dart';
 import 'package:food_app/functionalities/profile/screen/setting.dart';
 import 'package:food_app/functionalities/profile/screen/term_and_condition.dart';
 import 'package:food_app/functionalities/profile/screen/three_avatar_error_handler.dart';
@@ -49,6 +50,13 @@ class ProfileScreenState extends State<ProfileScreen>
   late AnimationController animationController;
   late Animation<double> animation;
   final O3DController controller = O3DController();
+
+  final GlobalKey _menuKey = GlobalKey();
+
+  void _showPopupMenu() {
+    final dynamic popupMenuState = _menuKey.currentState;
+    popupMenuState.showButtonMenu();
+  }
 
   // final FlutterSecureStorage storage = const FlutterSecureStorage();
 
@@ -130,6 +138,18 @@ class ProfileScreenState extends State<ProfileScreen>
     }
   }
 
+  removeStoredImages2D3D() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.remove("finalThreeDImagePath");
+    await preferences.remove("FinalTwoDImagePath");
+    setState(() {
+      twoDImage = null;
+      threeDImage = null;
+      is2Dimage = false;
+      is3DImage = false;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -143,10 +163,9 @@ class ProfileScreenState extends State<ProfileScreen>
 
     animation = Tween<double>(begin: 0, end: 1).animate(animationController)
       ..addListener(() {});
-    Future.microtask(() {
-      Provider.of<ProfileProvider>(context, listen: false).profile;
-      Provider.of<ProfileProvider>(context, listen: false).getUserData();
-    });
+
+    Provider.of<ProfileProvider>(context, listen: false).profile;
+    Provider.of<ProfileProvider>(context, listen: false).getUserData();
 
     getStored2DImage();
     getStored3DImage();
@@ -158,19 +177,8 @@ class ProfileScreenState extends State<ProfileScreen>
     super.dispose();
   }
 
-  // void _flipCard() {
-  //   if (animationController.status != AnimationStatus.forward) {
-  //     if (isFront) {
-  //       animationController.forward();
-  //     } else {
-  //       animationController.reverse();
-  //     }
-  //     isFront = !isFront;
-  //   }
-  // }
   void _flipCard() {
-    if (animationController.isAnimating)
-      return; // Prevent multiple taps during animation
+    if (animationController.isAnimating) return;
 
     if (isFront) {
       animationController.forward();
@@ -180,28 +188,6 @@ class ProfileScreenState extends State<ProfileScreen>
     isFront = !isFront;
   }
 
-  // Widget _buildFront() {
-  //   var provider = Provider.of<ProfileProvider>(context, listen: false).profile;
-  //   var myProfile = provider?.profileImage!;
-
-  //   if (myProfile!.isEmpty) {
-  //     myProccesser();
-  //   }
-  //   return Container(
-  //     decoration: BoxDecoration(
-  //         color: const Color.fromARGB(255, 203, 238, 205),
-  //         borderRadius: BorderRadius.circular(15)),
-  //     child: ClipRRect(
-  //       borderRadius: BorderRadius.circular(15.0),
-  //       child: Image.memory(
-  //         fit: BoxFit.cover,
-  //         base64Decode(myProfile!),
-  //         height: 140.0,
-  //         width: 140.0,
-  //       ),
-  //     ),
-  //   );
-  // }
   Widget _buildFront() {
     var provider = Provider.of<ProfileProvider>(context, listen: false).profile;
     var myProfile = provider?.profileImage;
@@ -353,112 +339,39 @@ class ProfileScreenState extends State<ProfileScreen>
                     Image.network(
                       twoDImage ??
                           "https://cdn3.iconfinder.com/data/icons/nft-blockchain-technology-rich-series/256/PFP-512.png",
+                      height: 90,
                       loadingBuilder: (context, child, loadingProgress) {
                         if (loadingProgress == null) return child;
-                        return const Center(
-                          child: CircularProgressIndicator(),
+                        return Center(
+                          child: myProccesser(),
                         );
                       },
                       errorBuilder: (context, error, stackTrace) {
                         return const Icon(Icons.error, color: Colors.red);
                       },
                     ),
+                    !is2Dimage
+                        ? Expanded(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 4.0),
+                              child: Text(
+                                "Create your 3D avatar",
+                                style: GoogleFonts.roboto(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          )
+                        : Text(""),
                   ],
                 ),
         ),
       ),
     );
   }
-
-  // Widget _buildBack() {
-  //   return Transform(
-  //     alignment: Alignment.center,
-  //     transform: Matrix4.rotationY(3.14),
-  //     child: Container(
-  //       decoration: BoxDecoration(
-  //         color: const Color.fromARGB(255, 203, 238, 205),
-  //         border: Border.all(
-  //           color: AppColors.darkGreen,
-  //           width: 0.5,
-  //         ),
-  //         borderRadius: BorderRadius.circular(15),
-  //       ),
-  //       child: Center(
-  //         child: is2Dimage
-  //             ? Stack(
-  //                 children: [
-  //                   !is3DImage
-  //                       ? Container(
-  //                           width: 140,
-  //                           height: 140,
-  //                           decoration: BoxDecoration(
-  //                             color: const Color.fromARGB(255, 203, 238, 205),
-  //                             border: Border.all(
-  //                               color: AppColors.darkGreen,
-  //                               width: 0.5,
-  //                             ),
-  //                             borderRadius: BorderRadius.circular(15),
-  //                           ),
-  //                           child: O3D(
-  //                             controller: controller,
-  //                             src: threeDImage ?? "assets/images/avatar.glb",
-  //                             alt: "3D Model of Avatar",
-  //                             autoRotate: true,
-  //                             cameraControls: true,
-  //                           ),
-  //                         )
-  //                       : ClipRRect(
-  //                           borderRadius: BorderRadius.circular(15),
-  //                           child: Image.network(
-  //                             twoDImage ??
-  //                                 "https://cdn3.iconfinder.com/data/icons/nft-blockchain-technology-rich-series/256/PFP-512.png",
-  //                             fit: BoxFit.cover,
-  //                             width: 140,
-  //                             height: 140,
-  //                           ),
-  //                         ),
-  //                   Positioned(
-  //                     right: 5,
-  //                     bottom: 5,
-  //                     child: GestureDetector(
-  //                       onTap: () {
-  //                         setState(() {
-  //                           is3DImage = !is3DImage;
-  //                         });
-  //                       },
-  //                       child: Container(
-  //                         decoration: BoxDecoration(
-  //                           color: const Color.fromARGB(255, 21, 88, 5),
-  //                           borderRadius: BorderRadius.circular(10),
-  //                         ),
-  //                         child: Padding(
-  //                           padding: const EdgeInsets.all(8.0),
-  //                           child: Center(
-  //                             child: Text(
-  //                               is3DImage ? "2D" : "3D",
-  //                               style: const TextStyle(color: Colors.white),
-  //                             ),
-  //                           ),
-  //                         ),
-  //                       ),
-  //                     ),
-  //                   ),
-  //                 ],
-  //               )
-  //             : Column(
-  //                 mainAxisAlignment: MainAxisAlignment.center,
-  //                 crossAxisAlignment: CrossAxisAlignment.center,
-  //                 children: [
-  //                   Image.network(
-  //                     twoDImage ??
-  //                         "https://cdn3.iconfinder.com/data/icons/nft-blockchain-technology-rich-series/256/PFP-512.png",
-  //                   ),
-  //                 ],
-  //               ),
-  //       ),
-  //     ),
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -526,25 +439,60 @@ class ProfileScreenState extends State<ProfileScreen>
                             ),
                           ),
                         ),
-                        Semantics(
-                          label: "Notification Button",
-                          button: true,
-                          hint:
-                              'Notification Button to redairect notification page',
-                          onTapHint:
-                              'Notification Button to redairect notification page',
+                        PopupMenuButton<String>(
+                          borderRadius: BorderRadius.circular(15),
+                          key: _menuKey,
+                          onSelected: (String value) {
+                            switch (value) {
+                              case 'option1':
+                                removeStoredImages2D3D();
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    backgroundColor: AppColors.darkGreen,
+                                    behavior: SnackBarBehavior.floating,
+                                    content:
+                                        Text("Remove 3D Avatar successfully"),
+                                  ),
+                                );
+                                debugPrint("Delete");
+                                break;
+                              case 'option2':
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const ProfileFullView(),
+                                  ),
+                                );
+                                debugPrint("Edit");
+                                break;
+                              case 'option3':
+                                // Handle share
+                                debugPrint("Share");
+                                break;
+                            }
+                          },
+                          itemBuilder: (BuildContext context) =>
+                              <PopupMenuEntry<String>>[
+                            PopupMenuItem<String>(
+                              value: 'option1',
+                              child: Text('Remove Avatar'),
+                            ),
+                            PopupMenuItem<String>(
+                              value: 'option2',
+                              child: Text('View Profile Image'),
+                            ),
+                            PopupMenuItem<String>(
+                              value: 'option3',
+                              child: Text('Share'),
+                            ),
+                          ],
                           child: GestureDetector(
-                            onTap: () {
-                              Sentry.addBreadcrumb(
-                                Breadcrumb(
-                                  message: "User clicked on Shader widget",
-                                  level: SentryLevel.info,
-                                ),
-                              );
-                            },
+                            onTap: _showPopupMenu,
                             child: Container(
+                              padding: const EdgeInsets.all(4),
                               decoration: BoxDecoration(
-                                color: AppColors.whiteColor,
+                                color: Colors.white,
                                 borderRadius: BorderRadius.circular(15),
                                 boxShadow: [
                                   BoxShadow(
@@ -556,9 +504,8 @@ class ProfileScreenState extends State<ProfileScreen>
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Image.asset(
-                                  "assets/images/home/notification.png",
-                                  height: height / 30,
-                                  width: width / 12,
+                                  "assets/images/privacy/dots.png",
+                                  width: width / 20,
                                 ),
                               ),
                             ),
@@ -599,9 +546,9 @@ class ProfileScreenState extends State<ProfileScreen>
                       ),
                     ),
                     const SizedBox(height: 15),
-                    !is3DImage
+                    (is2Dimage && !is3DImage)
                         ? kIsWeb
-                            ? SizedBox()
+                            ? const SizedBox()
                             : Center(
                                 child: CustomeButton(
                                   heights: 36,
@@ -626,7 +573,36 @@ class ProfileScreenState extends State<ProfileScreen>
                                   },
                                 ),
                               )
-                        : SizedBox(),
+                        : const SizedBox(),
+
+                    // !is3DImage
+                    //     ? kIsWeb
+                    //         ? SizedBox()
+                    //         : Center(
+                    //             child: CustomeButton(
+                    //               heights: 36,
+                    //               widths: 180,
+                    //               name: "View 3D Avatar",
+                    //               ontap: () {
+                    //                 Sentry.addBreadcrumb(
+                    //                   Breadcrumb(
+                    //                     message:
+                    //                         "User clicked on Local 3D model",
+                    //                     level: SentryLevel.info,
+                    //                   ),
+                    //                 );
+                    //                 Navigator.push(
+                    //                   context,
+                    //                   MaterialPageRoute(
+                    //                     builder: (context) => Local3dModel(
+                    //                       threeDImageUrl: "$threeDImage",
+                    //                     ),
+                    //                   ),
+                    //                 );
+                    //               },
+                    //             ),
+                    //           )
+                    //     : SizedBox(),
                     const SizedBox(height: 10),
                     Center(
                       child: Semantics(

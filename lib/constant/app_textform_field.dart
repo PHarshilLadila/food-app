@@ -44,7 +44,6 @@ class CustomeTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      autovalidateMode: AutovalidateMode.always,
       validator: validator,
       maxLines: maxline,
       maxLength: maxlength,

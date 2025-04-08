@@ -79,8 +79,19 @@ class _ProfileDoneState extends State<ProfileDone> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: GestureDetector(
         onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const BottomScreen()));
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const BottomScreen()),
+            (route) => false,
+          );
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              backgroundColor: AppColors.darkGreen,
+              behavior: SnackBarBehavior.floating,
+              content: Text("Nice! Your Profile is Ready to Use"),
+              duration: Duration(seconds: 2),
+            ),
+          );
         },
         child: Container(
           width: width * 0.4,

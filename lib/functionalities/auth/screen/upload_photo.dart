@@ -36,7 +36,7 @@ class _UploadPhotoState extends State<UploadPhoto> {
         Provider.of<AuthProviders>(context, listen: false)
             .addImageProfile(profileImage);
       });
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => ViewAuthProfile(
@@ -61,7 +61,7 @@ class _UploadPhotoState extends State<UploadPhoto> {
         Provider.of<AuthProviders>(context, listen: false)
             .addImageProfile(profileImage);
       });
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => ViewAuthProfile(

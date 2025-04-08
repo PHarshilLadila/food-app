@@ -301,6 +301,8 @@ class AuthProviders extends ChangeNotifier {
   User? googleUser;
   ProfileModel? _user;
   bool _isLoading = false;
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   bool get isLoading => _isLoading;
 
@@ -320,7 +322,9 @@ class AuthProviders extends ChangeNotifier {
   Future<void> login(String email, String password) async {
     try {
       UserCredential result = await auth.signInWithEmailAndPassword(
-          email: email, password: password);
+        email: email,
+        password: password,
+      );
 
       DocumentSnapshot snapshot =
           await firestore.collection("users").doc(result.user!.uid).get();
@@ -333,8 +337,33 @@ class AuthProviders extends ChangeNotifier {
       await databaseBox.put('userid', result.user!.uid);
 
       notifyListeners();
+    } on FirebaseAuthException catch (error) {
+      String errorMessage;
+      switch (error.code) {
+        case "invalid-email":
+          errorMessage = "Your email address appears to be malformed.";
+          break;
+        case "wrong-password":
+          errorMessage = "Your password is incorrect.";
+          break;
+        case "user-not-found":
+          errorMessage = "User with this email doesn't exist.";
+          break;
+        case "user-disabled":
+          errorMessage = "This user account has been disabled.";
+          break;
+        case "too-many-requests":
+          errorMessage = "Too many attempts. Please try again later.";
+          break;
+        case "operation-not-allowed":
+          errorMessage = "Email/password login is not enabled.";
+          break;
+        default:
+          errorMessage = "An unexpected error occurred. Please try again.";
+      }
+      throw Exception(errorMessage);
     } catch (e) {
-      throw e.toString();
+      throw Exception("Something went wrong. Please try again.");
     }
   }
 
@@ -487,6 +516,14 @@ class AuthProviders extends ChangeNotifier {
     );
   }
 
+  Future<void> forgotPassword(String emailAddress) async {
+    try {
+      await auth.sendPasswordResetEmail(email: emailAddress);
+    } on FirebaseAuthException catch (e) {
+      debugPrint("Google Sign-In Error: ${e.message}");
+    }
+  }
+
   Future<void> addImageProfile(String imageUrl) async {
     await firestore.collection("users").doc(user!.uid).update(
       {
@@ -506,21 +543,33 @@ class AuthProviders extends ChangeNotifier {
   Future<void> logout() async {
     Box? boxData = Hive.box("userProfile");
     var userUid = boxData.get("userid");
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.get("FinalTwoDImagePath");
+    preferences.get("finalThreeDImagePath");
 
     if (gUser != null) {
       await googleSignIn.signOut();
       await boxData.clear();
+      await preferences.remove("FinalTwoDImagePath");
+      await preferences.remove("finalThreeDImagePath");
+      await preferences.clear();
 
       gUser = null;
     } else if (_user != null) {
       await auth.signOut();
       _user = null;
       await boxData.clear();
+      await preferences.remove("FinalTwoDImagePath");
+      await preferences.remove("finalThreeDImagePath");
+      await preferences.clear();
       await boxData.delete("userid");
     } else if (userUid != null) {
       await boxData.clear();
       await boxData.delete("userid");
       boxData = null;
+      await preferences.remove("FinalTwoDImagePath");
+      await preferences.remove("finalThreeDImagePath");
+      await preferences.clear();
     }
     notifyListeners();
   }

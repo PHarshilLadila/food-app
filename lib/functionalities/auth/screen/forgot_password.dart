@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:food_app/constant/app_colors.dart';
 import 'package:food_app/constant/app_gredient_text.dart';
 import 'package:food_app/constant/app_textform_field.dart';
-import 'package:food_app/functionalities/auth/screen/login_screen.dart';
+import 'package:food_app/functionalities/auth/providers/auth_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});
@@ -13,6 +14,8 @@ class ForgotPassword extends StatefulWidget {
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
+  final TextEditingController emailController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -54,147 +57,192 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         physics: const BouncingScrollPhysics(),
-        child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-            double screenWidth = constraints.maxWidth;
-            double textFieldWidth = double.infinity;
+        child: Consumer<AuthProviders>(
+          builder: (BuildContext context, AuthProviders value, Widget? child) {
+            return LayoutBuilder(
+              builder: (BuildContext context, BoxConstraints constraints) {
+                double screenWidth = constraints.maxWidth;
+                double textFieldWidth = double.infinity;
 
-            if (screenWidth > 1300) {
-              debugPrint("screenWidth > 1300");
-              textFieldWidth = height / 1.5;
-            } else if (screenWidth > 1200 && screenWidth < 1300) {
-              textFieldWidth = height / 1.5;
-              debugPrint("screenWidth > 1200 && screenWidth < 1300");
-            } else if (screenWidth > 1000 && screenWidth < 1200) {
-              textFieldWidth = height / 1.5;
-              debugPrint("screenWidth > 1000 && screenWidth < 1200");
-              // Tablet view
-            } else if (screenWidth > 800 && screenWidth < 1000) {
-              textFieldWidth = height / 1.7;
-              debugPrint("screenWidth > 800 && screenWidth < 1000");
-            } else if (screenWidth > 600) {
-              textFieldWidth = width / 1.7;
-              debugPrint("screenWidth > 600 ");
-            } else if (screenWidth > 500) {
-              textFieldWidth = double.infinity;
-              debugPrint("screenWidth > 500");
-            } else if (screenWidth > 350) {
-              textFieldWidth = double.infinity;
-              debugPrint("screenWidth > 350");
-            }
-            return Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 10),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: height * 0.02,
-                  ),
-                  GradientText(
-                    'Forgot password?',
-                    style: GoogleFonts.poppins(
-                        fontSize: 30, fontWeight: FontWeight.w600),
-                    gradient: const LinearGradient(
-                      colors: [
-                        AppColors.blackColor,
-                        AppColors.blackColor,
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: height * 0.02,
-                  ),
-                  GradientText(
-                    'This data will be displayed in your account profile for security',
-                    style: GoogleFonts.poppins(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                    ),
-                    gradient: const LinearGradient(
-                      colors: [
-                        AppColors.blackColor,
-                        AppColors.blackColor,
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: height * 0.03,
-                  ),
-                  Center(
-                    child: Container(
-                      width: textFieldWidth,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: const Color.fromARGB(255, 250, 255, 251),
-                        boxShadow: const [
-                          BoxShadow(
-                            blurRadius: 12,
-                            offset: Offset(2, 5),
-                            color: Color.fromARGB(255, 219, 219, 219),
-                          ),
-                        ],
+                if (screenWidth > 1300) {
+                  debugPrint("screenWidth > 1300");
+                  textFieldWidth = height / 1.5;
+                } else if (screenWidth > 1200 && screenWidth < 1300) {
+                  textFieldWidth = height / 1.5;
+                  debugPrint("screenWidth > 1200 && screenWidth < 1300");
+                } else if (screenWidth > 1000 && screenWidth < 1200) {
+                  textFieldWidth = height / 1.5;
+                  debugPrint("screenWidth > 1000 && screenWidth < 1200");
+                  // Tablet view
+                } else if (screenWidth > 800 && screenWidth < 1000) {
+                  textFieldWidth = height / 1.7;
+                  debugPrint("screenWidth > 800 && screenWidth < 1000");
+                } else if (screenWidth > 600) {
+                  textFieldWidth = width / 1.7;
+                  debugPrint("screenWidth > 600 ");
+                } else if (screenWidth > 500) {
+                  textFieldWidth = double.infinity;
+                  debugPrint("screenWidth > 500");
+                } else if (screenWidth > 350) {
+                  textFieldWidth = double.infinity;
+                  debugPrint("screenWidth > 350");
+                }
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 12.0, vertical: 10),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: height * 0.02,
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 18.0, horizontal: 12),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                      GradientText(
+                        'Forgot password?',
+                        style: GoogleFonts.poppins(
+                            fontSize: 30, fontWeight: FontWeight.w600),
+                        gradient: const LinearGradient(
+                          colors: [
+                            AppColors.blackColor,
+                            AppColors.blackColor,
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: height * 0.02,
+                      ),
+                      GradientText(
+                        'This data will be displayed in your account profile for security',
+                        style: GoogleFonts.poppins(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                        ),
+                        gradient: const LinearGradient(
+                          colors: [
+                            AppColors.blackColor,
+                            AppColors.blackColor,
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: height * 0.03,
+                      ),
+                      Center(
+                        child: Container(
+                          width: textFieldWidth,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: const Color.fromARGB(255, 250, 255, 251),
+                            boxShadow: const [
+                              BoxShadow(
+                                blurRadius: 12,
+                                offset: Offset(2, 5),
+                                color: Color.fromARGB(255, 219, 219, 219),
+                              ),
+                            ],
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 18.0, horizontal: 12),
+                            child: Column(
                               children: [
-                                Image.asset(
-                                  "assets/images/login/message.png",
-                                  height: height * 0.04,
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      "assets/images/login/message.png",
+                                      height: height * 0.04,
+                                    ),
+                                    SizedBox(
+                                      width: width * 0.03,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        GradientText(
+                                          'Via email :',
+                                          style: GoogleFonts.poppins(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                          gradient: const LinearGradient(
+                                            colors: [
+                                              AppColors.blackColor,
+                                              AppColors.blackColor,
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 3,
+                                        ),
+                                        GradientText(
+                                          '(We will send you a link to reset your password)',
+                                          style: GoogleFonts.poppins(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                          gradient: const LinearGradient(
+                                            colors: [
+                                              AppColors.blackColor,
+                                              AppColors.blackColor,
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
                                 SizedBox(
-                                  width: width * 0.03,
+                                  height: height * 0.03,
                                 ),
-                                GradientText(
-                                  'Via email :',
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                  gradient: const LinearGradient(
-                                    colors: [
-                                      AppColors.blackColor,
-                                      AppColors.blackColor,
-                                    ],
+                                SizedBox(
+                                  width: textFieldWidth,
+                                  child: Form(
+                                    key: formKey,
+                                    child: CustomeTextFormField(
+                                      textEditingController: emailController,
+                                      maxline: 1,
+                                      fillColor:
+                                          Color.fromARGB(255, 252, 255, 252),
+                                      hintText: "Email (John.example.com)",
+                                      obscureText: false,
+                                      hintcolors: Color(
+                                        0xff3B3B3B,
+                                      ),
+                                      borderColor:
+                                          Color.fromARGB(255, 252, 255, 252),
+                                      disabledColor:
+                                          Color.fromARGB(255, 252, 255, 252),
+                                      enabledColor: AppColors.darkGreen,
+                                      focusedColor: AppColors.darkGreen,
+                                      keyboradType: TextInputType.emailAddress,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return "Please enter your email";
+                                        } else if (!RegExp(
+                                                r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
+                                            .hasMatch(value)) {
+                                          return "Please enter a valid email address";
+                                        }
+                                        return null;
+                                      },
+                                    ),
                                   ),
                                 ),
                               ],
                             ),
-                            SizedBox(
-                              height: height * 0.02,
-                            ),
-                            SizedBox(
-                              width: textFieldWidth,
-                              child: const CustomeTextFormField(
-                                maxline: 1,
-                                fillColor: Color.fromARGB(255, 252, 255, 252),
-                                hintText: "Email (John.example.com)",
-                                obscureText: false,
-                                hintcolors: Color(
-                                  0xff3B3B3B,
-                                ),
-                                borderColor: Color.fromARGB(255, 252, 255, 252),
-                                disabledColor:
-                                    Color.fromARGB(255, 252, 255, 252),
-                                enabledColor: AppColors.darkGreen,
-                                focusedColor: AppColors.darkGreen,
-                                keyboradType: TextInputType.emailAddress,
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
                       ),
-                    ),
+                      SizedBox(
+                        height: height * 0.03,
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                );
+              },
             );
           },
         ),
@@ -202,8 +250,22 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: GestureDetector(
         onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const LoginScreen()));
+          if (formKey.currentState!.validate()) {
+            Provider.of<AuthProviders>(context, listen: false)
+                .forgotPassword(emailController.text.trim());
+
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                behavior: SnackBarBehavior.floating,
+                content: Text(
+                    "Email sent successfully on ${emailController.text.trim()}"),
+                backgroundColor: AppColors.darkGreen,
+                duration: Duration(seconds: 2),
+              ),
+            );
+
+            Navigator.pop(context);
+          }
         },
         child: Container(
           width: width * 0.4,
@@ -222,11 +284,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           ),
           child: Center(
             child: Text(
-              "Back",
+              "Send Email",
               style: GoogleFonts.poppins(
                   color: AppColors.whiteColor,
                   fontSize: 16,
-                  fontWeight: FontWeight.w400),
+                  fontWeight: FontWeight.w500),
             ),
           ),
         ),

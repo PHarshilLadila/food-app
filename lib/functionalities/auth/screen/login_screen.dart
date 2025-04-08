@@ -9,12 +9,15 @@ import 'package:food_app/constant/app_textform_field.dart';
 import 'package:food_app/functionalities/auth/providers/auth_provider.dart';
 import 'package:food_app/functionalities/auth/screen/forgot_password.dart';
 import 'package:food_app/functionalities/auth/screen/sign_up_screen.dart';
+import 'package:food_app/functionalities/auth/screen/signup_process.dart';
 import 'package:food_app/functionalities/bottom%20navigation%20bar/bottom_navigation_bar.dart';
+import 'package:food_app/functionalities/profile/model/profile_model.dart';
 import 'package:food_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -60,31 +63,65 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void login() async {
-    final FormState? form = _formKey.currentState;
+    try {
+      await Provider.of<AuthProviders>(context, listen: false).login(
+        emailController.text.trim(),
+        passwordController.text.trim(),
+      );
 
-    if (form != null && form.validate()) {
-      try {
-        await Provider.of<AuthProviders>(context, listen: false).login(
-          emailController.text.trim(),
-          passwordController.text.trim(),
-        );
+      // Only if login succeeds, navigate to the home screen
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const BottomScreen()),
+        (route) => false,
+      );
 
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => const BottomScreen()),
-          (route) => false,
-        );
-      } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(e.toString()),
-          ),
-        );
-      }
-    } else {
-      setState(() {});
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          behavior: SnackBarBehavior.floating,
+          content: Text("Login Successful, welcome back to Swift Bite"),
+          backgroundColor: AppColors.darkGreen,
+        ),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.red,
+          content: Text(e.toString().replaceAll("Exception: ", "")),
+        ),
+      );
     }
   }
+
+  // void login() async {
+  //   try {
+  //     await Provider.of<AuthProviders>(context, listen: false).login(
+  //       emailController.text.trim(),
+  //       passwordController.text.trim(),
+  //     );
+  //     Navigator.pushAndRemoveUntil(
+  //       context,
+  //       MaterialPageRoute(builder: (context) => const BottomScreen()),
+  //       (route) => false,
+  //     );
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(
+  //         behavior: SnackBarBehavior.floating,
+  //         content: Text("Login Successful, welcome back to Swift Bite"),
+  //         backgroundColor: AppColors.darkGreen,
+  //       ),
+  //     );
+  //   } catch (e) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(
+  //         behavior: SnackBarBehavior.floating,
+  //         backgroundColor: Colors.red,
+  //         content: Text(e.toString()),
+  //       ),
+  //     );
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -128,91 +165,92 @@ class _LoginScreenState extends State<LoginScreen> {
           debugPrint("screenWidth > 350");
         }
 
-        return Scaffold(
-          backgroundColor: AppColors.whiteColor,
-          body: Container(
-            height: double.infinity,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                alignment: Alignment.topCenter,
-                colorFilter: ColorFilter.mode(
-                    // ignore: deprecated_member_use
-                    Colors.white.withOpacity(0.2),
-                    BlendMode.dstATop),
-                image: AssetImage(
-                  "assets/images/Pattern.png",
+        return Form(
+          key: _formKey,
+          child: Scaffold(
+            backgroundColor: AppColors.whiteColor,
+            body: Container(
+              height: double.infinity,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  alignment: Alignment.topCenter,
+                  colorFilter: ColorFilter.mode(
+                      // ignore: deprecated_member_use
+                      Colors.white.withOpacity(0.2),
+                      BlendMode.dstATop),
+                  image: AssetImage(
+                    "assets/images/Pattern.png",
+                  ),
                 ),
               ),
-            ),
-            child: Consumer<AuthProviders>(
-              builder: (BuildContext context, value, Widget? child) {
-                if (value.isLoading) {
-                  return Center(child: myProccesser());
-                } else {
-                  return child!;
-                }
-              },
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                physics: const BouncingScrollPhysics(),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.only(top: height * 0.08),
-                        child: Image.asset(
-                          "assets/images/splash/Logo.png",
+              child: Consumer<AuthProviders>(
+                builder: (BuildContext context, value, Widget? child) {
+                  if (value.isLoading) {
+                    return Center(child: myProccesser());
+                  } else {
+                    return child!;
+                  }
+                },
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  physics: const BouncingScrollPhysics(),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.only(top: height * 0.08),
+                          child: Image.asset(
+                            "assets/images/splash/Logo.png",
+                          ),
                         ),
-                      ),
-                      GradientText(
-                        // AppLocalizations.of(context)!.swiftBite,
-                        "Swift Bite",
-                        style: GoogleFonts.viga(
-                            fontSize: 40, fontWeight: FontWeight.w400),
-                        gradient: const LinearGradient(
-                          colors: [
-                            AppColors.lightGreen,
-                            AppColors.darkGreen,
-                          ],
+                        GradientText(
+                          // AppLocalizations.of(context)!.swiftBite,
+                          "Swift Bite",
+                          style: GoogleFonts.viga(
+                              fontSize: 40, fontWeight: FontWeight.w400),
+                          gradient: const LinearGradient(
+                            colors: [
+                              AppColors.lightGreen,
+                              AppColors.darkGreen,
+                            ],
+                          ),
                         ),
-                      ),
-                      Text(
-                        // AppLocalizations.of(context)!.slogun,
-                        "Deliver Favorite Food",
-                        style: GoogleFonts.inter(
-                            fontWeight: FontWeight.w600, fontSize: 13),
-                      ),
-                      SizedBox(
-                        height: height * 0.10,
-                      ),
-                      GradientText(
-                        // AppLocalizations.of(context)!.loginAccount,
-                        "Login To Your Account",
-                        style: GoogleFonts.viga(
-                            fontSize: 20, fontWeight: FontWeight.w400),
-                        gradient: const LinearGradient(
-                          colors: [
-                            AppColors.blackColor,
-                            AppColors.blackColor,
-                          ],
+                        Text(
+                          // AppLocalizations.of(context)!.slogun,
+                          "Deliver Favorite Food",
+                          style: GoogleFonts.inter(
+                              fontWeight: FontWeight.w600, fontSize: 13),
                         ),
-                      ),
-                      SizedBox(
-                        height: height * 0.04,
-                      ),
-                      Form(
-                        key: _formKey,
-                        child: Column(
+                        SizedBox(
+                          height: height * 0.10,
+                        ),
+                        GradientText(
+                          // AppLocalizations.of(context)!.loginAccount,
+                          "Login To Your Account",
+                          style: GoogleFonts.viga(
+                              fontSize: 20, fontWeight: FontWeight.w400),
+                          gradient: const LinearGradient(
+                            colors: [
+                              AppColors.blackColor,
+                              AppColors.blackColor,
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: height * 0.04,
+                        ),
+                        Column(
                           children: [
                             SizedBox(
                               width: textFieldWidth,
                               child: CustomeTextFormField(
                                 maxline: 1,
+                                key: const Key('email'),
                                 textEditingController: emailController,
                                 hintText: "Email",
                                 //  AppLocalizations.of(context)!.email,
@@ -254,6 +292,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             SizedBox(
                               width: textFieldWidth,
                               child: CustomeTextFormField(
+                                key: const Key('password'),
+
                                 maxline: 1,
                                 textEditingController: passwordController,
                                 hintText: "Password",
@@ -324,6 +364,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Align(
                               alignment: Alignment.center,
                               child: GestureDetector(
+                                key: const Key('login_button'),
                                 onTap: () {
                                   Navigator.push(
                                     context,
@@ -435,18 +476,36 @@ class _LoginScreenState extends State<LoginScreen> {
                                         flex: 1,
                                         child: GestureDetector(
                                           onTap: () async {
-                                            Provider.of<AuthProviders>(context,
-                                                    listen: false)
-                                                .signInWithGoogle(context);
-                                            // await Future.delayed(
-                                            //     const Duration(seconds: 4));
-                                            // Navigator.pushAndRemoveUntil(
-                                            //   context,
-                                            //   MaterialPageRoute(
-                                            //       builder: (context) =>
-                                            //           const SignupProcess()),
-                                            //   (route) => false,
-                                            // );
+                                            SharedPreferences prefs =
+                                                await SharedPreferences
+                                                    .getInstance();
+
+                                            var googUserId =
+                                                prefs.get("googleAuthUID");
+
+                                            if (googUserId == null) {
+                                              Provider.of<AuthProviders>(
+                                                      context,
+                                                      listen: false)
+                                                  .signInWithGoogle(context);
+                                              await Future.delayed(
+                                                  const Duration(seconds: 4));
+                                              Navigator.pushAndRemoveUntil(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const SignupProcess()),
+                                                (route) => false,
+                                              );
+                                            } else {
+                                              Navigator.pushAndRemoveUntil(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        BottomScreen()),
+                                                (route) => false,
+                                              );
+                                            }
                                           },
                                           child: Container(
                                             width: containerWidth,
@@ -505,7 +564,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                login();
+                                if (_formKey.currentState!.validate()) {
+                                  login();
+                                }
                               },
                               child: Container(
                                 width: width / 4,
@@ -564,8 +625,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ],
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),

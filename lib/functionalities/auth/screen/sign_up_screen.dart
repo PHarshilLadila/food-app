@@ -52,6 +52,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
           (route) => false,
         );
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: AppColors.darkGreen,
+            behavior: SnackBarBehavior.floating,
+            content: Text("Your Account Created Successfully"),
+            duration: Duration(seconds: 2),
+          ),
+        );
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
