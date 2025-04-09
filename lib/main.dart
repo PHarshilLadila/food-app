@@ -177,3 +177,7 @@ void sentryInit() async {
     FlutterError.presentError(details);
   };
 }
+
+// kotlinOptions {
+//         jvmTarget = JavaVersion.VERSION_1_8
+//     }

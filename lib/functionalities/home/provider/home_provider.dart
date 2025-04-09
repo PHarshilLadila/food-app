@@ -172,6 +172,8 @@
 //   }
 // }
 
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/functionalities/home/model/canadian_meal_model.dart';
@@ -208,8 +210,87 @@ class HomeProvider extends ChangeNotifier {
   List<CoffeeModel> get coffees => _coffees;
 
   List<CoffeeModel> _icedCoffee = [];
-
   List<CoffeeModel> get icedCoffee => _icedCoffee;
+
+  // ** for search items **
+
+  String _searchedQuery = "";
+  String get searchQuery => _searchedQuery;
+  Timer? _debounce;
+
+  //variable for search dessert meals
+  List<DessertModel> _searchResults = [];
+  List<DessertModel> get searchResults => _searchResults;
+
+  // variable for search coffee items
+  List<CoffeeModel> _searchCoffeeResults = [];
+  List<CoffeeModel> get searchCoffeeResults => _searchCoffeeResults;
+
+  // variable for search canadian meals
+  List<CanadianMealModel> _searchCanadianResults = [];
+  List<CanadianMealModel> get searchCanadianResults => _searchCanadianResults;
+
+  // ** search Functions **
+
+  void clearSearch() {
+    _searchedQuery = '';
+    _searchResults = [];
+    _searchCoffeeResults = [];
+    _searchCanadianResults = [];
+    notifyListeners();
+  }
+
+  void setSearchQuery(String query) {
+    _searchedQuery = query;
+    _debounce?.cancel();
+    _debounce = Timer(Duration(milliseconds: 500), () {
+      filterDessertResults();
+      filterCoffeeResults();
+      filterCanadianResults();
+      notifyListeners();
+    });
+  }
+
+  void filterDessertResults() {
+    if (_searchedQuery.isEmpty) {
+      _searchResults = [];
+    } else {
+      _searchResults = _dessertModel
+          .where((desserts) =>
+              desserts.name!.toLowerCase().contains(_searchedQuery.toLowerCase()) ||
+              desserts.cuisine!.toLowerCase().contains(_searchedQuery.toLowerCase()))
+          .toList();
+    }
+    notifyListeners();
+  }
+
+  void filterCoffeeResults() {
+    if (_searchCoffeeResults.isEmpty) {
+      _searchCoffeeResults = [];
+    } else {
+      _searchCoffeeResults = _coffees
+          .where((coffee) =>
+              coffee.title!.toLowerCase().contains(_searchedQuery.toLowerCase()) ||
+              coffee.description!.toLowerCase().contains(_searchedQuery.toLowerCase()))
+          .toList();
+    }
+    notifyListeners();
+  }
+
+  void filterCanadianResults() {
+    if (_searchCanadianResults.isEmpty) {
+      _searchCanadianResults = [];
+    } else {
+      _searchCanadianResults = canadianMealModel
+          .where(
+            (canadian) => canadian.strMeal!.toLowerCase().contains(_searchedQuery.toLowerCase()),
+          )
+          .toList();
+    }
+    notifyListeners();
+  }
+
+  // ** main Functions **
 
   Future<void> getAllCategories() async {
     isLoading = true;
@@ -330,14 +411,12 @@ class HomeProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> addToCart(String itemId, String itemName, String itemImage,
-      String itemDescription, double itemPrice, String restroName) async {
+  Future<void> addToCart(String itemId, String itemName, String itemImage, String itemDescription, double itemPrice, String restroName) async {
     final databaseBox = Hive.box('userProfile');
     var userUid = await databaseBox.get('userid');
 
     try {
-      var cartRef =
-          firestore.collection("users").doc(userUid).collection("cart");
+      var cartRef = firestore.collection("users").doc(userUid).collection("cart");
 
       var cartItem = await cartRef.where("itemId", isEqualTo: itemId).get();
 
@@ -365,40 +444,30 @@ class HomeProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> toggleFavoriteStatus(String mealId, String mealPrice,
-      String restroName, String restroImg) async {
+  Future<void> toggleFavoriteStatus(String mealId, String mealPrice, String restroName, String restroImg) async {
     final databaseBox = Hive.box('userProfile');
     var userUid = await databaseBox.get('userid');
     var favoriteBox = Hive.box('favoriteMeals');
 
     try {
-      var favCollection = firestore
-          .collection("users")
-          .doc(userUid)
-          .collection("favoriteItems");
+      var favCollection = firestore.collection("users").doc(userUid).collection("favoriteItems");
 
-      var existingFav =
-          await favCollection.where("mealId", isEqualTo: mealId).get();
+      var existingFav = await favCollection.where("mealId", isEqualTo: mealId).get();
 
       int mealIndex = _mealsModel.indexWhere((meal) => meal.idMeal == mealId);
-      int dessertIndex = _dessertModel.indexWhere(
-          (desserId) => desserId.id.toString() == (mealId.toString()));
-      int canadianIndex = _canadianMealModel
-          .indexWhere((canadian) => canadian.idMeal == mealId);
+      int dessertIndex = _dessertModel.indexWhere((desserId) => desserId.id.toString() == (mealId.toString()));
+      int canadianIndex = _canadianMealModel.indexWhere((canadian) => canadian.idMeal == mealId);
       // ignore: unrelated_type_equality_checks
       int hotCoffeeIndex = coffees.indexWhere((coffee) => coffee.id == mealId);
 
       if (mealIndex != -1) {
         _mealsModel[mealIndex].isFavorite = !_mealsModel[mealIndex].isFavorite;
       } else if (dessertIndex != -1) {
-        _dessertModel[dessertIndex].isFavorite =
-            !_dessertModel[dessertIndex].isFavorite;
+        _dessertModel[dessertIndex].isFavorite = !_dessertModel[dessertIndex].isFavorite;
       } else if (canadianIndex != -1) {
-        _canadianMealModel[canadianIndex].isFavorite =
-            !_canadianMealModel[canadianIndex].isFavorite;
+        _canadianMealModel[canadianIndex].isFavorite = !_canadianMealModel[canadianIndex].isFavorite;
       } else if (hotCoffeeIndex != -1) {
-        _coffees[hotCoffeeIndex].isFavorite =
-            !_coffees[hotCoffeeIndex].isFavorite;
+        _coffees[hotCoffeeIndex].isFavorite = !_coffees[hotCoffeeIndex].isFavorite;
       }
 
       if (existingFav.docs.isNotEmpty) {

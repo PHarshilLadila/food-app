@@ -95,6 +95,7 @@ dependencies:
   shimmer: ^3.0.0
   country_pickers: ^3.0.1
   mockito: ^5.4.5
+  firebase_crashlytics: ^4.3.5
  
 dev_dependencies:
   flutter_test:

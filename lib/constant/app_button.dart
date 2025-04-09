@@ -19,6 +19,7 @@ class CustomeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      key: Key("myCustomButtonKey"),
       onTap: ontap,
       child: Container(
         width: widths,
@@ -40,10 +41,7 @@ class CustomeButton extends StatelessWidget {
             name!,
             minFontSize: 16,
             maxFontSize: 18,
-            style: GoogleFonts.poppins(
-                color: AppColors.whiteColor,
-                fontSize: MediaQuery.of(context).size.width / 30,
-                fontWeight: FontWeight.w700),
+            style: GoogleFonts.poppins(color: AppColors.whiteColor, fontSize: MediaQuery.of(context).size.width / 30, fontWeight: FontWeight.w700),
             textAlign: TextAlign.center,
           ),
         ),

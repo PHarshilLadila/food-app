@@ -11,7 +11,6 @@ import 'package:food_app/functionalities/auth/screen/forgot_password.dart';
 import 'package:food_app/functionalities/auth/screen/sign_up_screen.dart';
 import 'package:food_app/functionalities/auth/screen/signup_process.dart';
 import 'package:food_app/functionalities/bottom%20navigation%20bar/bottom_navigation_bar.dart';
-import 'package:food_app/functionalities/profile/model/profile_model.dart';
 import 'package:food_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';

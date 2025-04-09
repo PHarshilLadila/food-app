@@ -44,6 +44,7 @@ class CustomeTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      key: Key("CustomeTextFormField"),
       validator: validator,
       maxLines: maxline,
       maxLength: maxlength,
@@ -57,8 +58,7 @@ class CustomeTextFormField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hintText,
         counterText: "",
-        hintStyle: GoogleFonts.poppins(
-            color: hintcolors, fontSize: 14, fontWeight: FontWeight.w400),
+        hintStyle: GoogleFonts.poppins(color: hintcolors, fontSize: 14, fontWeight: FontWeight.w400),
         filled: true,
         prefixIcon: prefixIcon,
         fillColor: fillColor,

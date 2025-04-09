@@ -29,6 +29,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final _searchController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -40,6 +42,12 @@ class _HomeScreenState extends State<HomeScreen> {
       Provider.of<HomeProvider>(context, listen: false).fetchHotCoffeeData();
       Provider.of<HomeProvider>(context, listen: false).fetchIcedCoffeeData();
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _searchController.dispose();
   }
 
   void _goToPage(int number) {
@@ -71,6 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final homeProvider = Provider.of<HomeProvider>(context, listen: false);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -94,8 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
             decoration: BoxDecoration(
               image: DecorationImage(
                 alignment: Alignment.topCenter,
-                colorFilter: ColorFilter.mode(
-                    Colors.white.withOpacity(0.4), BlendMode.dstATop),
+                colorFilter: ColorFilter.mode(Colors.white.withOpacity(0.4), BlendMode.dstATop),
                 image: const AssetImage(
                   "assets/images/Pattern.png",
                 ),
@@ -103,8 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             child: SafeArea(
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18),
+                padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18),
                 child: SingleChildScrollView(
                   scrollDirection: Axis.vertical,
                   physics: const BouncingScrollPhysics(),
@@ -119,8 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: GradientText(
                               // AppLocalizations.of(context)!.homeTitle,
                               'Find Your Favorite Food',
-                              style: GoogleFonts.poppins(
-                                  fontSize: 30, fontWeight: FontWeight.bold),
+                              style: GoogleFonts.poppins(fontSize: 30, fontWeight: FontWeight.bold),
                               gradient: const LinearGradient(
                                 colors: [
                                   AppColors.lightGreen,
@@ -144,10 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: AppColors.whiteColor,
                                 borderRadius: BorderRadius.circular(15),
                                 boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.grey.shade100,
-                                      offset: const Offset(5, 25),
-                                      blurRadius: 15),
+                                  BoxShadow(color: Colors.grey.shade100, offset: const Offset(5, 25), blurRadius: 15),
                                 ],
                               ),
                               child: Padding(
@@ -169,15 +172,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Expanded(
                             child: CustomeTextFormField(
+                              textEditingController: _searchController,
+                              onChanged: (value) {
+                                homeProvider.setSearchQuery(value);
+                              },
                               obscureText: false,
-                              borderColor:
-                                  const Color.fromARGB(255, 252, 255, 252),
-                              disabledColor:
-                                  const Color.fromARGB(255, 252, 255, 252),
-                              enabledColor:
-                                  const Color.fromARGB(255, 252, 255, 252),
-                              focusedColor:
-                                  AppColors.darkOrange.withOpacity(1.0),
+                              borderColor: const Color.fromARGB(255, 252, 255, 252),
+                              disabledColor: const Color.fromARGB(255, 252, 255, 252),
+                              enabledColor: const Color.fromARGB(255, 252, 255, 252),
+                              focusedColor: AppColors.darkOrange.withOpacity(1.0),
                               hintText: "What Do You Want To Order?",
                               //  AppLocalizations.of(context)!.search,
                               fillColor: AppColors.lightOrange,
@@ -188,6 +191,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                   "assets/images/home/search.png",
                                   height: height / 100,
                                 ),
+                              ),
+                              sufixIcon: IconButton(
+                                onPressed: () {
+                                  _searchController.clear();
+                                  homeProvider.clearSearch();
+                                },
+                                icon: const Icon(Icons.clear),
                               ),
                             ),
                           ),
@@ -200,10 +210,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: AppColors.lightOrange,
                               borderRadius: BorderRadius.circular(15),
                               boxShadow: [
-                                BoxShadow(
-                                    color: Colors.grey.shade100,
-                                    offset: const Offset(5, 25),
-                                    blurRadius: 15),
+                                BoxShadow(color: Colors.grey.shade100, offset: const Offset(5, 25), blurRadius: 15),
                               ],
                             ),
                             child: Padding(
@@ -217,12 +224,79 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                       SizedBox(
+                        height: height / 100,
+                      ),
+                      homeProvider.isLoading
+                          ? Center(
+                              child: myProccesser(),
+                            )
+                          : homeProvider.searchResults.isEmpty
+                              ? homeProvider.searchQuery.isEmpty
+                                  ? Center(
+                                      child: null,
+                                    )
+                                  : Container(
+                                      padding: EdgeInsets.all(20),
+                                      decoration: BoxDecoration(
+                                        color: Color(0xc3eaffdd),
+                                        borderRadius: BorderRadius.circular(15),
+                                      ),
+                                      child: Center(
+                                        child: Text("Item Not Found"),
+                                      ),
+                                    )
+                              : Container(
+                                  decoration: BoxDecoration(
+                                    color: Color(0xc3eaffdd),
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: ListView.builder(
+                                    itemCount: homeProvider.searchResults.length,
+                                    shrinkWrap: true,
+                                    itemBuilder: (context, index) {
+                                      final dessert = homeProvider.searchResults[index];
+                                      // final coffee = homeProvider.searchCoffeeResults[index];
+                                      // final canadian = homeProvider.searchCanadianResults[index];
+                                      return Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color: Colors.white60,
+                                                border: Border.all(
+                                                  color: Colors.black26,
+                                                  width: 0.5,
+                                                ),
+                                                borderRadius: BorderRadius.circular(10),
+                                              ),
+                                              child: ListTile(
+                                                leading: dessert.image != null
+                                                    ? ClipRRect(
+                                                        borderRadius: BorderRadius.circular(10),
+                                                        child: Image.network(dessert.image!),
+                                                      )
+                                                    : null,
+                                                title: Text(dessert.name ?? ''),
+                                                subtitle: Text(dessert.cuisine ?? ""),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 6,
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  ),
+                                ),
+                      SizedBox(
                         height: height / 40,
                       ),
-
                       LayoutBuilder(
-                        builder:
-                            (BuildContext context, BoxConstraints constraints) {
+                        builder: (BuildContext context, BoxConstraints constraints) {
                           double screenWidth = constraints.maxWidth;
                           int crossAxisCount = 4;
                           double childAspectRatio = 0.8;
@@ -293,17 +367,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                 padding: EdgeInsets.only(top: 10, bottom: 15),
                                 child: Text(
                                   "Categories",
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
+                                  style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.bold),
                                 ),
                               ),
                               GridView.builder(
                                 shrinkWrap: true,
                                 physics: NeverScrollableScrollPhysics(),
                                 itemCount: foodCategoriesList.length,
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisSpacing: 15,
                                   mainAxisSpacing: 15,
                                   childAspectRatio: childAspectRatio,
@@ -316,30 +387,25 @@ class _HomeScreenState extends State<HomeScreen> {
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
-                                          color: const Color.fromARGB(
-                                              255, 238, 255, 234),
+                                          color: const Color.fromARGB(255, 238, 255, 234),
                                           boxShadow: [
                                             BoxShadow(
-                                              color: const Color.fromARGB(
-                                                  17, 0, 0, 0),
+                                              color: const Color.fromARGB(17, 0, 0, 0),
                                               blurRadius: 1,
                                               spreadRadius: 3,
                                               offset: Offset(2, 2),
                                             ),
                                           ],
-                                          borderRadius:
-                                              BorderRadius.circular(12)),
+                                          borderRadius: BorderRadius.circular(12)),
                                       child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Image.asset(
                                             foodCategoriesList[index]["image"],
                                             height: 50,
                                           ),
                                           Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 8.0),
+                                            padding: const EdgeInsets.only(top: 8.0),
                                             child: Text(
                                               foodCategoriesList[index]["name"],
                                               style: GoogleFonts.poppins(),
@@ -408,16 +474,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             Text(
                               "Popular Menu",
-                              style: GoogleFonts.poppins(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
+                              style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                             Text(
                               // AppLocalizations.of(context)!.viewMore,
                               'View More',
-                              style: GoogleFonts.poppins(
-                                  color: AppColors.darkOrange,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500),
+                              style: GoogleFonts.poppins(color: AppColors.darkOrange, fontSize: 16, fontWeight: FontWeight.w500),
                             ),
                           ],
                         ),
@@ -427,112 +489,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: height / 80,
                       ),
                       PopulerMenu(height: height, width: width),
-                      // DefaultTabController(
-                      //   length: 7,
-                      //   child: Column(
-                      //     children: <Widget>[
-                      //       ButtonsTabBar(
-                      //         height: height / 18,
-                      //         duration: 800,
-                      //         contentPadding:
-                      //             const EdgeInsets.symmetric(horizontal: 20),
-                      //         backgroundColor: AppColors.darkGreen,
-                      //         unselectedBackgroundColor:
-                      //             const Color.fromARGB(207, 220, 243, 217),
-                      //         unselectedLabelStyle:
-                      //             const TextStyle(color: Colors.black),
-                      //         labelStyle: const TextStyle(
-                      //             color: Colors.white,
-                      //             fontWeight: FontWeight.bold),
-                      //         tabs: const [
-                      //           Tab(text: "Chicken Meals"),
-                      //           Tab(text: "Canadian Meals"),
-                      //           Tab(text: "Hot Coffees"),
-                      //           Tab(text: "Iced Coffees"),
-                      //           Tab(text: "Dessert Meals"),
-                      //           Tab(text: "Meal's Categories"),
-                      //           Tab(text: "Nearest Restrorent"),
-                      //         ],
-                      //       ),
-                      //       SizedBox(
-                      //         height: height / 0.40,
-                      //         child: TabBarView(
-                      //           physics: const NeverScrollableScrollPhysics(),
-                      //           children: <Widget>[
-                      //             Padding(
-                      //               padding: const EdgeInsets.only(top: 14.0),
-                      //               child: MainMeals(
-                      //                 height: height,
-                      //                 meals: meals,
-                      //                 mealPrice: mealPrice,
-                      //                 nearestRestaurant: nearestRestaurant,
-                      //                 width: width,
-                      //               ),
-                      //             ),
-                      //             Padding(
-                      //               padding: const EdgeInsets.only(top: 14.0),
-                      //               child: CanadianMeals(
-                      //                 height: height,
-                      //                 canadianMeal: canadianMeal,
-                      //                 canadianMealPrice: canadianMealPrice,
-                      //                 nearestRestaurant:
-                      //                     canadianMealNearestRestaurant,
-                      //                 width: width,
-                      //               ),
-                      //             ),
-                      //             Padding(
-                      //               padding: const EdgeInsets.only(top: 14.0),
-                      //               child: HotCoffeesData(
-                      //                 height: height,
-                      //                 hotCoffee: coffee,
-                      //                 width: width,
-                      //                 nearestRestaurant:
-                      //                     hotCoffeeNearestRestaurant,
-                      //               ),
-                      //             ),
-                      //             Padding(
-                      //               padding: const EdgeInsets.only(top: 14.0),
-                      //               child: IcedCoffeesData(
-                      //                 height: height,
-                      //                 icedCoffee: icedCoffee,
-                      //                 width: width,
-                      //                 nearestRestaurant:
-                      //                     icedCoffeeNearestRestaurant,
-                      //               ),
-                      //             ),
-                      //             Padding(
-                      //               padding: const EdgeInsets.only(top: 14.0),
-                      //               child: DessertMeals(
-                      //                 height: height,
-                      //                 dessertMeals: dessertMeals,
-                      //                 dessertMealPrice: dessertPrice,
-                      //                 nearestRestaurant:
-                      //                     dessertNearestRestaurant,
-                      //                 width: width,
-                      //               ),
-                      //             ),
-                      //             Padding(
-                      //               padding: const EdgeInsets.only(top: 14.0),
-                      //               child: MealsCategories(
-                      //                 height: height,
-                      //                 categories: categories,
-                      //                 width: width,
-                      //               ),
-                      //             ),
-                      //             Padding(
-                      //               padding: const EdgeInsets.only(top: 14.0),
-                      //               child: NearestRestauranst(
-                      //                 height: height,
-                      //                 nearestRestaurant: nearestRestaurant,
-                      //                 width: width,
-                      //               ),
-                      //             ),
-                      //           ],
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),
