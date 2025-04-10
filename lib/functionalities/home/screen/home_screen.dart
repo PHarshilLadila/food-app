@@ -433,6 +433,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                           borderRadius:
                                               BorderRadius.circular(12)),
                                       child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
@@ -445,7 +447,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 const EdgeInsets.only(top: 8.0),
                                             child: Text(
                                               foodCategoriesList[index]["name"],
-                                              style: GoogleFonts.poppins(),
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 14),
+                                              textAlign: TextAlign.center,
                                             ),
                                           )
                                         ],
@@ -583,14 +587,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                           popularItems[index]["name"],
                                           style: GoogleFonts.poppins(
                                               color: AppColors.blackColor,
-                                              fontSize: 16,
+                                              fontSize: 14,
                                               fontWeight: FontWeight.w600),
                                         ),
                                         Text(
                                           popularItems[index]["description"],
                                           style: GoogleFonts.poppins(
                                               color: AppColors.blackColor,
-                                              fontSize: 14,
+                                              fontSize: 12,
                                               fontWeight: FontWeight.w400),
                                         ),
                                       ],
@@ -600,7 +604,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       "\$${popularItems[index]["price"]}",
                                       style: GoogleFonts.poppins(
                                           color: AppColors.darkOrange,
-                                          fontSize: 16,
+                                          fontSize: 14,
                                           fontWeight: FontWeight.w700),
                                     ),
                                   ],
