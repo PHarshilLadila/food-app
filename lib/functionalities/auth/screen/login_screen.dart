@@ -33,7 +33,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   // void login() async {
   //   try {
-
   //     await Provider.of<AuthProviders>(context, listen: false).login(
   //       emailController.text.trim(),
   //       passwordController.text.trim(),
@@ -178,6 +177,7 @@ class _LoginScreenState extends State<LoginScreen> {
         return Form(
           key: _formKey,
           child: Scaffold(
+            key: Key("login_screen"),
             backgroundColor: AppColors.whiteColor,
             body: Container(
               height: double.infinity,
@@ -374,7 +374,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             Align(
                               alignment: Alignment.center,
                               child: GestureDetector(
-                                key: const Key('login_button'),
                                 onTap: () {
                                   Navigator.push(
                                     context,
@@ -573,6 +572,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               height: height * 0.05,
                             ),
                             GestureDetector(
+                              key: const Key('login_button'),
                               onTap: () {
                                 if (_formKey.currentState!.validate()) {
                                   login();

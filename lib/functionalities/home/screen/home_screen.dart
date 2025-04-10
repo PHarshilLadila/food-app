@@ -441,6 +441,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Image.asset(
+                                            key: Key("foodCategoryList"),
                                             foodCategoriesList[index]["image"],
                                             height: 50,
                                           ),
@@ -468,6 +469,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: height / 40,
                       ),
                       GestureDetector(
+                        key: Key("otherCategories"),
                         onTap: () {
                           Navigator.push(
                             context,

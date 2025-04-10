@@ -95,185 +95,180 @@ class _ItemDetailsState extends State<ItemDetails>
           ),
         ),
       ),
-      body: Consumer<HomeProvider>(
-        builder: (BuildContext context, value, Widget? child) {
-          return SafeArea(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              physics: const BouncingScrollPhysics(),
-              child: LayoutBuilder(
-                builder: (BuildContext context, BoxConstraints constraints) {
-                  double screenWidth = constraints.maxWidth;
-                  double imgHeight = height / 3;
-                  double imgWidth = width / 2;
+      body: SafeArea(
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          physics: const BouncingScrollPhysics(),
+          child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              double screenWidth = constraints.maxWidth;
+              double imgHeight = height / 3;
+              double imgWidth = width / 2;
 
-                  if (screenWidth > 1300) {
-                    imgHeight = height / 2;
-                    imgWidth = width / 5.5;
-                    debugPrint("screenWidth > 1300");
-                  } else if (screenWidth > 1200 && screenWidth < 1300) {
-                    imgHeight = height / 2;
-                    imgWidth = width / 4;
-                    debugPrint("screenWidth > 1200 && screenWidth < 1300");
-                  } else if (screenWidth > 1000 && screenWidth < 1200) {
-                    imgHeight = height / 2.5;
-                    imgWidth = width / 3.5;
-                    debugPrint("screenWidth > 1000 && screenWidth < 1200");
-                  } else if (screenWidth > 800 && screenWidth < 1000) {
-                    imgHeight = height / 3;
-                    imgWidth = width / 3;
-                    debugPrint("screenWidth > 800 && screenWidth < 1000");
-                  } else if (screenWidth > 600) {
-                    imgHeight = height / 3.5;
-                    imgWidth = width / 2.5;
-                    debugPrint("screenWidth > 600 ");
-                  } else if (screenWidth > 500) {
-                    imgHeight = height / 3.5;
-                    imgWidth = width / 2;
-                    debugPrint("screenWidth > 500");
-                  } else if (screenWidth > 350) {
-                    imgHeight = height / 4;
-                    imgWidth = width / 2;
-                    debugPrint("screenWidth > 350");
-                  }
+              if (screenWidth > 1300) {
+                imgHeight = height / 2;
+                imgWidth = width / 5.5;
+                debugPrint("screenWidth > 1300");
+              } else if (screenWidth > 1200 && screenWidth < 1300) {
+                imgHeight = height / 2;
+                imgWidth = width / 4;
+                debugPrint("screenWidth > 1200 && screenWidth < 1300");
+              } else if (screenWidth > 1000 && screenWidth < 1200) {
+                imgHeight = height / 2.5;
+                imgWidth = width / 3.5;
+                debugPrint("screenWidth > 1000 && screenWidth < 1200");
+              } else if (screenWidth > 800 && screenWidth < 1000) {
+                imgHeight = height / 3;
+                imgWidth = width / 3;
+                debugPrint("screenWidth > 800 && screenWidth < 1000");
+              } else if (screenWidth > 600) {
+                imgHeight = height / 3.5;
+                imgWidth = width / 2.5;
+                debugPrint("screenWidth > 600 ");
+              } else if (screenWidth > 500) {
+                imgHeight = height / 3.5;
+                imgWidth = width / 2;
+                debugPrint("screenWidth > 500");
+              } else if (screenWidth > 350) {
+                imgHeight = height / 4;
+                imgWidth = width / 2;
+                debugPrint("screenWidth > 350");
+              }
 
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(height: 15),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: widget.itemImage!.startsWith("http")
-                            ? Image.network(
-                                widget.itemImage ?? "",
-                                height: imgHeight,
-                                width: imgWidth,
-                                fit: BoxFit.cover,
-                              )
-                            : Image.asset(
-                                widget.itemImage ?? "",
-                                height: imgHeight,
-                                width: imgWidth,
-                                fit: BoxFit.cover,
-                              ),
-                      ),
-                      SizedBox(height: 15),
-                      BottomSheet(
-                        elevation: 15,
-                        showDragHandle: true,
-                        enableDrag: false,
-                        backgroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        onClosing: () {},
-                        builder: (BuildContext context) {
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 14),
-                            child: Column(
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(height: 15),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: widget.itemImage!.startsWith("http")
+                        ? Image.network(
+                            widget.itemImage ?? "",
+                            height: imgHeight,
+                            width: imgWidth,
+                            fit: BoxFit.cover,
+                          )
+                        : Image.asset(
+                            widget.itemImage ?? "",
+                            height: imgHeight,
+                            width: imgWidth,
+                            fit: BoxFit.cover,
+                          ),
+                  ),
+                  SizedBox(height: 15),
+                  BottomSheet(
+                    elevation: 15,
+                    showDragHandle: true,
+                    enableDrag: false,
+                    backgroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    onClosing: () {},
+                    builder: (BuildContext context) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 14),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
+                                Container(
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.rectangle,
+                                      borderRadius: BorderRadius.circular(15),
+                                      color: const Color.fromARGB(
+                                          255, 243, 255, 239)),
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: width / 25,
+                                        vertical: height / 60),
+                                    child: const Text("Popular"),
+                                  ),
+                                ),
+                                const Spacer(),
+                                SizedBox(
+                                  width: width / 50,
+                                ),
+                                Column(
                                   children: [
                                     Container(
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.rectangle,
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          color: const Color.fromARGB(
+                                      decoration: const BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: Color.fromARGB(
                                               255, 243, 255, 239)),
-                                      child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: width / 25,
-                                            vertical: height / 60),
-                                        child: const Text("Popular"),
+                                      child: const Padding(
+                                        padding: EdgeInsets.all(15.0),
+                                        child: FaIcon(
+                                          FontAwesomeIcons.locationDot,
+                                          color: AppColors.darkGreen,
+                                        ),
                                       ),
                                     ),
-                                    const Spacer(),
-                                    SizedBox(
-                                      width: width / 50,
-                                    ),
-                                    Column(
-                                      children: [
-                                        Container(
-                                          decoration: const BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              color: Color.fromARGB(
-                                                  255, 243, 255, 239)),
-                                          child: const Padding(
-                                            padding: EdgeInsets.all(15.0),
-                                            child: FaIcon(
-                                              FontAwesomeIcons.locationDot,
-                                              color: AppColors.darkGreen,
-                                            ),
-                                          ),
-                                        ),
-                                        Text(
-                                          widget.restroName ?? "",
-                                          style: GoogleFonts.poppins(
-                                              color: AppColors.blackColor,
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
+                                    Text(
+                                      widget.restroName ?? "",
+                                      style: GoogleFonts.poppins(
+                                          color: AppColors.blackColor,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ],
                                 ),
-                                SizedBox(
-                                  height: height / 40,
-                                ),
-                                Text(
-                                  widget.itemname ?? "",
-                                  style: GoogleFonts.poppins(
-                                      color: AppColors.blackColor,
-                                      fontSize: 35,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  "\$ ${widget.itemPrice.toString()}",
-                                  style: GoogleFonts.poppins(
-                                      color: AppColors.darkGreen,
-                                      fontSize: 35,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                SizedBox(
-                                  height: height / 80,
-                                ),
-                                RatingBars(
-                                  itemid: widget.itemId,
-                                ),
-                                SizedBox(
-                                  height: height / 80,
-                                ),
-                                Text(
-                                  widget.itemDescription ?? "",
-                                  style: GoogleFonts.poppins(
-                                      color: AppColors.blackColor,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500),
-                                  textAlign: TextAlign.start,
-                                ),
-                                SizedBox(
-                                  height: height / 20,
-                                ),
                               ],
                             ),
-                          );
-                        },
-                      ),
-                      SizedBox(
-                        height: height / 15,
-                      ),
-                    ],
-                  );
-                },
-              ),
-            ),
-          );
-        },
+                            SizedBox(
+                              height: height / 40,
+                            ),
+                            Text(
+                              widget.itemname ?? "",
+                              style: GoogleFonts.poppins(
+                                  color: AppColors.blackColor,
+                                  fontSize: 35,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              "\$ ${widget.itemPrice.toString()}",
+                              style: GoogleFonts.poppins(
+                                  color: AppColors.darkGreen,
+                                  fontSize: 35,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              height: height / 80,
+                            ),
+                            RatingBars(
+                              itemid: widget.itemId,
+                            ),
+                            SizedBox(
+                              height: height / 80,
+                            ),
+                            Text(
+                              widget.itemDescription ?? "",
+                              style: GoogleFonts.poppins(
+                                  color: AppColors.blackColor,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500),
+                              textAlign: TextAlign.start,
+                            ),
+                            SizedBox(
+                              height: height / 20,
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                  SizedBox(
+                    height: height / 15,
+                  ),
+                ],
+              );
+            },
+          ),
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Padding(

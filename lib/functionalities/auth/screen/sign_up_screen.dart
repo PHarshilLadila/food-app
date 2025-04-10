@@ -194,6 +194,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       SizedBox(
                         width: textFieldWidth,
                         child: CustomeTextFormField(
+                          key: Key("username"),
                           maxline: 1,
                           hintText: "User Name",
                           // AppLocalizations.of(context)!.userName,
@@ -228,6 +229,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         height: height * 0.02,
                       ),
                       SizedBox(
+                        key: Key("email"),
                         width: textFieldWidth,
                         child: CustomeTextFormField(
                           maxline: 1,
@@ -272,6 +274,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       SizedBox(
                         width: textFieldWidth,
                         child: CustomeTextFormField(
+                          key: Key("password"),
                           maxline: 1,
                           textEditingController: passwordController,
                           hintText: "Password",
@@ -338,6 +341,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         height: height / 18,
                       ),
                       GestureDetector(
+                        key: Key("registration_button"),
                         onTap: () {
                           register();
                         },
