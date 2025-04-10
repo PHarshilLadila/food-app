@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:food_app/constant/app_colors.dart';
 import 'package:food_app/constant/app_gredient_text.dart';
@@ -8,6 +10,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:toastification/toastification.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SetLocation extends StatefulWidget {
@@ -78,34 +81,50 @@ class _SetLocationState extends State<SetLocation> {
   Future<bool> handleLocationPermission() async {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      showSnackBar(
+      // showSnackBar(
+      //     // AppLocalizations.of(context)!.locationServiceDisabled
+      //     "Location services are disabled. Please enable the services.");
+      appTostMessage(
+          context,
+          ToastificationType.error,
+          "Location services are disabled. Please enable the services.",
           // AppLocalizations.of(context)!.locationServiceDisabled
-          "Location services are disabled. Please enable the services.");
+
+          "assets/images/wronge.png");
       return false;
     }
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        showSnackBar(
-          // AppLocalizations.of(context)!.locationPermissionDenied
+        // showSnackBar(
+        //   // AppLocalizations.of(context)!.locationPermissionDenied
+        //   "Location permissions are denied",
+        // );
+        appTostMessage(
+          context,
+          ToastificationType.error,
           "Location permissions are denied",
+          // AppLocalizations.of(context)!.locationPermissionDenied
+
+          "assets/images/wronge.png",
         );
         return false;
       }
     }
     if (permission == LocationPermission.deniedForever) {
-      showSnackBar(
+      // showSnackBar(
+      //     // AppLocalizations.of(context)!.locationPermissionPermanentlyDenied,
+      //     "Location permissions are permanently denied, we cannot request permissions.");
+      appTostMessage(
+          context,
+          ToastificationType.error,
+          "Location permissions are permanently denied, we cannot request permissions.",
           // AppLocalizations.of(context)!.locationPermissionPermanentlyDenied,
-          "Location permissions are permanently denied, we cannot request permissions.");
+          "assets/images/wronge.png");
       return false;
     }
     return true;
-  }
-
-  void showSnackBar(String message) {
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(message)));
   }
 
   void storeLocation() {
@@ -116,16 +135,28 @@ class _SetLocationState extends State<SetLocation> {
         context,
         MaterialPageRoute(builder: (context) => const ProfileDone()),
       );
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: AppColors.darkGreen,
-          behavior: SnackBarBehavior.floating,
-          content: Text("Location added successfully"),
-          duration: Duration(seconds: 2),
-        ),
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   const SnackBar(
+      //     backgroundColor: AppColors.darkGreen,
+      //     behavior: SnackBarBehavior.floating,
+      //     content: Text("Location added successfully"),
+      //     duration: Duration(seconds: 2),
+      //   ),
+      // );
+      appTostMessage(
+        context,
+        ToastificationType.success,
+        "Location added successfully",
+        "assets/images/done.png",
       );
     } catch (e) {
-      showSnackBar(e.toString());
+      appTostMessage(
+        context,
+        ToastificationType.error,
+        e.toString(),
+        "assets/images/wronge.png",
+      );
+      debugPrint(e.toString());
     }
   }
 
@@ -164,101 +195,126 @@ class _SetLocationState extends State<SetLocation> {
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: height * 0.02),
-            GradientText(
-              // AppLocalizations.of(context)!.setYourLocation,
-              "Set Your Location",
-              style: GoogleFonts.poppins(
-                  fontSize: 30, fontWeight: FontWeight.w600),
-              gradient: const LinearGradient(
-                  colors: [AppColors.blackColor, AppColors.blackColor]),
-            ),
-            SizedBox(height: height * 0.02),
-            GradientText(
-              // AppLocalizations.of(context)!.proccessData,
-              "This data will be displayed in your account profile for security,",
-              style: GoogleFonts.poppins(
-                  fontSize: 16, fontWeight: FontWeight.w400),
-              gradient: const LinearGradient(
-                  colors: [AppColors.blackColor, AppColors.blackColor]),
-            ),
-            SizedBox(height: height * 0.03),
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: const Color.fromARGB(255, 250, 255, 251),
-                boxShadow: const [
-                  BoxShadow(
-                      blurRadius: 12,
-                      offset: Offset(2, 5),
-                      color: Color.fromARGB(255, 219, 219, 219))
-                ],
-              ),
-              padding:
-                  const EdgeInsets.symmetric(vertical: 18.0, horizontal: 12),
-              child: Column(
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Image.asset("assets/images/login/location.png",
-                          height: height * 0.05),
-                      SizedBox(width: width * 0.03),
-                      Expanded(
-                        child: isLoading
-                            ? myProccesser()
-                            : GradientText(
-                                currentAddress ??
-                                    // AppLocalizations.of(context)!
-                                    //     .setYourLocation,
-                                    "Set Your Location",
-                                style: GoogleFonts.poppins(
-                                    fontSize: 16, fontWeight: FontWeight.w600),
-                                gradient: const LinearGradient(colors: [
-                                  AppColors.blackColor,
-                                  AppColors.blackColor
-                                ]),
-                              ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: height * 0.03),
-                  GestureDetector(
-                    onTap: getCurrentPosition,
-                    child: Container(
-                      width: double.infinity,
-                      height: height * 0.06,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
-                        gradient: const LinearGradient(
-                          begin: Alignment(-0.95, 0.0),
-                          end: Alignment(1.0, 0.0),
-                          colors: [
-                            AppColors.lightGreen,
-                            AppColors.darkGreen,
+        child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            double screenWidth = constraints.maxWidth;
+            double textFieldWidth = double.infinity;
+
+            // Make text field width responsive
+            if (screenWidth > 1300) {
+              textFieldWidth = height / 1.5;
+            } else if (screenWidth > 1200 && screenWidth < 1300) {
+              textFieldWidth = height / 1.5;
+            } else if (screenWidth > 1000 && screenWidth < 1200) {
+              textFieldWidth = height / 1.5;
+            } else if (screenWidth > 800 && screenWidth < 1000) {
+              textFieldWidth = height / 1.7;
+            } else if (screenWidth > 600) {
+              textFieldWidth = width / 1.7;
+            } else {
+              textFieldWidth = double.infinity;
+            }
+
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: height * 0.02),
+                GradientText(
+                  // AppLocalizations.of(context)!.setYourLocation,
+                  "Set Your Location",
+                  style: GoogleFonts.poppins(
+                      fontSize: 30, fontWeight: FontWeight.w600),
+                  gradient: const LinearGradient(
+                      colors: [AppColors.blackColor, AppColors.blackColor]),
+                ),
+                SizedBox(height: height * 0.02),
+                GradientText(
+                  // AppLocalizations.of(context)!.proccessData,
+                  "This data will be displayed in your account profile for security,",
+                  style: GoogleFonts.poppins(
+                      fontSize: 16, fontWeight: FontWeight.w400),
+                  gradient: const LinearGradient(
+                      colors: [AppColors.blackColor, AppColors.blackColor]),
+                ),
+                SizedBox(height: height * 0.03),
+                Center(
+                  child: Container(
+                    width: textFieldWidth,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: const Color.fromARGB(255, 250, 255, 251),
+                      boxShadow: const [
+                        BoxShadow(
+                            blurRadius: 12,
+                            offset: Offset(2, 5),
+                            color: Color.fromARGB(255, 219, 219, 219))
+                      ],
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 18.0, horizontal: 12),
+                    child: Column(
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.asset("assets/images/login/location.png",
+                                height: height * 0.05),
+                            SizedBox(width: width * 0.03),
+                            Expanded(
+                              child: isLoading
+                                  ? myProccesser()
+                                  : GradientText(
+                                      currentAddress ??
+                                          // AppLocalizations.of(context)!
+                                          //     .setYourLocation,
+                                          "Set Your Location",
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600),
+                                      gradient: const LinearGradient(colors: [
+                                        AppColors.blackColor,
+                                        AppColors.blackColor
+                                      ]),
+                                    ),
+                            ),
                           ],
                         ),
-                      ),
-                      child: Center(
-                        child: Text(
-                          // AppLocalizations.of(context)!.setLocation,
-                          "Set Location",
-                          style: GoogleFonts.poppins(
-                              color: AppColors.whiteColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600),
+                        SizedBox(height: height * 0.03),
+                        GestureDetector(
+                          onTap: getCurrentPosition,
+                          child: Container(
+                            width: textFieldWidth,
+                            height: height * 0.06,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15.0),
+                              gradient: const LinearGradient(
+                                begin: Alignment(-0.95, 0.0),
+                                end: Alignment(1.0, 0.0),
+                                colors: [
+                                  AppColors.lightGreen,
+                                  AppColors.darkGreen,
+                                ],
+                              ),
+                            ),
+                            child: Center(
+                              child: Text(
+                                // AppLocalizations.of(context)!.setLocation,
+                                "Set Location",
+                                style: GoogleFonts.poppins(
+                                    color: AppColors.whiteColor,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-            ),
-          ],
+                ),
+              ],
+            );
+          },
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

@@ -5,9 +5,11 @@ import 'package:food_app/constant/app_button.dart';
 import 'package:food_app/constant/app_colors.dart';
 import 'package:food_app/constant/app_gredient_text.dart';
 import 'package:food_app/functionalities/home/provider/home_provider.dart';
+import 'package:food_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
+import 'package:toastification/toastification.dart';
 
 class ItemDetails extends StatefulWidget {
   final String? itemId;
@@ -142,12 +144,19 @@ class _ItemDetailsState extends State<ItemDetails>
                       SizedBox(height: 15),
                       ClipRRect(
                         borderRadius: BorderRadius.circular(15),
-                        child: Image.network(
-                          widget.itemImage ?? "",
-                          height: imgHeight,
-                          width: imgWidth,
-                          fit: BoxFit.cover,
-                        ),
+                        child: widget.itemImage!.startsWith("http")
+                            ? Image.network(
+                                widget.itemImage ?? "",
+                                height: imgHeight,
+                                width: imgWidth,
+                                fit: BoxFit.cover,
+                              )
+                            : Image.asset(
+                                widget.itemImage ?? "",
+                                height: imgHeight,
+                                width: imgWidth,
+                                fit: BoxFit.cover,
+                              ),
                       ),
                       SizedBox(height: 15),
                       BottomSheet(
@@ -282,19 +291,25 @@ class _ItemDetailsState extends State<ItemDetails>
               widget.itemPrice!.toDouble(),
               widget.restroName!,
             );
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                padding: const EdgeInsets.all(15),
-                shape: BeveledRectangleBorder(
-                    borderRadius: BorderRadius.circular(5)),
-                backgroundColor: AppColors.darkGreen,
-                dismissDirection: DismissDirection.endToStart,
-                behavior: SnackBarBehavior.floating,
-                content: Text(
-                  "Yup..! ${widget.itemname!} added to cart Successfully.",
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
+            // ScaffoldMessenger.of(context).showSnackBar(
+            //   SnackBar(
+            //     padding: const EdgeInsets.all(15),
+            //     shape: BeveledRectangleBorder(
+            //         borderRadius: BorderRadius.circular(5)),
+            //     backgroundColor: AppColors.darkGreen,
+            //     dismissDirection: DismissDirection.endToStart,
+            //     behavior: SnackBarBehavior.floating,
+            //     content: Text(
+            //       "Yup..! ${widget.itemname!} added to cart Successfully.",
+            //       style: TextStyle(color: Colors.white),
+            //     ),
+            //   ),
+            // );
+            appTostMessage(
+              context,
+              ToastificationType.success,
+              "Yup..! ${widget.itemname!} added to cart Successfully.",
+              "assets/images/done.png",
             );
           },
         ),

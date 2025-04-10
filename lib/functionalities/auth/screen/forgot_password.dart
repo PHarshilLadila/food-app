@@ -3,8 +3,10 @@ import 'package:food_app/constant/app_colors.dart';
 import 'package:food_app/constant/app_gredient_text.dart';
 import 'package:food_app/constant/app_textform_field.dart';
 import 'package:food_app/functionalities/auth/providers/auth_provider.dart';
+import 'package:food_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:toastification/toastification.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});
@@ -88,7 +90,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   debugPrint("screenWidth > 350");
                 }
                 return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 12.0, vertical: 10),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,7 +101,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       ),
                       GradientText(
                         'Forgot password?',
-                        style: GoogleFonts.poppins(fontSize: 30, fontWeight: FontWeight.w600),
+                        style: GoogleFonts.poppins(
+                            fontSize: 30, fontWeight: FontWeight.w600),
                         gradient: const LinearGradient(
                           colors: [
                             AppColors.blackColor,
@@ -140,7 +144,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                             ],
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 18.0, horizontal: 12),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 18.0, horizontal: 12),
                             child: Column(
                               children: [
                                 Row(
@@ -155,7 +160,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                       width: width * 0.03,
                                     ),
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         GradientText(
                                           'Via email :',
@@ -200,21 +206,26 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                     child: CustomeTextFormField(
                                       textEditingController: emailController,
                                       maxline: 1,
-                                      fillColor: Color.fromARGB(255, 252, 255, 252),
+                                      fillColor:
+                                          Color.fromARGB(255, 252, 255, 252),
                                       hintText: "Email (John.example.com)",
                                       obscureText: false,
                                       hintcolors: Color(
                                         0xff3B3B3B,
                                       ),
-                                      borderColor: Color.fromARGB(255, 252, 255, 252),
-                                      disabledColor: Color.fromARGB(255, 252, 255, 252),
+                                      borderColor:
+                                          Color.fromARGB(255, 252, 255, 252),
+                                      disabledColor:
+                                          Color.fromARGB(255, 252, 255, 252),
                                       enabledColor: AppColors.darkGreen,
                                       focusedColor: AppColors.darkGreen,
                                       keyboradType: TextInputType.emailAddress,
                                       validator: (value) {
                                         if (value == null || value.isEmpty) {
                                           return "Please enter your email";
-                                        } else if (!RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$").hasMatch(value)) {
+                                        } else if (!RegExp(
+                                                r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
+                                            .hasMatch(value)) {
                                           return "Please enter a valid email address";
                                         }
                                         return null;
@@ -242,16 +253,22 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       floatingActionButton: GestureDetector(
         onTap: () {
           if (formKey.currentState!.validate()) {
-            Provider.of<AuthProviders>(context, listen: false).forgotPassword(emailController.text.trim());
+            Provider.of<AuthProviders>(context, listen: false)
+                .forgotPassword(emailController.text.trim());
 
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                behavior: SnackBarBehavior.floating,
-                content: Text("Email sent successfully on ${emailController.text.trim()}"),
-                backgroundColor: AppColors.darkGreen,
-                duration: Duration(seconds: 2),
-              ),
-            );
+            // ScaffoldMessenger.of(context).showSnackBar(
+            //   SnackBar(
+            //     behavior: SnackBarBehavior.floating,
+            //     content: Text("Email sent successfully on ${emailController.text.trim()}"),
+            //     backgroundColor: AppColors.darkGreen,
+            //     duration: Duration(seconds: 2),
+            //   ),
+            // );
+            appTostMessage(
+                context,
+                ToastificationType.success,
+                "Email sent successfully on ${emailController.text.trim()}",
+                "assets/images/done.png");
 
             Navigator.pop(context);
           }
@@ -274,7 +291,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           child: Center(
             child: Text(
               "Send Email",
-              style: GoogleFonts.poppins(color: AppColors.whiteColor, fontSize: 16, fontWeight: FontWeight.w500),
+              style: GoogleFonts.poppins(
+                  color: AppColors.whiteColor,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500),
             ),
           ),
         ),

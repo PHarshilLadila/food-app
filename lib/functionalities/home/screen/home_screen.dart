@@ -7,6 +7,7 @@ import 'package:food_app/constant/app_gredient_text.dart';
 import 'package:food_app/constant/app_textform_field.dart';
 import 'package:food_app/functionalities/home/helper/list_data.dart';
 import 'package:food_app/functionalities/home/provider/home_provider.dart';
+import 'package:food_app/functionalities/home/screen/item_details.dart';
 import 'package:food_app/functionalities/home/widget/cards/card1.dart';
 import 'package:food_app/functionalities/home/widget/cards/card2.dart';
 import 'package:food_app/functionalities/home/widget/category%20pages/cat_canadian_meal.dart';
@@ -15,7 +16,6 @@ import 'package:food_app/functionalities/home/widget/category%20pages/cat_hot_co
 import 'package:food_app/functionalities/home/widget/category%20pages/cat_main_meal.dart';
 import 'package:food_app/functionalities/home/widget/category%20pages/cat_pasta.dart';
 import 'package:food_app/functionalities/home/widget/grid%20and%20lists/meals_categories.dart';
-import 'package:food_app/functionalities/home/widget/populer_menu.dart';
 import 'package:food_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -103,7 +103,8 @@ class _HomeScreenState extends State<HomeScreen> {
             decoration: BoxDecoration(
               image: DecorationImage(
                 alignment: Alignment.topCenter,
-                colorFilter: ColorFilter.mode(Colors.white.withOpacity(0.4), BlendMode.dstATop),
+                colorFilter: ColorFilter.mode(
+                    Colors.white.withOpacity(0.4), BlendMode.dstATop),
                 image: const AssetImage(
                   "assets/images/Pattern.png",
                 ),
@@ -111,7 +112,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             child: SafeArea(
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18),
                 child: SingleChildScrollView(
                   scrollDirection: Axis.vertical,
                   physics: const BouncingScrollPhysics(),
@@ -126,7 +128,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: GradientText(
                               // AppLocalizations.of(context)!.homeTitle,
                               'Find Your Favorite Food',
-                              style: GoogleFonts.poppins(fontSize: 30, fontWeight: FontWeight.bold),
+                              style: GoogleFonts.poppins(
+                                  fontSize: 30, fontWeight: FontWeight.bold),
                               gradient: const LinearGradient(
                                 colors: [
                                   AppColors.lightGreen,
@@ -137,6 +140,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           GestureDetector(
                             onTap: () {
+                              // appTostMessage(
+                              //     context,
+                              //     ToastificationType.success,
+                              //     "Hello there!, How are you??",
+                              //     "assets/images/done.png");
                               // Navigator.push(
                               //   context,
                               //   MaterialPageRoute(
@@ -150,7 +158,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: AppColors.whiteColor,
                                 borderRadius: BorderRadius.circular(15),
                                 boxShadow: [
-                                  BoxShadow(color: Colors.grey.shade100, offset: const Offset(5, 25), blurRadius: 15),
+                                  BoxShadow(
+                                      color: Colors.grey.shade100,
+                                      offset: const Offset(5, 25),
+                                      blurRadius: 15),
                                 ],
                               ),
                               child: Padding(
@@ -158,7 +169,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Image.asset(
                                   "assets/images/home/notification.png",
                                   height: height / 30,
-                                  width: width / 12,
+                                  width: width / 14,
                                 ),
                               ),
                             ),
@@ -177,10 +188,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                 homeProvider.setSearchQuery(value);
                               },
                               obscureText: false,
-                              borderColor: const Color.fromARGB(255, 252, 255, 252),
-                              disabledColor: const Color.fromARGB(255, 252, 255, 252),
-                              enabledColor: const Color.fromARGB(255, 252, 255, 252),
-                              focusedColor: AppColors.darkOrange.withOpacity(1.0),
+                              borderColor:
+                                  const Color.fromARGB(255, 252, 255, 252),
+                              disabledColor:
+                                  const Color.fromARGB(255, 252, 255, 252),
+                              enabledColor:
+                                  const Color.fromARGB(255, 252, 255, 252),
+                              focusedColor:
+                                  AppColors.darkOrange.withOpacity(1.0),
                               hintText: "What Do You Want To Order?",
                               //  AppLocalizations.of(context)!.search,
                               fillColor: AppColors.lightOrange,
@@ -210,7 +225,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: AppColors.lightOrange,
                               borderRadius: BorderRadius.circular(15),
                               boxShadow: [
-                                BoxShadow(color: Colors.grey.shade100, offset: const Offset(5, 25), blurRadius: 15),
+                                BoxShadow(
+                                    color: Colors.grey.shade100,
+                                    offset: const Offset(5, 25),
+                                    blurRadius: 15),
                               ],
                             ),
                             child: Padding(
@@ -251,18 +269,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                     borderRadius: BorderRadius.circular(15),
                                   ),
                                   child: ListView.builder(
-                                    itemCount: homeProvider.searchResults.length,
+                                    itemCount:
+                                        homeProvider.searchResults.length,
                                     shrinkWrap: true,
                                     itemBuilder: (context, index) {
-                                      final dessert = homeProvider.searchResults[index];
+                                      final dessert =
+                                          homeProvider.searchResults[index];
                                       // final coffee = homeProvider.searchCoffeeResults[index];
                                       // final canadian = homeProvider.searchCanadianResults[index];
                                       return Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
                                         children: [
                                           Padding(
-                                            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 4.0),
                                             child: Container(
                                               decoration: BoxDecoration(
                                                 color: Colors.white60,
@@ -270,17 +293,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   color: Colors.black26,
                                                   width: 0.5,
                                                 ),
-                                                borderRadius: BorderRadius.circular(10),
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
                                               ),
                                               child: ListTile(
                                                 leading: dessert.image != null
                                                     ? ClipRRect(
-                                                        borderRadius: BorderRadius.circular(10),
-                                                        child: Image.network(dessert.image!),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        child: Image.network(
+                                                            dessert.image!),
                                                       )
                                                     : null,
                                                 title: Text(dessert.name ?? ''),
-                                                subtitle: Text(dessert.cuisine ?? ""),
+                                                subtitle:
+                                                    Text(dessert.cuisine ?? ""),
                                               ),
                                             ),
                                           ),
@@ -296,7 +324,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: height / 40,
                       ),
                       LayoutBuilder(
-                        builder: (BuildContext context, BoxConstraints constraints) {
+                        builder:
+                            (BuildContext context, BoxConstraints constraints) {
                           double screenWidth = constraints.maxWidth;
                           int crossAxisCount = 4;
                           double childAspectRatio = 0.8;
@@ -367,14 +396,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                 padding: EdgeInsets.only(top: 10, bottom: 15),
                                 child: Text(
                                   "Categories",
-                                  style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.bold),
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
                               GridView.builder(
                                 shrinkWrap: true,
                                 physics: NeverScrollableScrollPhysics(),
                                 itemCount: foodCategoriesList.length,
-                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisSpacing: 15,
                                   mainAxisSpacing: 15,
                                   childAspectRatio: childAspectRatio,
@@ -387,25 +419,30 @@ class _HomeScreenState extends State<HomeScreen> {
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
-                                          color: const Color.fromARGB(255, 238, 255, 234),
+                                          color: const Color.fromARGB(
+                                              255, 238, 255, 234),
                                           boxShadow: [
                                             BoxShadow(
-                                              color: const Color.fromARGB(17, 0, 0, 0),
+                                              color: const Color.fromARGB(
+                                                  17, 0, 0, 0),
                                               blurRadius: 1,
                                               spreadRadius: 3,
                                               offset: Offset(2, 2),
                                             ),
                                           ],
-                                          borderRadius: BorderRadius.circular(12)),
+                                          borderRadius:
+                                              BorderRadius.circular(12)),
                                       child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
                                           Image.asset(
                                             foodCategoriesList[index]["image"],
                                             height: 50,
                                           ),
                                           Padding(
-                                            padding: const EdgeInsets.only(top: 8.0),
+                                            padding:
+                                                const EdgeInsets.only(top: 8.0),
                                             child: Text(
                                               foodCategoriesList[index]["name"],
                                               style: GoogleFonts.poppins(),
@@ -474,21 +511,105 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             Text(
                               "Popular Menu",
-                              style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.bold),
+                              style: GoogleFonts.poppins(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                             Text(
                               // AppLocalizations.of(context)!.viewMore,
                               'View More',
-                              style: GoogleFonts.poppins(color: AppColors.darkOrange, fontSize: 16, fontWeight: FontWeight.w500),
+                              style: GoogleFonts.poppins(
+                                  color: AppColors.darkOrange,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500),
                             ),
                           ],
                         ),
                       ),
-                      PopulerMenu(height: height, width: width),
-                      SizedBox(
-                        height: height / 80,
+                      ListView.builder(
+                        itemCount: popularItems.length,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 8.0),
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ItemDetails(
+                                      itemId: popularItems[index]["id"],
+                                      itemImage: popularItems[index]["image"],
+                                      itemPrice: popularItems[index]["price"],
+                                      itemname: popularItems[index]["name"],
+                                      restroImg:
+                                          "assets/images/home/nearRestaurant/near3.png",
+                                      restroName: "The Chinese Bar",
+                                      itemDescription: popularItems[index]
+                                          ["description"],
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius:
+                                          BorderRadiusDirectional.circular(15),
+                                      child: Image.asset(
+                                        popularItems[index]["image"],
+                                        fit: BoxFit.cover,
+                                        height: 80,
+                                        width: 80,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 15,
+                                    ),
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          popularItems[index]["name"],
+                                          style: GoogleFonts.poppins(
+                                              color: AppColors.blackColor,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                        Text(
+                                          popularItems[index]["description"],
+                                          style: GoogleFonts.poppins(
+                                              color: AppColors.blackColor,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                      ],
+                                    ),
+                                    Spacer(),
+                                    Text(
+                                      "\$${popularItems[index]["price"]}",
+                                      style: GoogleFonts.poppins(
+                                          color: AppColors.darkOrange,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        },
                       ),
-                      PopulerMenu(height: height, width: width),
                     ],
                   ),
                 ),

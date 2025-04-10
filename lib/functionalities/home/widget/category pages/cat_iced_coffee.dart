@@ -9,8 +9,10 @@ import 'package:food_app/functionalities/home/provider/home_provider.dart';
 import 'package:food_app/functionalities/home/screen/item_details.dart';
 import 'package:food_app/functionalities/home/widget/drag_note.dart';
 import 'package:food_app/functionalities/home/widget/dropped_cart_button.dart';
+import 'package:food_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:toastification/toastification.dart';
 
 class CatIcedCoffee extends StatefulWidget {
   const CatIcedCoffee({super.key});
@@ -730,11 +732,17 @@ class _CatIcedCoffeeState extends State<CatIcedCoffee> {
                       _isDropped = true;
                       _droppedItem = data;
                     });
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        backgroundColor: AppColors.darkGreen,
-                        content: Text('${data["itemName"]} added to cart!'),
-                      ),
+                    // ScaffoldMessenger.of(context).showSnackBar(
+                    //   SnackBar(
+                    //     backgroundColor: AppColors.darkGreen,
+                    //     content: Text('${data["itemName"]} added to cart!'),
+                    //   ),
+                    // );
+                    appTostMessage(
+                      context,
+                      ToastificationType.success,
+                      "${data["itemName"]} added to cart!",
+                      "assets/images/done.png",
                     );
                   },
                   builder: (context, accepted, rejected) {

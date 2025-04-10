@@ -20,6 +20,7 @@ import 'package:provider/provider.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:sentry_logging/sentry_logging.dart';
+import 'package:toastification/toastification.dart';
 
 final GlobalKey<NavigatorState> globalNavigatorKey =
     GlobalKey<NavigatorState>();
@@ -120,43 +121,45 @@ class _MyAppState extends State<MyApp> {
       ],
       child: Consumer<LocalProvider>(
         builder: (BuildContext context, LocalProvider value, Widget? child) {
-          return MaterialApp(
-            title: 'Swift Bite',
-            navigatorKey: globalNavigatorKey,
-            // -- locale: value.appLocal,
-            showSemanticsDebugger: false,
-            //  -- supportedLocales: AppLocalizations.supportedLocales,
-            //    supportedLocales: const [
-            //   Locale('en'),
-            //   Locale('es'),
-            //   Locale('he'),
-            // ],
-//--
-            // localizationsDelegates: AppLocalizations.localizationsDelegates,
-            // localeResolutionCallback: (locale, supportedLocales) {
-            //   if (locale == null) {
-            //     return supportedLocales.first;
-            //   }
-            //   for (var supportedLocale in supportedLocales) {
-            //     if (supportedLocale.languageCode == locale.languageCode &&
-            //         supportedLocale.countryCode == locale.countryCode) {
-            //       return supportedLocale;
-            //     }
-            //   }
-            //   return supportedLocales.first;
-            // },
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              colorScheme:
-                  ColorScheme.fromSeed(seedColor: AppColors.lightGreen),
-              useMaterial3: false,
-            ),
-            home: Consumer<AuthProviders>(
-              builder: (context, auth, _) {
-                return userUid.isEmpty
-                    ? const SplashScreen()
-                    : const BottomScreen();
-              },
+          return ToastificationWrapper(
+            child: MaterialApp(
+              title: 'Swift Bite',
+              navigatorKey: globalNavigatorKey,
+              // -- locale: value.appLocal,
+              showSemanticsDebugger: false,
+              //  -- supportedLocales: AppLocalizations.supportedLocales,
+              //    supportedLocales: const [
+              //   Locale('en'),
+              //   Locale('es'),
+              //   Locale('he'),
+              // ],
+              //--
+              // localizationsDelegates: AppLocalizations.localizationsDelegates,
+              // localeResolutionCallback: (locale, supportedLocales) {
+              //   if (locale == null) {
+              //     return supportedLocales.first;
+              //   }
+              //   for (var supportedLocale in supportedLocales) {
+              //     if (supportedLocale.languageCode == locale.languageCode &&
+              //         supportedLocale.countryCode == locale.countryCode) {
+              //       return supportedLocale;
+              //     }
+              //   }
+              //   return supportedLocales.first;
+              // },
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData(
+                colorScheme:
+                    ColorScheme.fromSeed(seedColor: AppColors.lightGreen),
+                useMaterial3: false,
+              ),
+              home: Consumer<AuthProviders>(
+                builder: (context, auth, _) {
+                  return userUid.isEmpty
+                      ? const SplashScreen()
+                      : const BottomScreen();
+                },
+              ),
             ),
           );
         },

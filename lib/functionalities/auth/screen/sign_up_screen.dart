@@ -8,8 +8,10 @@ import 'package:food_app/constant/app_textform_field.dart';
 import 'package:food_app/functionalities/auth/providers/auth_provider.dart';
 import 'package:food_app/functionalities/auth/screen/login_screen.dart';
 import 'package:food_app/functionalities/auth/screen/signup_process.dart';
+import 'package:food_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:toastification/toastification.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -52,21 +54,33 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
           (route) => false,
         );
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            backgroundColor: AppColors.darkGreen,
-            behavior: SnackBarBehavior.floating,
-            content: Text("Your Account Created Successfully"),
-            duration: Duration(seconds: 2),
-          ),
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //   const SnackBar(
+        //     backgroundColor: AppColors.darkGreen,
+        //     behavior: SnackBarBehavior.floating,
+        //     content: Text("Your Account Created Successfully"),
+        //     duration: Duration(seconds: 2),
+        //   ),
+        // );
+        appTostMessage(
+          context,
+          ToastificationType.success,
+          "Your Account Created Successfully",
+          "assets/images/done.png",
         );
       } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              e.toString(),
-            ),
-          ),
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //   SnackBar(
+        //     content: Text(
+        //       e.toString(),
+        //     ),
+        //   ),
+        // );
+        appTostMessage(
+          context,
+          ToastificationType.error,
+          e.toString(),
+          "assets/images/wronge.png",
         );
         throw e.toString();
       }

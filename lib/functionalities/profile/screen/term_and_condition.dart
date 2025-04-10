@@ -161,8 +161,6 @@ class TermsAndConditionsPage extends StatelessWidget {
 
   List<Widget> _buildSection(BuildContext context,
       {required String title, required String content}) {
-    final textTheme = Theme.of(context).textTheme;
-
     return [
       Container(
         width: double.infinity,
@@ -185,17 +183,18 @@ class TermsAndConditionsPage extends StatelessWidget {
           children: [
             Text(
               title,
-              style: textTheme.titleMedium?.copyWith(
+              style: GoogleFonts.poppins(
+                fontSize: 16,
                 fontWeight: FontWeight.w600,
-                color: AppColors.darkGreen,
               ),
             ),
             const SizedBox(height: 8),
             Text(
               content,
-              style: textTheme.bodyMedium?.copyWith(
+              style: GoogleFonts.poppins(
                 height: 1.6,
                 fontWeight: FontWeight.w400,
+                fontSize: 14,
                 color: Colors.black87,
               ),
             ),

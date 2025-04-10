@@ -376,3 +376,30 @@ List<Map<String, dynamic>> pastaMenu = [
     "restaurantImageUrl": "assets/images/home/nearRestaurant/near5.png"
   },
 ];
+
+List<Map<String, dynamic>> popularItems = [
+  {
+    "id": "1",
+    "name": "Chow Mein",
+    "description":
+        "A classic Chinese stir-fried noodle dish\nwith vegetables and protein.",
+    "image": "assets/images/home/chowme.jpg",
+    "price": 12.0,
+  },
+  {
+    "id": "2",
+    "name": "Hakka Noddle",
+    "description":
+        "A popular Indo-Chinese dish made with\nstir-fried noodles and vegetables.",
+    "image": "assets/images/home/noddles.jpg",
+    "price": 15.0,
+  },
+  {
+    "id": "3",
+    "name": "Green Noddle",
+    "description":
+        "A healthy noodle dish made with\ngreen vegetables and herbs.",
+    "image": "assets/images/home/item1.png",
+    "price": 20.0,
+  },
+];

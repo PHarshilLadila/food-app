@@ -59,9 +59,36 @@ class _SettingScreenState extends State<SettingScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 5.0, bottom: 5, left: 12, right: 12),
+                              child: Container(
+                                margin: EdgeInsets.all(2),
+                                decoration: BoxDecoration(
+                                  color: AppColors.extraLightGreen,
+                                  borderRadius: BorderRadius.circular(15),
+                                  border: Border.all(
+                                    color: AppColors.lightGreen,
+                                    width: 0.5,
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: const Icon(
+                                    Icons.arrow_back_ios_new,
+                                    color: AppColors.darkGreen,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                           Flexible(
                             child: GradientText(
                               "Update Your Profile Here",
@@ -73,29 +100,6 @@ class _SettingScreenState extends State<SettingScreen> {
                                   AppColors.lightGreen,
                                   AppColors.darkGreen,
                                 ],
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: AppColors.whiteColor,
-                                borderRadius: BorderRadius.circular(15),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.grey.shade100,
-                                      offset: const Offset(5, 25),
-                                      blurRadius: 15),
-                                ],
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Image.asset(
-                                  "assets/images/home/notification.png",
-                                  height: height / 30,
-                                  width: width / 12,
-                                ),
                               ),
                             ),
                           ),

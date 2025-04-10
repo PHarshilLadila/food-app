@@ -17,6 +17,7 @@ import 'package:provider/provider.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:toastification/toastification.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -75,21 +76,31 @@ class _LoginScreenState extends State<LoginScreen> {
         (route) => false,
       );
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          behavior: SnackBarBehavior.floating,
-          content: Text("Login Successful, welcome back to Swift Bite"),
-          backgroundColor: AppColors.darkGreen,
-        ),
-      );
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(
+      //     behavior: SnackBarBehavior.floating,
+      //     content: Text("Login Successful, welcome back to Swift Bite"),
+      //     backgroundColor: AppColors.darkGreen,
+      //   ),
+      // );
+      appTostMessage(
+          context,
+          ToastificationType.success,
+          "Login Successful, welcome back to Swift Bite",
+          "assets/images/done.png");
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          behavior: SnackBarBehavior.floating,
-          backgroundColor: Colors.red,
-          content: Text(e.toString().replaceAll("Exception: ", "")),
-        ),
-      );
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(
+      //     behavior: SnackBarBehavior.floating,
+      //     backgroundColor: Colors.red,
+      //     content: Text(e.toString().replaceAll("Exception: ", "")),
+      //   ),
+      // );
+      appTostMessage(
+          context,
+          ToastificationType.error,
+          e.toString().replaceAll("Exception: ", ""),
+          "assets/images/wronge.png");
     }
   }
 

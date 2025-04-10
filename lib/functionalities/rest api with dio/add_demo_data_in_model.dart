@@ -5,6 +5,8 @@ import 'package:food_app/functionalities/rest%20api%20with%20dio/demo%20service/
 import 'package:food_app/functionalities/rest%20api%20with%20dio/get_data.dart';
 import 'package:food_app/constant/app_colors.dart';
 import 'package:food_app/constant/app_textform_field.dart';
+import 'package:food_app/utils/utils.dart';
+import 'package:toastification/toastification.dart';
 
 class AddDemoDataInModel extends StatefulWidget {
   const AddDemoDataInModel({super.key});
@@ -29,8 +31,11 @@ class _AddDemoDataInModelState extends State<AddDemoDataInModel> {
         salaryController.text.isEmpty ||
         ageController.text.isEmpty ||
         profileController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("All fields are required!")),
+      appTostMessage(
+        context,
+        ToastificationType.error,
+        "All fields are required!",
+        "assets/images/wronge.png",
       );
       return;
     }
@@ -49,22 +54,40 @@ class _AddDemoDataInModelState extends State<AddDemoDataInModel> {
       setState(() => isLoading = false);
 
       if (isSuccess) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Data added successfully!")),
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //   const SnackBar(content: Text("Data added successfully!")),
+        // );
+        appTostMessage(
+          context,
+          ToastificationType.success,
+          "Details added successfully!",
+          "assets/images/done.png",
         );
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => Getdata()),
         );
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Failed to add data. Try again!")),
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //   const SnackBar(content: Text("Failed to add data. Try again!")),
+        // );
+        appTostMessage(
+          context,
+          ToastificationType.error,
+          "Failed to add data. Try again!",
+          "assets/images/wronge.png",
         );
       }
     } catch (e) {
       setState(() => isLoading = false);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Error: $e")),
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(content: Text("Error: $e")),
+      // );
+      appTostMessage(
+        context,
+        ToastificationType.error,
+        "Error: $e",
+        "assets/images/wronge.png",
       );
     }
   }

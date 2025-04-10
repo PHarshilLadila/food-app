@@ -364,8 +364,10 @@ import 'package:food_app/constant/app_gredient_text.dart';
 import 'package:food_app/constant/app_textform_field.dart';
 import 'package:food_app/functionalities/auth/providers/auth_provider.dart';
 import 'package:food_app/functionalities/auth/screen/upload_photo.dart';
+import 'package:food_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:toastification/toastification.dart';
 
 class SignupProcess extends StatefulWidget {
   const SignupProcess({super.key});
@@ -394,19 +396,31 @@ class _SignupProcessState extends State<SignupProcess> {
           builder: (context) => const UploadPhoto(),
         ),
       );
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: AppColors.darkGreen,
-          behavior: SnackBarBehavior.floating,
-          content: Text("Your profile details added successfully"),
-          duration: Duration(seconds: 2),
-        ),
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   const SnackBar(
+      //     backgroundColor: AppColors.darkGreen,
+      //     behavior: SnackBarBehavior.floating,
+      //     content: Text("Your profile details added successfully"),
+      //     duration: Duration(seconds: 2),
+      //   ),
+      // );
+      appTostMessage(
+        context,
+        ToastificationType.success,
+        "Your profile details added successfully",
+        "assets/images/done.png",
       );
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(e.toString()),
-        ),
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(
+      //     content: Text(e.toString()),
+      //   ),
+      // );
+      appTostMessage(
+        context,
+        ToastificationType.error,
+        e.toString(),
+        "assets/images/wronge.png",
       );
     }
   }

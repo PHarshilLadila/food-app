@@ -36,6 +36,7 @@ import 'package:food_app/functionalities/profile/provider/profile_provider.dart'
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:toastification/toastification.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -407,550 +408,593 @@ class ProfileScreenState extends State<ProfileScreen>
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 physics: const BouncingScrollPhysics(),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints constraints) {
+                    double screenWidth = constraints.maxWidth;
+
+                    double iconSize = width / 20;
+
+                    if (screenWidth > 1300) {
+                      debugPrint("screenWidth > 1300");
+                      iconSize = width / 70;
+                    } else if (screenWidth > 1200 && screenWidth < 1300) {
+                      debugPrint("screenWidth > 1200 && screenWidth < 1300");
+                      iconSize = width / 60;
+                    } else if (screenWidth > 1000 && screenWidth < 1200) {
+                      debugPrint("screenWidth > 1000 && screenWidth < 1200");
+                      iconSize = width / 60;
+                    } else if (screenWidth > 800 && screenWidth < 1000) {
+                      debugPrint("screenWidth > 800 && screenWidth < 1000");
+                      iconSize = width / 40;
+                    } else if (screenWidth > 600) {
+                      debugPrint("screenWidth > 600 ");
+                      iconSize = width / 40;
+                    } else if (screenWidth > 500) {
+                      debugPrint("screenWidth > 500");
+                      iconSize = width / 20;
+                    } else if (screenWidth > 350) {
+                      debugPrint("screenWidth > 350");
+                      iconSize = width / 20;
+                    }
+
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Flexible(
-                          child: Semantics(
-                            value: "Here Your Profile",
-                            //  AppLocalizations.of(context)!.profileTitle,
-                            readOnly: true,
-                            label: "Profile Page Title'",
-                            header: true,
-                            hint: 'Profile Page Title',
-                            onTapHint: 'Profile Page Title',
-                            child: GradientText(
-                              "Here Your Profile",
-                              // AppLocalizations.of(context)!.profileTitle,
-                              // 'Find Your \nFavorite Food',
-                              style: GoogleFonts.poppins(
-                                  fontSize: 30, fontWeight: FontWeight.bold),
-                              gradient: const LinearGradient(
-                                colors: [
-                                  AppColors.lightGreen,
-                                  AppColors.darkGreen,
-                                ],
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Flexible(
+                              child: Semantics(
+                                value: "Here Your Profile",
+                                //  AppLocalizations.of(context)!.profileTitle,
+                                readOnly: true,
+                                label: "Profile Page Title'",
+                                header: true,
+                                hint: 'Profile Page Title',
+                                onTapHint: 'Profile Page Title',
+                                child: GradientText(
+                                  "Here Your Profile",
+                                  // AppLocalizations.of(context)!.profileTitle,
+                                  // 'Find Your \nFavorite Food',
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold),
+                                  gradient: const LinearGradient(
+                                    colors: [
+                                      AppColors.lightGreen,
+                                      AppColors.darkGreen,
+                                    ],
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ),
-                        PopupMenuButton<String>(
-                          borderRadius: BorderRadius.circular(15),
-                          key: _menuKey,
-                          onSelected: (String value) {
-                            switch (value) {
-                              case 'option1':
-                                removeStoredImages2D3D();
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    backgroundColor: AppColors.darkGreen,
-                                    behavior: SnackBarBehavior.floating,
-                                    content:
-                                        Text("Remove 3D Avatar successfully"),
+                            PopupMenuButton<String>(
+                              borderRadius: BorderRadius.circular(15),
+                              key: _menuKey,
+                              onSelected: (String value) {
+                                switch (value) {
+                                  case 'option1':
+                                    removeStoredImages2D3D();
+                                    // ScaffoldMessenger.of(context).showSnackBar(
+                                    //   const SnackBar(
+                                    //     backgroundColor: AppColors.darkGreen,
+                                    //     behavior: SnackBarBehavior.floating,
+                                    //     content:
+                                    //         Text("Remove 3D Avatar successfully"),
+                                    //   ),
+                                    // );
+                                    appTostMessage(
+                                      context,
+                                      ToastificationType.success,
+                                      "Remove 3D Avatar successfully",
+                                      "assets/images/done.png",
+                                    );
+                                    debugPrint("Delete");
+                                    break;
+                                  case 'option2':
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ProfileFullView(),
+                                      ),
+                                    );
+                                    debugPrint("Edit");
+                                    break;
+                                  case 'option3':
+                                    // Handle share
+                                    debugPrint("Share");
+                                    break;
+                                }
+                              },
+                              itemBuilder: (BuildContext context) =>
+                                  <PopupMenuEntry<String>>[
+                                PopupMenuItem<String>(
+                                  value: 'option1',
+                                  child: Text('Remove Avatar'),
+                                ),
+                                PopupMenuItem<String>(
+                                  value: 'option2',
+                                  child: Text('View Profile Image'),
+                                ),
+                                PopupMenuItem<String>(
+                                  value: 'option3',
+                                  child: Text('Share'),
+                                ),
+                              ],
+                              child: GestureDetector(
+                                onTap: _showPopupMenu,
+                                child: Container(
+                                  padding: const EdgeInsets.all(4),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(15),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.grey.shade100,
+                                          offset: const Offset(5, 25),
+                                          blurRadius: 15),
+                                    ],
                                   ),
-                                );
-                                debugPrint("Delete");
-                                break;
-                              case 'option2':
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const ProfileFullView(),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Image.asset(
+                                      "assets/images/privacy/dots.png",
+                                      width: iconSize,
+                                    ),
                                   ),
-                                );
-                                debugPrint("Edit");
-                                break;
-                              case 'option3':
-                                // Handle share
-                                debugPrint("Share");
-                                break;
-                            }
-                          },
-                          itemBuilder: (BuildContext context) =>
-                              <PopupMenuEntry<String>>[
-                            PopupMenuItem<String>(
-                              value: 'option1',
-                              child: Text('Remove Avatar'),
-                            ),
-                            PopupMenuItem<String>(
-                              value: 'option2',
-                              child: Text('View Profile Image'),
-                            ),
-                            PopupMenuItem<String>(
-                              value: 'option3',
-                              child: Text('Share'),
+                                ),
+                              ),
                             ),
                           ],
-                          child: GestureDetector(
-                            onTap: _showPopupMenu,
-                            child: Container(
-                              padding: const EdgeInsets.all(4),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(15),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.grey.shade100,
-                                      offset: const Offset(5, 25),
-                                      blurRadius: 15),
-                                ],
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Image.asset(
-                                  "assets/images/privacy/dots.png",
-                                  width: kIsWeb ? width / 60 : width / 20,
+                        ),
+                        SizedBox(
+                          height: height / 30,
+                        ),
+                        Semantics(
+                          readOnly: true,
+                          label: "Profile Image",
+                          image: true,
+                          hint: "Your Profile Image",
+                          child: Center(
+                            child: GestureDetector(
+                              onTap: _flipCard,
+                              child: Center(
+                                child: SizedBox(
+                                  width: 140,
+                                  height: 140,
+                                  child: AnimatedBuilder(
+                                    animation: animationController,
+                                    builder:
+                                        (BuildContext context, Widget? child) {
+                                      return Transform(
+                                        transform: Matrix4.rotationY(
+                                            animationController.value * pi),
+                                        alignment: Alignment.center,
+                                        child: isFront
+                                            ? _buildFront()
+                                            : _buildBack(),
+                                      );
+                                    },
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: height / 30,
-                    ),
-                    Semantics(
-                      readOnly: true,
-                      label: "Profile Image",
-                      image: true,
-                      hint: "Your Profile Image",
-                      child: Center(
-                        child: GestureDetector(
-                          onTap: _flipCard,
-                          child: Center(
-                            child: SizedBox(
-                              width: 140,
-                              height: 140,
-                              child: AnimatedBuilder(
-                                animation: animationController,
-                                builder: (BuildContext context, Widget? child) {
-                                  return Transform(
-                                    transform: Matrix4.rotationY(
-                                        animationController.value * pi),
-                                    alignment: Alignment.center,
-                                    child:
-                                        isFront ? _buildFront() : _buildBack(),
-                                  );
-                                },
+                        const SizedBox(height: 15),
+                        (is2Dimage && !is3DImage)
+                            ? kIsWeb
+                                ? const SizedBox()
+                                : Center(
+                                    child: CustomeButton(
+                                      heights: 36,
+                                      widths: 180,
+                                      name: "View 3D Avatar",
+                                      ontap: () {
+                                        Sentry.addBreadcrumb(
+                                          Breadcrumb(
+                                            message:
+                                                "User clicked on Local 3D model",
+                                            level: SentryLevel.info,
+                                          ),
+                                        );
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => Local3dModel(
+                                              threeDImageUrl: "$threeDImage",
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  )
+                            : const SizedBox(),
+                        const SizedBox(height: 10),
+                        Center(
+                          child: Semantics(
+                            readOnly: true,
+                            label: "Profile User Name",
+                            hint: 'Your Profile User Name',
+                            onTapHint: 'Your Profile User Name',
+                            child: Text(
+                              "${value.profile!.fname} ${value.profile!.lname}",
+                              style: GoogleFonts.poppins(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ),
-                    const SizedBox(height: 15),
-                    (is2Dimage && !is3DImage)
-                        ? kIsWeb
-                            ? const SizedBox()
-                            : Center(
-                                child: CustomeButton(
-                                  heights: 36,
-                                  widths: 180,
-                                  name: "View 3D Avatar",
-                                  ontap: () {
+                        SizedBox(height: height / 300),
+                        Center(
+                          child: Semantics(
+                            readOnly: true,
+                            label: "Profile User Email Id",
+                            hint: 'Your Profile User Email Id',
+                            onTapHint: 'Your Profile User Email Id',
+                            child: Text(
+                              value.profile!.email!,
+                              style: GoogleFonts.poppins(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: height / 25,
+                        ),
+                        MergeSemantics(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Semantics(
+                                label: 'Gift Button',
+                                button: true,
+                                hint: 'Show the Gifts onpress of gift button',
+                                onTapHint:
+                                    'Show the Gifts onpress of gift button',
+                                child: Focus(
+                                  onFocusChange: (value) {
+                                    if (value) {
+                                      debugPrint('gift button pressed');
+                                    }
+                                  },
+                                  child: VerticalContainerButton(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => SnowFall(),
+                                          // builder: (context) => MyPainter(),
+                                        ),
+                                      );
+                                    },
+                                    iconData: Icons.redeem,
+                                    iconColor: AppColors.darkGreen,
+                                    text: "Gifts",
+                                    // AppLocalizations.of(context)!.gifts,
+                                  ),
+                                ),
+                              ),
+                              Semantics(
+                                label: "Favorite Food Items Button",
+                                button: true,
+                                hint:
+                                    'Show the Favorite Food items onPress of Favorite button',
+                                onTapHint:
+                                    'Show the Favorite Food items onPress of Favorite button',
+                                child: Focus(
+                                  onFocusChange: (value) {
+                                    if (value) {
+                                      debugPrint("favorite button clicked");
+                                    }
+                                  },
+                                  child: VerticalContainerButton(
+                                    onTap: () {
+                                      Sentry.addBreadcrumb(
+                                        Breadcrumb(
+                                          message:
+                                              "User clicked on Favorite Items.",
+                                          level: SentryLevel.info,
+                                        ),
+                                      );
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const FavoriteItems(),
+                                        ),
+                                      );
+                                    },
+                                    iconData: Icons.favorite,
+                                    iconColor: Colors.red,
+                                    text: "Favorites",
+                                    // AppLocalizations.of(context)!.favorites,
+                                  ),
+                                ),
+                              ),
+                              Semantics(
+                                label: "orders Button",
+                                button: true,
+                                hint:
+                                    'Show Your recent food order details onPress of orders button',
+                                onTapHint:
+                                    'Show Your recent food order details onPress of orders button',
+                                child: VerticalContainerButton(
+                                  onTap: () {
                                     Sentry.addBreadcrumb(
                                       Breadcrumb(
-                                        message:
-                                            "User clicked on Local 3D model",
+                                        message: "User clicked on Track Order.",
                                         level: SentryLevel.info,
                                       ),
                                     );
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => Local3dModel(
-                                          threeDImageUrl: "$threeDImage",
-                                        ),
+                                        builder: (context) => TrackOrder(),
                                       ),
                                     );
                                   },
+                                  iconData: Icons.shopping_bag,
+                                  iconColor: Colors.blue,
+                                  text: "Orders",
+                                  // AppLocalizations.of(context)!.orders,
                                 ),
-                              )
-                        : const SizedBox(),
-                    const SizedBox(height: 10),
-                    Center(
-                      child: Semantics(
-                        readOnly: true,
-                        label: "Profile User Name",
-                        hint: 'Your Profile User Name',
-                        onTapHint: 'Your Profile User Name',
-                        child: Text(
-                          "${value.profile!.fname} ${value.profile!.lname}",
-                          style: GoogleFonts.poppins(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: height / 300),
-                    Center(
-                      child: Semantics(
-                        readOnly: true,
-                        label: "Profile User Email Id",
-                        hint: 'Your Profile User Email Id',
-                        onTapHint: 'Your Profile User Email Id',
-                        child: Text(
-                          value.profile!.email!,
-                          style: GoogleFonts.poppins(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: height / 25,
-                    ),
-                    MergeSemantics(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Semantics(
-                            label: 'Gift Button',
-                            button: true,
-                            hint: 'Show the Gifts onpress of gift button',
-                            onTapHint: 'Show the Gifts onpress of gift button',
-                            child: Focus(
-                              onFocusChange: (value) {
-                                if (value) {
-                                  debugPrint('gift button pressed');
-                                }
-                              },
-                              child: VerticalContainerButton(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => SnowFall(),
-                                      // builder: (context) => MyPainter(),
-                                    ),
-                                  );
-                                },
-                                iconData: Icons.redeem,
-                                iconColor: AppColors.darkGreen,
-                                text: "Gifts",
-                                // AppLocalizations.of(context)!.gifts,
-                              ),
-                            ),
-                          ),
-                          Semantics(
-                            label: "Favorite Food Items Button",
-                            button: true,
-                            hint:
-                                'Show the Favorite Food items onPress of Favorite button',
-                            onTapHint:
-                                'Show the Favorite Food items onPress of Favorite button',
-                            child: Focus(
-                              onFocusChange: (value) {
-                                if (value) {
-                                  debugPrint("favorite button clicked");
-                                }
-                              },
-                              child: VerticalContainerButton(
-                                onTap: () {
-                                  Sentry.addBreadcrumb(
-                                    Breadcrumb(
-                                      message:
-                                          "User clicked on Favorite Items.",
-                                      level: SentryLevel.info,
-                                    ),
-                                  );
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const FavoriteItems(),
-                                    ),
-                                  );
-                                },
-                                iconData: Icons.favorite,
-                                iconColor: Colors.red,
-                                text: "Favorites",
-                                // AppLocalizations.of(context)!.favorites,
-                              ),
-                            ),
-                          ),
-                          Semantics(
-                            label: "orders Button",
-                            button: true,
-                            hint:
-                                'Show Your recent food order details onPress of orders button',
-                            onTapHint:
-                                'Show Your recent food order details onPress of orders button',
-                            child: VerticalContainerButton(
-                              onTap: () {
-                                Sentry.addBreadcrumb(
-                                  Breadcrumb(
-                                    message: "User clicked on Track Order.",
-                                    level: SentryLevel.info,
-                                  ),
-                                );
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => TrackOrder(),
-                                  ),
-                                );
-                              },
-                              iconData: Icons.shopping_bag,
-                              iconColor: Colors.blue,
-                              text: "Orders",
-                              // AppLocalizations.of(context)!.orders,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: height / 60),
-                    Semantics(
-                      label: "My Profile Button",
-                      button: true,
-                      hint:
-                          'Show & Edit your profile details onPress of my profile button',
-                      onTapHint:
-                          'Show & Edit your profile details onPress of my profile button',
-                      child: ContainerButton(
-                        height: height,
-                        width: width,
-                        onTap: () {
-                          Sentry.addBreadcrumb(
-                            Breadcrumb(
-                              message: "User clicked on My Profile.",
-                              level: SentryLevel.info,
-                            ),
-                          );
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const UpdateProfile(),
-                            ),
-                          );
-                        },
-                        icons: Icons.person,
-                        name: "My Profile",
-                        // AppLocalizations.of(context)!.myProfile,
-                        colors: AppColors.darkGreen,
-                      ),
-                    ),
-                    SizedBox(height: height / 80),
-                    GestureDetector(
-                      onTap: () {
-                        Sentry.addBreadcrumb(
-                          Breadcrumb(
-                            message: "User clicked on My 3d Avatar.",
-                            level: SentryLevel.info,
-                          ),
-                        );
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => kIsWeb
-                                  ? ThreeAvatarErrorHandler()
-                                  : My3dAvatar()),
-                        );
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 255, 255, 255),
-                            borderRadius: BorderRadius.circular(15)),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: height / 50, horizontal: width / 60),
-                          child: Row(
-                            children: [
-                              FaIcon(
-                                FontAwesomeIcons.cube,
-                                size: height / 40,
-                                color: AppColors.darkGreen,
-                              ),
-                              SizedBox(
-                                width: width / 30,
-                              ),
-                              Text(
-                                "3D Avatar",
-                                style: GoogleFonts.poppins(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              const Spacer(),
-                              Icon(
-                                CupertinoIcons.right_chevron,
-                                size: height / 50,
-                                color: Colors.green,
                               ),
                             ],
                           ),
                         ),
-                      ),
-                    ),
-                    SizedBox(height: height / 80),
-                    Semantics(
-                      label: "setting Button",
-                      button: true,
-                      hint:
-                          'manage your application settings onPress of settings button',
-                      onTapHint:
-                          'manage your application settings onPress of settings button',
-                      child: ContainerButton(
-                        height: height,
-                        width: width,
-                        onTap: () {
-                          Sentry.addBreadcrumb(
-                            Breadcrumb(
-                              message: "User clicked on Setting Screen.",
-                              level: SentryLevel.info,
+                        SizedBox(height: height / 60),
+                        Semantics(
+                          label: "My Profile Button",
+                          button: true,
+                          hint:
+                              'Show & Edit your profile details onPress of my profile button',
+                          onTapHint:
+                              'Show & Edit your profile details onPress of my profile button',
+                          child: ContainerButton(
+                            height: height,
+                            width: width,
+                            onTap: () {
+                              Sentry.addBreadcrumb(
+                                Breadcrumb(
+                                  message: "User clicked on My Profile.",
+                                  level: SentryLevel.info,
+                                ),
+                              );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const UpdateProfile(),
+                                ),
+                              );
+                            },
+                            icons: Icons.person,
+                            name: "My Profile",
+                            // AppLocalizations.of(context)!.myProfile,
+                            colors: AppColors.darkGreen,
+                          ),
+                        ),
+                        SizedBox(height: height / 80),
+                        GestureDetector(
+                          onTap: () {
+                            Sentry.addBreadcrumb(
+                              Breadcrumb(
+                                message: "User clicked on My 3d Avatar.",
+                                level: SentryLevel.info,
+                              ),
+                            );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => kIsWeb
+                                      ? ThreeAvatarErrorHandler()
+                                      : My3dAvatar()),
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 255, 255, 255),
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: height / 50,
+                                  horizontal: width / 60),
+                              child: Row(
+                                children: [
+                                  FaIcon(
+                                    FontAwesomeIcons.cube,
+                                    size: height / 40,
+                                    color: AppColors.darkGreen,
+                                  ),
+                                  SizedBox(
+                                    width: width / 30,
+                                  ),
+                                  Text(
+                                    "3D Avatar",
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  Icon(
+                                    CupertinoIcons.right_chevron,
+                                    size: height / 50,
+                                    color: Colors.green,
+                                  ),
+                                ],
+                              ),
                             ),
-                          );
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const SettingScreen(),
-                            ),
-                          );
-                        },
-                        icons: Icons.settings,
-                        name: "Settings",
-                        // AppLocalizations.of(context)!.setting,
-                        colors: AppColors.darkGreen,
-                      ),
-                    ),
-                    SizedBox(height: height / 80),
-                    Semantics(
-                      label: "help and support Button",
-                      button: true,
-                      hint:
-                          'you can find your answers here onPress of logout button',
-                      onTapHint:
-                          'you can find your answers here onPress of logout button',
-                      child: ContainerButton(
-                        height: height,
-                        width: width,
-                        onTap: () {
-                          Sentry.addBreadcrumb(
-                            Breadcrumb(
-                              message:
-                                  "User clicked on Help and Support Screen.",
-                              level: SentryLevel.info,
-                            ),
-                          );
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const HelpAndSupportScreen()),
-                          );
-                        },
-                        icons: Icons.help_rounded,
-                        name: "Help & Support",
-                        //  AppLocalizations.of(context)!.help,
-                        colors: AppColors.darkGreen,
-                      ),
-                    ),
-                    SizedBox(height: height / 80),
-                    Semantics(
-                      label: "setting Button",
-                      button: true,
-                      hint:
-                          'manage your application settings onPress of settings button',
-                      onTapHint:
-                          'manage your application settings onPress of settings button',
-                      child: ContainerButton(
-                        height: height,
-                        width: width,
-                        onTap: () {
-                          Sentry.addBreadcrumb(
-                            Breadcrumb(
-                              message: "User clicked on Setting Screen.",
-                              level: SentryLevel.info,
-                            ),
-                          );
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const PrivacyPolicyPage(),
-                            ),
-                          );
-                        },
-                        icons: Icons.privacy_tip,
-                        name: "Privacy & Policy",
-                        // AppLocalizations.of(context)!.setting,
-                        colors: AppColors.darkGreen,
-                      ),
-                    ),
-                    SizedBox(height: height / 80),
-                    Semantics(
-                      label: "setting Button",
-                      button: true,
-                      hint:
-                          'manage your application settings onPress of settings button',
-                      onTapHint:
-                          'manage your application settings onPress of settings button',
-                      child: ContainerButton(
-                        height: height,
-                        width: width,
-                        onTap: () {
-                          Sentry.addBreadcrumb(
-                            Breadcrumb(
-                              message: "User clicked on Setting Screen.",
-                              level: SentryLevel.info,
-                            ),
-                          );
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const TermsAndConditionsPage(),
-                            ),
-                          );
-                        },
-                        icons: Icons.description,
-                        name: "Terms & Conditions",
-                        // AppLocalizations.of(context)!.setting,
-                        colors: AppColors.darkGreen,
-                      ),
-                    ),
-                    SizedBox(height: height / 80),
-                    Semantics(
-                      label: "log out Button  ",
-                      button: true,
-                      hint:
-                          'you can log out to application onPress of logout button',
-                      onTapHint:
-                          'you can log out to application onPress of logout button',
-                      child: ContainerButton(
-                        height: height,
-                        width: width,
-                        onTap: () {
-                          Sentry.addBreadcrumb(
-                            Breadcrumb(
-                              message: "User clicked on Logout.",
-                              level: SentryLevel.info,
-                            ),
-                          );
-                          Provider.of<AuthProviders>(context, listen: false)
-                              .logout();
-                          Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const LoginScreen()),
-                            (route) => false,
-                          );
-                        },
-                        icons: Icons.logout,
-                        name: "Log Out",
-                        // AppLocalizations.of(context)!.logOut,
-                        colors: Colors.red,
-                      ),
-                    ),
-                  ],
+                          ),
+                        ),
+                        SizedBox(height: height / 80),
+                        Semantics(
+                          label: "setting Button",
+                          button: true,
+                          hint:
+                              'manage your application settings onPress of settings button',
+                          onTapHint:
+                              'manage your application settings onPress of settings button',
+                          child: ContainerButton(
+                            height: height,
+                            width: width,
+                            onTap: () {
+                              Sentry.addBreadcrumb(
+                                Breadcrumb(
+                                  message: "User clicked on Setting Screen.",
+                                  level: SentryLevel.info,
+                                ),
+                              );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const SettingScreen(),
+                                ),
+                              );
+                            },
+                            icons: Icons.settings,
+                            name: "Settings",
+                            // AppLocalizations.of(context)!.setting,
+                            colors: AppColors.darkGreen,
+                          ),
+                        ),
+                        SizedBox(height: height / 80),
+                        Semantics(
+                          label: "help and support Button",
+                          button: true,
+                          hint:
+                              'you can find your answers here onPress of logout button',
+                          onTapHint:
+                              'you can find your answers here onPress of logout button',
+                          child: ContainerButton(
+                            height: height,
+                            width: width,
+                            onTap: () {
+                              Sentry.addBreadcrumb(
+                                Breadcrumb(
+                                  message:
+                                      "User clicked on Help and Support Screen.",
+                                  level: SentryLevel.info,
+                                ),
+                              );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const HelpAndSupportScreen()),
+                              );
+                            },
+                            icons: Icons.help_rounded,
+                            name: "Help & Support",
+                            //  AppLocalizations.of(context)!.help,
+                            colors: AppColors.darkGreen,
+                          ),
+                        ),
+                        SizedBox(height: height / 80),
+                        Semantics(
+                          label: "setting Button",
+                          button: true,
+                          hint:
+                              'manage your application settings onPress of settings button',
+                          onTapHint:
+                              'manage your application settings onPress of settings button',
+                          child: ContainerButton(
+                            height: height,
+                            width: width,
+                            onTap: () {
+                              Sentry.addBreadcrumb(
+                                Breadcrumb(
+                                  message: "User clicked on Setting Screen.",
+                                  level: SentryLevel.info,
+                                ),
+                              );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const PrivacyPolicyPage(),
+                                ),
+                              );
+                            },
+                            icons: Icons.privacy_tip,
+                            name: "Privacy & Policy",
+                            // AppLocalizations.of(context)!.setting,
+                            colors: AppColors.darkGreen,
+                          ),
+                        ),
+                        SizedBox(height: height / 80),
+                        Semantics(
+                          label: "setting Button",
+                          button: true,
+                          hint:
+                              'manage your application settings onPress of settings button',
+                          onTapHint:
+                              'manage your application settings onPress of settings button',
+                          child: ContainerButton(
+                            height: height,
+                            width: width,
+                            onTap: () {
+                              Sentry.addBreadcrumb(
+                                Breadcrumb(
+                                  message: "User clicked on Setting Screen.",
+                                  level: SentryLevel.info,
+                                ),
+                              );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const TermsAndConditionsPage(),
+                                ),
+                              );
+                            },
+                            icons: Icons.description,
+                            name: "Terms & Conditions",
+                            // AppLocalizations.of(context)!.setting,
+                            colors: AppColors.darkGreen,
+                          ),
+                        ),
+                        SizedBox(height: height / 80),
+                        Semantics(
+                          label: "log out Button  ",
+                          button: true,
+                          hint:
+                              'you can log out to application onPress of logout button',
+                          onTapHint:
+                              'you can log out to application onPress of logout button',
+                          child: ContainerButton(
+                            height: height,
+                            width: width,
+                            onTap: () {
+                              Sentry.addBreadcrumb(
+                                Breadcrumb(
+                                  message: "User clicked on Logout.",
+                                  level: SentryLevel.info,
+                                ),
+                              );
+                              Provider.of<AuthProviders>(context, listen: false)
+                                  .logout();
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const LoginScreen()),
+                                (route) => false,
+                              );
+                            },
+                            icons: Icons.logout,
+                            name: "Log Out",
+                            // AppLocalizations.of(context)!.logOut,
+                            colors: Colors.red,
+                          ),
+                        ),
+                      ],
+                    );
+                  },
                 ),
               ),
             ),

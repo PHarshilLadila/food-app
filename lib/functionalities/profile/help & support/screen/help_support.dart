@@ -10,10 +10,12 @@ import 'package:food_app/functionalities/profile/help%20&%20support/provider/que
 import 'package:food_app/functionalities/profile/help%20&%20support/widget/contactus_tab.dart';
 import 'package:food_app/functionalities/profile/help%20&%20support/widget/faq_tab.dart';
 import 'package:food_app/functionalities/profile/help%20&%20support/widget/raised_complain_tab.dart';
+import 'package:food_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
+import 'package:toastification/toastification.dart';
 
 class HelpAndSupportScreen extends StatefulWidget {
   const HelpAndSupportScreen({super.key});
@@ -52,12 +54,18 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
     provider.addQueries(query);
     queryController.clear();
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          "Ticket Id : $myTicketId, Your Complaint is Registered. Our Team will contact you as soon as possible.",
-        ),
-      ),
+    // ScaffoldMessenger.of(context).showSnackBar(
+    //   SnackBar(
+    //     content: Text(
+    //       "Ticket Id : $myTicketId, Your Complaint is Registered. Our Team will contact you as soon as possible.",
+    //     ),
+    //   ),
+    // );
+    appTostMessage(
+      context,
+      ToastificationType.success,
+      "Ticket Id : $myTicketId, Your Complaint is Registered. Our Team will contact you as soon as possible.",
+      "assets/images/done.png",
     );
   }
 
@@ -84,6 +92,29 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
             alignment: Alignment.topCenter,
             image: AssetImage('assets/images/Pattern.png'),
             fit: BoxFit.cover,
+          ),
+          leading: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(top: 5.0, bottom: 5, left: 12),
+              child: Container(
+                margin: EdgeInsets.all(2),
+                decoration: BoxDecoration(
+                  color: AppColors.extraLightGreen,
+                  borderRadius: BorderRadius.circular(15),
+                  border: Border.all(
+                    color: AppColors.lightGreen,
+                    width: 0.5,
+                  ),
+                ),
+                child: const Icon(
+                  Icons.arrow_back_ios_new,
+                  color: AppColors.darkGreen,
+                ),
+              ),
+            ),
           ),
           elevation: 0,
           automaticallyImplyLeading: false,

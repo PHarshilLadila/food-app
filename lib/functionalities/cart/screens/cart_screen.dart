@@ -11,7 +11,6 @@ import 'package:food_app/constant/app_colors.dart';
 import 'package:food_app/constant/app_gredient_text.dart';
 import 'package:food_app/functionalities/bottom%20navigation%20bar/bottom_navigation_bar.dart';
 import 'package:food_app/functionalities/cart/widget/oreder_row.dart';
-import 'package:food_app/functionalities/file%20operation/oreder_screen.dart';
 import 'package:food_app/functionalities/home/provider/home_provider.dart';
 import 'package:food_app/functionalities/track%20order/screens/track_order.dart';
 import 'package:food_app/utils/utils.dart';
@@ -146,11 +145,11 @@ class _CartScreenState extends State<CartScreen> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => OrederScreen(),
-                              ));
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => OrederScreen(),
+                          //     ));
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -168,7 +167,7 @@ class _CartScreenState extends State<CartScreen> {
                             child: Image.asset(
                               "assets/images/home/notification.png",
                               height: height / 30,
-                              width: width / 12,
+                              width: width / 14,
                             ),
                           ),
                         ),
@@ -782,7 +781,7 @@ class _MyFloatingActionButtonState extends State<MyFloatingActionButton> {
           debugPrint("screenWidth > 1000 && screenWidth < 1200");
           // Tablet view
         } else if (screenWidth > 800 && screenWidth < 1000) {
-          sizedBoxHeight = widget.height / 4.2;
+          sizedBoxHeight = widget.height / 5;
           sizedBoxWidth = widget.width / 2;
           horizontalPadding = widget.width / 60;
           verticalPadding = widget.height / 60;
@@ -794,13 +793,19 @@ class _MyFloatingActionButtonState extends State<MyFloatingActionButton> {
           verticalPadding = widget.height / 40;
           debugPrint("screenWidth > 600 ");
         } else if (screenWidth > 500) {
-          sizedBoxHeight = widget.height / 4.2;
+          sizedBoxHeight = widget.height / 3.9;
           sizedBoxWidth = widget.width / 1.5;
           horizontalPadding = widget.width / 30;
           verticalPadding = widget.height / 40;
           debugPrint("screenWidth > 500");
-        } else if (screenWidth > 350) {
-          sizedBoxHeight = widget.height / 4.2;
+        } else if (screenWidth > 375 || screenWidth < 500) {
+          sizedBoxHeight = widget.height / 3.9;
+          sizedBoxWidth = widget.width / 1.2;
+          horizontalPadding = widget.width / 30;
+          verticalPadding = widget.height / 40;
+          debugPrint("screenWidth > 375");
+        } else if (screenWidth < 375) {
+          sizedBoxHeight = widget.height / 3.5;
           sizedBoxWidth = widget.width / 1.2;
           horizontalPadding = widget.width / 30;
           verticalPadding = widget.height / 40;
@@ -830,24 +835,26 @@ class _MyFloatingActionButtonState extends State<MyFloatingActionButton> {
             padding: EdgeInsets.symmetric(
                 horizontal: horizontalPadding, vertical: verticalPadding),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 OrderRow(
                   keys: "Sub Total",
                   // AppLocalizations.of(context)!.subTotal,
                   amount: "${widget.totalofIndexItems!.toStringAsFixed(2)} \$",
-                  fontSizes: 18,
+                  fontSizes: 16,
                 ),
                 OrderRow(
                   keys: "Delivery Charge",
                   //  AppLocalizations.of(context)!.deliveryCharge,
                   amount: "6 \$",
-                  fontSizes: 18,
+                  fontSizes: 16,
                 ),
                 OrderRow(
                   keys: "Discount (5%)",
                   //  AppLocalizations.of(context)!.discount,
                   amount: "${widget.itemdiscount?.toStringAsFixed(2)}\$",
-                  fontSizes: 18,
+                  fontSizes: 16,
                 ),
                 SizedBox(
                   height: widget.height / 100,
@@ -856,7 +863,7 @@ class _MyFloatingActionButtonState extends State<MyFloatingActionButton> {
                   keys: "Total Amount",
                   // AppLocalizations.of(context)!.total,
                   amount: "${widget.finalTotal!.toStringAsFixed(2)}\$",
-                  fontSizes: 22,
+                  fontSizes: 18,
                 ),
                 SizedBox(
                   height: widget.height / 50,
@@ -920,7 +927,7 @@ class _MyFloatingActionButtonState extends State<MyFloatingActionButton> {
                         }
                       },
                       child: Container(
-                        height: widget.height / 20,
+                        height: 45,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.0),
                           gradient: const LinearGradient(

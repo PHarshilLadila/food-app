@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/functionalities/bottom%20navigation%20bar/bottom_navigation_bar.dart';
+import 'package:food_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:food_app/constant/app_colors.dart';
 import 'package:food_app/constant/app_gredient_text.dart';
+import 'package:toastification/toastification.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileDone extends StatefulWidget {
@@ -84,14 +86,16 @@ class _ProfileDoneState extends State<ProfileDone> {
             MaterialPageRoute(builder: (context) => const BottomScreen()),
             (route) => false,
           );
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              backgroundColor: AppColors.darkGreen,
-              behavior: SnackBarBehavior.floating,
-              content: Text("Nice! Your Profile is Ready to Use"),
-              duration: Duration(seconds: 2),
-            ),
-          );
+          // ScaffoldMessenger.of(context).showSnackBar(
+          //   const SnackBar(
+          //     backgroundColor: AppColors.darkGreen,
+          //     behavior: SnackBarBehavior.floating,
+          //     content: Text("Nice! Your Profile is Ready to Use"),
+          //     duration: Duration(seconds: 2),
+          //   ),
+          // );
+          appTostMessage(context, ToastificationType.success,
+              "Nice! Your Profile is Ready to Use", "assets/images/done.png");
         },
         child: Container(
           width: width * 0.4,

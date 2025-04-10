@@ -5,7 +5,9 @@ import 'package:food_app/constant/app_colors.dart';
 import 'package:food_app/constant/app_gredient_text.dart';
 import 'package:food_app/constant/app_sctring.dart';
 import 'package:food_app/functionalities/auth/screen/set_location.dart';
+import 'package:food_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:toastification/toastification.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ViewAuthProfile extends StatefulWidget {
@@ -193,13 +195,19 @@ class _ViewAuthProfileState extends State<ViewAuthProfile> {
               builder: (context) => const SetLocation(),
             ),
           );
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              backgroundColor: AppColors.darkGreen,
-              behavior: SnackBarBehavior.floating,
-              content: Text("Your Profile picture added successfully."),
-              duration: Duration(seconds: 2),
-            ),
+          // ScaffoldMessenger.of(context).showSnackBar(
+          //   const SnackBar(
+          //     backgroundColor: AppColors.darkGreen,
+          //     behavior: SnackBarBehavior.floating,
+          //     content: Text("Your Profile picture added successfully."),
+          //     duration: Duration(seconds: 2),
+          //   ),
+          // );
+          appTostMessage(
+            context,
+            ToastificationType.success,
+            "Your Profile picture added successfully.",
+            "assets/images/done.png",
           );
         },
         child: Container(

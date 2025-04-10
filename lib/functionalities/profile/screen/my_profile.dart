@@ -14,6 +14,7 @@ import 'package:food_app/functionalities/profile/screen/update_profie_image.dart
 import 'package:food_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:toastification/toastification.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UpdateProfile extends StatefulWidget {
@@ -67,19 +68,31 @@ class _UpdateProfileState extends State<UpdateProfile> {
         await authProvider.addImageProfile(profileImage ?? '');
       }
       await Provider.of<ProfileProvider>(context, listen: false).getUserData();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Profile updated successfully!"),
-          backgroundColor: AppColors.darkGreen,
-        ),
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(
+      //     content: Text("Profile updated successfully!"),
+      //     backgroundColor: AppColors.darkGreen,
+      //   ),
+      // );
+      appTostMessage(
+        context,
+        ToastificationType.success,
+        "Profile updated successfully!",
+        "assets/images/done.png",
       );
       setState(() {});
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Error updating profile: ${e.toString()}"),
-          backgroundColor: Colors.red,
-        ),
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(
+      //     content: Text("Error updating profile: ${e.toString()}"),
+      //     backgroundColor: Colors.red,
+      //   ),
+      // );
+      appTostMessage(
+        context,
+        ToastificationType.error,
+        "Error updating profile: ${e.toString()}",
+        "assets/images/wronge.png",
       );
     }
   }
@@ -150,8 +163,35 @@ class _UpdateProfileState extends State<UpdateProfile> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 5.0, bottom: 5, left: 12, right: 12),
+                                  child: Container(
+                                    margin: EdgeInsets.all(2),
+                                    decoration: BoxDecoration(
+                                      color: AppColors.extraLightGreen,
+                                      borderRadius: BorderRadius.circular(15),
+                                      border: Border.all(
+                                        color: AppColors.lightGreen,
+                                        width: 0.5,
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: const Icon(
+                                        Icons.arrow_back_ios_new,
+                                        color: AppColors.darkGreen,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
                               Flexible(
                                 child: Semantics(
                                   value: "Here Your Profile",

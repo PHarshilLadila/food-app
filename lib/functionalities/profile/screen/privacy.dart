@@ -189,7 +189,7 @@ class PrivacyPolicyPage extends StatelessWidget {
           Text(
             title,
             style: GoogleFonts.poppins(
-              fontSize: 20,
+              fontSize: 16,
               fontWeight: FontWeight.w700,
               color: Colors.black87,
             ),
@@ -197,8 +197,8 @@ class PrivacyPolicyPage extends StatelessWidget {
           const SizedBox(height: 10),
           Text(
             content,
-            style: const TextStyle(
-              fontSize: 16,
+            style: GoogleFonts.poppins(
+              fontSize: 14,
               color: Colors.black87,
               height: 1.5,
             ),
