@@ -51,7 +51,7 @@ class Card2 extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             GradientText(
-                              'Special Deal For\nMarch',
+                              'Special Deal For\nApril',
                               style: GoogleFonts.poppins(
                                   fontSize: 16, fontWeight: FontWeight.bold),
                               gradient: const LinearGradient(
