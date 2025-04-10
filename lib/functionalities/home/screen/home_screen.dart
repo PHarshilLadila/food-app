@@ -10,6 +10,7 @@ import 'package:food_app/functionalities/home/provider/home_provider.dart';
 import 'package:food_app/functionalities/home/screen/item_details.dart';
 import 'package:food_app/functionalities/home/widget/cards/card1.dart';
 import 'package:food_app/functionalities/home/widget/cards/card2.dart';
+import 'package:food_app/functionalities/home/widget/cards/card3.dart';
 import 'package:food_app/functionalities/home/widget/category%20pages/cat_canadian_meal.dart';
 import 'package:food_app/functionalities/home/widget/category%20pages/cat_dessert_meal.dart';
 import 'package:food_app/functionalities/home/widget/category%20pages/cat_hot_coffee.dart';
@@ -383,7 +384,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 items: const [
                                   Card1(),
                                   Card2(),
-                                  Card1(),
+                                  Card3(),
                                 ],
                               ),
                               SizedBox(
