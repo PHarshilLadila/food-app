@@ -868,7 +868,7 @@ class _MyFloatingActionButtonState extends State<MyFloatingActionButton> {
                     onTapHint: "Make Your Payment & Plcae yor order.",
                     child: GestureDetector(
                       onTap: () {
-                        if (kDebugMode == false) {
+                        if (kIsWeb == false) {
                           int totalAmountPaisa =
                               (widget.finalTotal! * 87.33).toInt();
 

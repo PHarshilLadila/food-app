@@ -45,3 +45,6 @@ app.*.map.json
 # Ignore Visual Studio database files
 .vs/
 *.VC.db
+
+# Ignore the following files for the Flutter SDK
+.fvm/flutter_sdk

@@ -166,7 +166,7 @@ class _MyAppState extends State<MyApp> {
 }
 
 //  flutter gen-l10n
-//       allow read, write: if request.auth!=null;
+//       allow read, write: if request.auth!=null;  firebase rules
 
 void sentryInit() async {
   FlutterError.onError = (FlutterErrorDetails details) async {

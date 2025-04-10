@@ -17,7 +17,7 @@ class ProfileProvider with ChangeNotifier {
   Future<void> getUserData() async {
     try {
       SharedPreferences preferences = await SharedPreferences.getInstance();
-      var data = await preferences.getString("googleAuthUID");
+      var data = preferences.getString("googleAuthUID");
 
       log("THIS IS GOOGLE AUTH USER ID :: $data");
 
