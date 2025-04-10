@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously, deprecated_member_use
 
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/constant/app_colors.dart';
 import 'package:food_app/constant/app_gredient_text.dart';
@@ -103,13 +104,13 @@ class _HomeScreenState extends State<HomeScreen> {
             width: double.infinity,
             decoration: BoxDecoration(
               image: DecorationImage(
-                alignment: Alignment.topCenter,
-                colorFilter: ColorFilter.mode(
-                    Colors.white.withOpacity(0.4), BlendMode.dstATop),
-                image: const AssetImage(
-                  "assets/images/Pattern.png",
-                ),
-              ),
+                  alignment: Alignment.topCenter,
+                  colorFilter: ColorFilter.mode(
+                      Colors.white.withOpacity(0.4), BlendMode.dstATop),
+                  image: const AssetImage(
+                    "assets/images/Pattern.png",
+                  ),
+                  fit: kIsWeb ? BoxFit.cover : BoxFit.none),
             ),
             child: SafeArea(
               child: Padding(
