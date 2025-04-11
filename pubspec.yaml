@@ -97,6 +97,7 @@ dependencies:
   mockito: ^5.4.5
   firebase_crashlytics: ^4.3.5
   toastification: ^3.0.2
+  app_links: ^6.4.0
  
 dev_dependencies:
   flutter_test:

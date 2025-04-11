@@ -10,7 +10,7 @@ void main() {
       HomeScreen();
       await tester.pumpAndSettle();
 
-      await tester.viewOf(find.byKey(Key("foodCategoryList")));
+      tester.viewOf(find.byKey(Key("foodCategoryList")));
 
       await tester.tap(find.byKey(Key("otherCategories")));
 
