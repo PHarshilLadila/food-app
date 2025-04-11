@@ -290,9 +290,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/functionalities/profile/model/profile_model.dart';
+import 'package:food_app/utils/utils.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:path/path.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:toastification/toastification.dart';
 
 class AuthProviders extends ChangeNotifier {
   final FirebaseAuth auth = FirebaseAuth.instance;
@@ -384,6 +387,24 @@ class AuthProviders extends ChangeNotifier {
       await databaseBox.put('userid', result.user!.uid);
 
       notifyListeners();
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        appTostMessage(
+          context as BuildContext,
+          ToastificationType.error,
+          "The password provided is too weak.",
+          "assets/images/wronge.png",
+        );
+        debugPrint('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        appTostMessage(
+          context as BuildContext,
+          ToastificationType.error,
+          "The account already exists for that email.",
+          "assets/images/wronge.png",
+        );
+        debugPrint('The account already exists for that email.');
+      }
     } catch (e) {
       throw e.toString();
     }

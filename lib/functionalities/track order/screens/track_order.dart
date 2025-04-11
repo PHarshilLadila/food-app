@@ -268,8 +268,7 @@ class _TrackOrderState extends State<TrackOrder> {
                                     .orderBy('timestamp', descending: true)
                                     .limit(1)
                                     .snapshots()
-                                : const Stream
-                                    .empty(), // Prevents Firestore assertion error
+                                : const Stream.empty(),
                             builder: (context, snapshot) {
                               if (snapshot.connectionState ==
                                   ConnectionState.waiting) {
@@ -336,22 +335,36 @@ class _TrackOrderState extends State<TrackOrder> {
                                     itemBuilder: (context, index) {
                                       final item = orderData['orderDetails']
                                           [index] as Map<String, dynamic>;
-
                                       orederDetails =
-                                          item as List<Map<String, dynamic>>?;
+                                          List<Map<String, dynamic>>.from(
+                                              orderData['orderDetails']);
+
+                                      // orederDetails =
+                                      //     item as List<Map<String, dynamic>>?;
                                       return ListTile(
                                         leading: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(15),
-                                          child: Image.network(
-                                            item['itemImage'] ?? "",
-                                            width: 60,
-                                            height: 60,
-                                            fit: BoxFit.cover,
-                                            errorBuilder:
-                                                (context, error, stackTrace) =>
-                                                    const Icon(Icons.error),
-                                          ),
+                                          child: item['itemImage']
+                                                  .startsWith("http")
+                                              ? Image.network(
+                                                  item['itemImage'] ?? "",
+                                                  width: 60,
+                                                  height: 60,
+                                                  fit: BoxFit.cover,
+                                                  errorBuilder: (context, error,
+                                                          stackTrace) =>
+                                                      const Icon(Icons.error),
+                                                )
+                                              : Image.asset(
+                                                  item['itemImage'] ?? "",
+                                                  width: 60,
+                                                  height: 60,
+                                                  fit: BoxFit.cover,
+                                                  errorBuilder: (context, error,
+                                                          stackTrace) =>
+                                                      const Icon(Icons.error),
+                                                ),
                                         ),
                                         title: Text(
                                             item['itemName'] ?? "Unknown Item"),
