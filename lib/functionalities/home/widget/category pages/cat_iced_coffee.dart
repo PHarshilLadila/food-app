@@ -148,7 +148,7 @@ class _CatIcedCoffeeState extends State<CatIcedCoffee> {
                           }
                           return GridView.builder(
                             padding: const EdgeInsets.all(8.0),
-                            itemCount: value.coffees.length,
+                            itemCount: value.icedCoffee.length,
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
                               mainAxisSpacing: 8,

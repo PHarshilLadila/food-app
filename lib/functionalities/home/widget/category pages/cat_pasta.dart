@@ -149,7 +149,7 @@ class _CatPastaState extends State<CatPasta> {
                         debugPrint("screenWidth > 350");
 
                         crossAxisCount = 2;
-                        childAspectRatio = 0.65;
+                        childAspectRatio = 0.6;
                         widthSize = width / 3;
                       }
 

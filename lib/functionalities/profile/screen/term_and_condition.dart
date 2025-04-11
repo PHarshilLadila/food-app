@@ -9,7 +9,6 @@ class TermsAndConditionsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
         title: GradientText(
@@ -47,11 +46,14 @@ class TermsAndConditionsPage extends StatelessWidget {
           ),
         ),
         automaticallyImplyLeading: false,
-        flexibleSpace: Image(
-          opacity: const AlwaysStoppedAnimation(0.3),
-          alignment: Alignment.topCenter,
-          image: AssetImage('assets/images/Pattern.png'),
-          fit: BoxFit.fitWidth,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(),
+          child: Image(
+            opacity: const AlwaysStoppedAnimation(0.3),
+            alignment: Alignment.topCenter,
+            image: AssetImage('assets/images/Pattern.png'),
+            fit: BoxFit.fitWidth,
+          ),
         ),
         centerTitle: false,
         backgroundColor: Colors.transparent,
@@ -164,7 +166,7 @@ class TermsAndConditionsPage extends StatelessWidget {
     return [
       Container(
         width: double.infinity,
-        margin: const EdgeInsets.only(bottom: 20),
+        margin: const EdgeInsets.only(bottom: 10),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: Colors.white,

@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:app_tutorial/app_tutorial.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -52,6 +53,9 @@ class ProfileScreenState extends State<ProfileScreen>
   final O3DController controller = O3DController();
 
   final GlobalKey _menuKey = GlobalKey();
+
+  List<TutorialItem> items = [];
+  final showAnimation = GlobalKey();
 
   void _showPopupMenu() {
     final dynamic popupMenuState = _menuKey.currentState;
@@ -150,6 +154,64 @@ class ProfileScreenState extends State<ProfileScreen>
     });
   }
 
+  void initItems() {
+    items.addAll({
+      TutorialItem(
+        globalKey: showAnimation,
+        shapeFocus: ShapeFocus.square,
+        borderRadius: Radius.circular(15),
+        color: Colors.white.withOpacity(0.6),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 280.0),
+          child: Container(
+            height: 110,
+            margin: EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 203, 238, 205),
+              borderRadius: BorderRadius.circular(15),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.3),
+                  offset: const Offset(5, 25),
+                  blurRadius: 10,
+                ),
+              ],
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "View 2D/3d Avatar",
+                    style: GoogleFonts.poppins(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Center(
+                    child: Text(
+                      "On tap of profile picture & view your 2D or 3d avatar here with amazing animation..!",
+                      style: GoogleFonts.poppins(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -163,6 +225,13 @@ class ProfileScreenState extends State<ProfileScreen>
 
     animation = Tween<double>(begin: 0, end: 1).animate(animationController)
       ..addListener(() {});
+
+    initItems();
+    Future.delayed(const Duration(microseconds: 200)).then((value) {
+      Tutorial.showTutorial(context, items, onTutorialComplete: () {
+        debugPrint('Tutorial is complete!');
+      });
+    });
 
     Provider.of<ProfileProvider>(context, listen: false).profile;
     Provider.of<ProfileProvider>(context, listen: false).getUserData();
@@ -200,6 +269,7 @@ class ProfileScreenState extends State<ProfileScreen>
         ? myProfile
         : AppString.defaultImage;
     return Container(
+      key: showAnimation,
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 203, 238, 205),
         borderRadius: BorderRadius.circular(15),
