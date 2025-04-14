@@ -166,7 +166,7 @@ class _CatIcedCoffeeState extends State<CatIcedCoffee> {
                                   "itemId": meal.id,
                                   "itemDiscription": meal.description,
                                   "itemRestro":
-                                      icedCoffeeNearestRestaurant[index],
+                                      hotCoffeeNearestRestaurant[index],
                                 },
                                 feedback: Material(
                                   color: Colors.transparent,
@@ -277,9 +277,9 @@ class _CatIcedCoffeeState extends State<CatIcedCoffee> {
                                                               .icedCoffee[index]
                                                               .price
                                                               .toString(),
-                                                          icedCoffeeNearestRestaurant[
+                                                          hotCoffeeNearestRestaurant[
                                                               index]['name'],
-                                                          icedCoffeeNearestRestaurant[
+                                                          hotCoffeeNearestRestaurant[
                                                               index]['image'],
                                                         );
                                                         debugPrint(
@@ -445,9 +445,9 @@ class _CatIcedCoffeeState extends State<CatIcedCoffee> {
                                                         value.icedCoffee[index]
                                                             .price
                                                             .toString(),
-                                                        icedCoffeeNearestRestaurant[
+                                                        hotCoffeeNearestRestaurant[
                                                             index]['name'],
-                                                        icedCoffeeNearestRestaurant[
+                                                        hotCoffeeNearestRestaurant[
                                                             index]['image'],
                                                       );
                                                       debugPrint(
@@ -532,10 +532,10 @@ class _CatIcedCoffeeState extends State<CatIcedCoffee> {
                                           itemId: value.icedCoffee[index].id
                                               .toString(),
                                           restroName:
-                                              icedCoffeeNearestRestaurant[index]
+                                              hotCoffeeNearestRestaurant[index]
                                                   ['name'],
                                           restroImg:
-                                              icedCoffeeNearestRestaurant[index]
+                                              hotCoffeeNearestRestaurant[index]
                                                   ['image'],
                                         ),
                                       ),
@@ -647,9 +647,9 @@ class _CatIcedCoffeeState extends State<CatIcedCoffee> {
                                                               .icedCoffee[index]
                                                               .price
                                                               .toString(),
-                                                          icedCoffeeNearestRestaurant[
+                                                          hotCoffeeNearestRestaurant[
                                                               index]['name'],
-                                                          icedCoffeeNearestRestaurant[
+                                                          hotCoffeeNearestRestaurant[
                                                               index]['image'],
                                                         );
                                                         debugPrint(
@@ -750,6 +750,15 @@ class _CatIcedCoffeeState extends State<CatIcedCoffee> {
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
                         onTap: () {
+                          if (_droppedItem == null) {
+                            appTostMessage(
+                              context,
+                              ToastificationType.error,
+                              "Please drag and drop an item first.",
+                              "assets/images/wronge.png",
+                            );
+                            return;
+                          }
                           Provider.of<HomeProvider>(context, listen: false)
                               .addToCart(
                             _droppedItem!["itemId"].toString(),

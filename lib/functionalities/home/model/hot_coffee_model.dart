@@ -5,7 +5,7 @@ class CoffeeModel {
   String? image;
   num? price;
   int? id;
-  late bool isFavorite;
+  bool isFavorite;
 
   CoffeeModel({
     this.title,
@@ -17,25 +17,37 @@ class CoffeeModel {
     this.isFavorite = false,
   });
 
-  CoffeeModel.fromJson(Map<String, dynamic> json) {
-    title = json['title'];
-    description = json['description'];
-    ingredients = json['ingredients'].cast<String>();
-    image = json['image'];
-    price = json['price'];
-    id = json['id'];
-    isFavorite = json['isFavorite'] ?? false;
+  factory CoffeeModel.fromJson(Map<String, dynamic> json) {
+    return CoffeeModel(
+      title: json['title'],
+      description: json['description'],
+      ingredients: json['ingredients'].cast<String>(),
+      image: json['image'],
+      price: json['price'],
+      id: json['id'],
+      isFavorite: json['isFavorite'] ?? false,
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['title'] = title;
-    data['description'] = description;
-    data['ingredients'] = ingredients;
-    data['image'] = image;
-    data['price'] = price;
-    data['id'] = id;
-    data['isFavorite'] = isFavorite;
-    return data;
-  }
+  // CoffeeModel.fromJson(Map<String, dynamic> json) {
+  //   title = json['title'];
+  //   description = json['description'];
+  //   ingredients = json['ingredients'].cast<String>();
+  //   image = json['image'];
+  //   price = json['price'];
+  //   id = json['id'];
+  //   isFavorite = json['isFavorite'] ?? false;
+  // }
+
+  // Map<String, dynamic> toJson() {
+  //   final Map<String, dynamic> data = <String, dynamic>{};
+  //   data['title'] = title;
+  //   data['description'] = description;
+  //   data['ingredients'] = ingredients;
+  //   data['image'] = image;
+  //   data['price'] = price;
+  //   data['id'] = id;
+  //   data['isFavorite'] = isFavorite;
+  //   return data;
+  // }
 }

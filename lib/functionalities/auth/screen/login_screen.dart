@@ -63,12 +63,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void login() async {
     try {
-      await Provider.of<AuthProviders>(context, listen: false).login(
+       await Provider.of<AuthProviders>(context, listen: false).login(
         emailController.text.trim(),
         passwordController.text.trim(),
       );
 
-      // Only if login succeeds, navigate to the home screen
+       
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => const BottomScreen()),

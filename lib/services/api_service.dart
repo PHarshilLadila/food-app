@@ -13,6 +13,23 @@ class ApiService {
   Dio dio = Dio();
   final client = SentryHttpClient();
 
+  static const int timeOutDutration = 60;
+  final Map<String, String> headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Accept-Language": "en-US",
+  };
+
+  // ApiService._internal();
+  // static final ApiService _instance = ApiService._internal();
+  // static ApiService get instance => _instance;
+  // late final http.Client httpClient;
+  // late final SSlPinningManager sslPinningManager;
+  // factory ApiService(http.Client client) {
+  //   _instance.httpClient = client;
+  //   return _instance;
+  // }
+
   Future<List<Category>> getCategory() async {
     try {
       const url = 'https://www.themealdb.com/api/json/v1/1/categories.php';

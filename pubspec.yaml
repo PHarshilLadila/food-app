@@ -99,6 +99,7 @@ dependencies:
   toastification: ^3.0.2
   app_links: ^6.4.0
   app_tutorial: ^1.0.6
+  http_certificate_pinning: ^3.0.1
  
 dev_dependencies:
   flutter_test:
@@ -154,6 +155,7 @@ flutter:
     - assets/rive/
     - assets/images/pasta/
     - assets/images/privacy/
+    - assets/certificates/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

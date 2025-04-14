@@ -277,9 +277,9 @@ class _CatCanadianMealState extends State<CatCanadianMeal> {
                                                           canadianMealPrice[
                                                                   index]
                                                               .toString(),
-                                                          nearestRestaurant[
+                                                          canadianMealNearestRestaurant[
                                                               index]['name'],
-                                                          nearestRestaurant[
+                                                          canadianMealNearestRestaurant[
                                                               index]['image'],
                                                         );
                                                         debugPrint(
@@ -448,10 +448,10 @@ class _CatCanadianMealState extends State<CatCanadianMeal> {
                                                             .idMeal!,
                                                         canadianMealPrice[index]
                                                             .toString(),
-                                                        nearestRestaurant[index]
-                                                            ['name'],
-                                                        nearestRestaurant[index]
-                                                            ['image'],
+                                                        canadianMealNearestRestaurant[
+                                                            index]['name'],
+                                                        canadianMealNearestRestaurant[
+                                                            index]['image'],
                                                       );
                                                       debugPrint(
                                                           "${value.canadianMealModel.length}");
@@ -536,10 +536,12 @@ class _CatCanadianMealState extends State<CatCanadianMeal> {
                                               .toDouble(),
                                           itemId: value
                                               .canadianMealModel[index].idMeal,
-                                          restroName: nearestRestaurant[index]
-                                              ['name'],
-                                          restroImg: nearestRestaurant[index]
-                                              ['image'],
+                                          restroName:
+                                              canadianMealNearestRestaurant[
+                                                  index]['name'],
+                                          restroImg:
+                                              canadianMealNearestRestaurant[
+                                                  index]['image'],
                                         ),
                                       ),
                                     );
@@ -649,9 +651,9 @@ class _CatCanadianMealState extends State<CatCanadianMeal> {
                                                           canadianMealPrice[
                                                                   index]
                                                               .toString(),
-                                                          nearestRestaurant[
+                                                          canadianMealNearestRestaurant[
                                                               index]['name'],
-                                                          nearestRestaurant[
+                                                          canadianMealNearestRestaurant[
                                                               index]['image'],
                                                         );
                                                         debugPrint(
@@ -754,6 +756,15 @@ class _CatCanadianMealState extends State<CatCanadianMeal> {
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
                         onTap: () {
+                          if (_droppedItem == null) {
+                            appTostMessage(
+                              context,
+                              ToastificationType.error,
+                              "Please drag and drop an item first.",
+                              "assets/images/wronge.png",
+                            );
+                            return;
+                          }
                           Provider.of<HomeProvider>(context, listen: false)
                               .addToCart(
                             _droppedItem?["itemId"],

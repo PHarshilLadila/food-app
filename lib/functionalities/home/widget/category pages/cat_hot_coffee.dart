@@ -267,8 +267,8 @@ class _CatHotCoffeeState extends State<CatHotCoffee> {
                                                       onTap: () {
                                                         value
                                                             .toggleFavoriteStatus(
-                                                          value
-                                                              .coffees[index].id
+                                                          value.coffees[index]
+                                                              .id!
                                                               .toString(),
                                                           value.coffees[index]
                                                               .price
@@ -278,8 +278,6 @@ class _CatHotCoffeeState extends State<CatHotCoffee> {
                                                           hotCoffeeNearestRestaurant[
                                                               index]['image'],
                                                         );
-                                                        debugPrint(
-                                                            "${value.coffees.length}");
                                                       },
                                                       child: SizedBox(
                                                         height: height / 15,
@@ -738,6 +736,15 @@ class _CatHotCoffeeState extends State<CatHotCoffee> {
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
                         onTap: () {
+                          if (_droppedItem == null) {
+                            appTostMessage(
+                              context,
+                              ToastificationType.error,
+                              "Please drag and drop an item first.",
+                              "assets/images/wronge.png",
+                            );
+                            return;
+                          }
                           Provider.of<HomeProvider>(context, listen: false)
                               .addToCart(
                             _droppedItem!["itemId"].toString(),

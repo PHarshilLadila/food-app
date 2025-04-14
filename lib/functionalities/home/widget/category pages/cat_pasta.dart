@@ -591,6 +591,15 @@ class _CatPastaState extends State<CatPasta> {
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: GestureDetector(
                         onTap: () {
+                          if (_droppedItem == null) {
+                            appTostMessage(
+                              context,
+                              ToastificationType.error,
+                              "Please drag and drop an item first.",
+                              "assets/images/wronge.png",
+                            );
+                            return;
+                          }
                           Provider.of<HomeProvider>(context, listen: false)
                               .addToCart(
                             _droppedItem!["itemId"].toString(),

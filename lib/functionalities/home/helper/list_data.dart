@@ -135,63 +135,6 @@ List<Map<String, dynamic>> hotCoffeeNearestRestaurant = [
     "duration": "3 km",
   },
 ];
-List<Map<String, dynamic>> icedCoffeeNearestRestaurant = [
-  {
-    "image": "assets/images/home/nearRestaurant/near4.png",
-    "name": "Smart Restro",
-    "duration": "700 mt",
-  },
-  {
-    "image": "assets/images/home/nearRestaurant/near1.png",
-    "name": "Vegan Restro",
-    "duration": "2.4 km",
-  },
-  {
-    "image": "assets/images/home/nearRestaurant/near2.png",
-    "name": "Healthy Food",
-    "duration": "1.5 km",
-  },
-  {
-    "image": "assets/images/home/nearRestaurant/near3.png",
-    "name": "Good Food",
-    "duration": "2 km",
-  },
-  {
-    "image": "assets/images/home/nearRestaurant/near5.png",
-    "name": "Vegan Restro",
-    "duration": "3 km",
-  },
-  {
-    "image": "assets/images/home/nearRestaurant/near6.png",
-    "name": "Smart Restro",
-    "duration": "1.9 km",
-  },
-  {
-    "image": "assets/images/home/nearRestaurant/near5.png",
-    "name": "Vegan Restro",
-    "duration": "3 km",
-  },
-  {
-    "image": "assets/images/home/nearRestaurant/near2.png",
-    "name": "Healthy food",
-    "duration": "1.5 km",
-  },
-  {
-    "image": "assets/images/home/nearRestaurant/near4.png",
-    "name": "Smart Restro",
-    "duration": "700 mt",
-  },
-  {
-    "image": "assets/images/home/nearRestaurant/near5.png",
-    "name": "Vegan Restro",
-    "duration": "3 km",
-  },
-  {
-    "image": "assets/images/home/nearRestaurant/near2.png",
-    "name": "Healthy Food",
-    "duration": "1.5 km",
-  },
-];
 
 List<Map<String, dynamic>> canadianMealNearestRestaurant = [
   {

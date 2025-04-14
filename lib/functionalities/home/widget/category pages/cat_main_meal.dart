@@ -739,6 +739,15 @@ class _CatMainMealState extends State<CatMainMeal> {
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
                         onTap: () {
+                          if (_droppedItem == null) {
+                            appTostMessage(
+                              context,
+                              ToastificationType.error,
+                              "Please drag and drop an item first.",
+                              "assets/images/wronge.png",
+                            );
+                            return;
+                          }
                           Provider.of<HomeProvider>(context, listen: false)
                               .addToCart(
                             _droppedItem!["itemId"].toString(),

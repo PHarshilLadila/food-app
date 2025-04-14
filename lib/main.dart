@@ -20,6 +20,7 @@ import 'package:food_app/functionalities/profile/screen/profile_screen.dart';
 import 'package:food_app/functionalities/rest%20api%20with%20dio/provider/rest_demo.dart';
 import 'package:food_app/functionalities/spalsh/splash_screen.dart';
 import 'package:food_app/localization/provider/local_provider.dart';
+import 'package:food_app/security/ssl_pinning_manager.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -74,6 +75,8 @@ Future<void> main() async {
     option.addIntegration(LoggingIntegration());
     option.enableFramesTracking = false;
   });
+
+  await SSlPinningManager().initialize();
 
   await Hive.initFlutter();
   await Hive.openBox("userProfile");
