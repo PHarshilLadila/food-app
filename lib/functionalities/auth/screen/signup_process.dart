@@ -625,6 +625,7 @@ class _SignupProcessState extends State<SignupProcess> {
                                       maxline: 1,
                                       textEditingController: mobileController,
                                       hintText: "Mobile Number",
+                                      maxlength: 10,
                                       obscureText: false,
                                       fillColor: const Color.fromARGB(
                                           255, 252, 255, 252),

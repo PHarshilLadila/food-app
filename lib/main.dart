@@ -6,21 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:food_app/constant/app_colors.dart';
 import 'package:food_app/constant/app_sctring.dart';
-import 'package:food_app/deep%20link/deep_link_listner.dart';
 import 'package:food_app/functionalities/auth/providers/auth_provider.dart';
-import 'package:food_app/functionalities/auth/screen/login_screen.dart';
 import 'package:food_app/functionalities/bottom%20navigation%20bar/bottom_navigation_bar.dart';
-import 'package:food_app/functionalities/cart/screens/cart_screen.dart';
 import 'package:food_app/functionalities/file%20operation/order_provider.dart';
 import 'package:food_app/functionalities/home/provider/home_provider.dart';
-import 'package:food_app/functionalities/home/screen/home_screen.dart';
 import 'package:food_app/functionalities/profile/help%20&%20support/provider/query_provider.dart';
 import 'package:food_app/functionalities/profile/provider/profile_provider.dart';
-import 'package:food_app/functionalities/profile/screen/profile_screen.dart';
 import 'package:food_app/functionalities/rest%20api%20with%20dio/provider/rest_demo.dart';
 import 'package:food_app/functionalities/spalsh/splash_screen.dart';
 import 'package:food_app/localization/provider/local_provider.dart';
-import 'package:food_app/security/ssl_pinning_manager.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -35,7 +29,7 @@ WebViewEnvironment? webViewEnvironment;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  flutterDeepLink();
+  // flutterDeepLink();
 
   if (!kIsWeb && defaultTargetPlatform == TargetPlatform.windows) {
     final availableVersion = await WebViewEnvironment.getAvailableVersion();
@@ -76,7 +70,7 @@ Future<void> main() async {
     option.enableFramesTracking = false;
   });
 
-  await SSlPinningManager().initialize();
+  // await SSlPinningManager().initialize();
 
   await Hive.initFlutter();
   await Hive.openBox("userProfile");
@@ -162,14 +156,14 @@ class _MyAppState extends State<MyApp> {
                     ColorScheme.fromSeed(seedColor: AppColors.lightGreen),
                 useMaterial3: false,
               ),
-              routes: {
-                "home": (context) => HomeScreen(),
-                "login": (context) => const LoginScreen(),
-                "bottom": (context) => const BottomScreen(),
-                "cart": (context) => const CartScreen(),
-                "signup": (context) => const CartScreen(),
-                "profile": (context) => const ProfileScreen(),
-              },
+              // routes: {
+              //   "home": (context) => HomeScreen(),
+              //   "login": (context) => const LoginScreen(),
+              //   "bottom": (context) => const BottomScreen(),
+              //   "cart": (context) => const CartScreen(),
+              //   "signup": (context) => const CartScreen(),
+              //   "profile": (context) => const ProfileScreen(),
+              // },
               home: Consumer<AuthProviders>(
                 builder: (context, auth, _) {
                   return userUid.isEmpty

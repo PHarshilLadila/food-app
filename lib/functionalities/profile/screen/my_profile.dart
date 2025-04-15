@@ -323,7 +323,11 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                   width: textFieldWidth,
                                   child: SizedBox(
                                       child: buildProfileField(
-                                          "User Name", nameController))),
+                                    "User Name",
+                                    nameController,
+                                    25,
+                                    TextInputType.name,
+                                  ))),
                               SizedBox(
                                 height: height / 60,
                               ),
@@ -338,7 +342,11 @@ class _UpdateProfileState extends State<UpdateProfile> {
                               SizedBox(
                                   width: textFieldWidth,
                                   child: buildProfileField(
-                                      "Email", emailController)),
+                                    "Email",
+                                    emailController,
+                                    50,
+                                    TextInputType.emailAddress,
+                                  )),
                               SizedBox(
                                 height: height / 60,
                               ),
@@ -353,7 +361,11 @@ class _UpdateProfileState extends State<UpdateProfile> {
                               SizedBox(
                                   width: textFieldWidth,
                                   child: buildProfileField(
-                                      "First Name", fNameController)),
+                                    "First Name",
+                                    fNameController,
+                                    25,
+                                    TextInputType.name,
+                                  )),
                               SizedBox(
                                 height: height / 60,
                               ),
@@ -368,7 +380,11 @@ class _UpdateProfileState extends State<UpdateProfile> {
                               SizedBox(
                                   width: textFieldWidth,
                                   child: buildProfileField(
-                                      "Last Name", lNameController)),
+                                    "Last Name",
+                                    lNameController,
+                                    25,
+                                    TextInputType.name,
+                                  )),
                               SizedBox(
                                 height: height / 60,
                               ),
@@ -383,7 +399,11 @@ class _UpdateProfileState extends State<UpdateProfile> {
                               SizedBox(
                                   width: textFieldWidth,
                                   child: buildProfileField(
-                                      "Mobile", mobileController)),
+                                    "Mobile",
+                                    mobileController,
+                                    10,
+                                    TextInputType.number,
+                                  )),
                               SizedBox(
                                 height: height / 60,
                               ),
@@ -398,7 +418,11 @@ class _UpdateProfileState extends State<UpdateProfile> {
                               SizedBox(
                                   width: textFieldWidth,
                                   child: buildProfileField(
-                                      "Address", addressController)),
+                                    "Address",
+                                    addressController,
+                                    100,
+                                    TextInputType.streetAddress,
+                                  )),
                             ],
                           ),
                           const SizedBox(height: 30),
@@ -421,17 +445,20 @@ class _UpdateProfileState extends State<UpdateProfile> {
     );
   }
 
-  Widget buildProfileField(String label, TextEditingController controller) {
+  Widget buildProfileField(String label, TextEditingController controller,
+      int maxline, TextInputType keyboradType) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: CustomeTextFormField(
         maxline: 1,
+        maxlength: maxline,
         textEditingController: controller,
         obscureText: false,
         fillColor: Colors.white,
         borderColor: AppColors.darkGreen,
         enabledColor: AppColors.darkGreen,
         focusedColor: AppColors.darkGreen,
+        keyboradType: keyboradType,
       ),
     );
   }

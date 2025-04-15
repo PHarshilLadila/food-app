@@ -212,6 +212,60 @@ class ProfileScreenState extends State<ProfileScreen>
     }
   }
 
+  Future<void> save3DImage() async {
+    String? imageurl3D = threeDImage ?? AppString.defaultImage;
+    var random = Random();
+
+    late String message;
+    setState(() {
+      isLoading = true; // Show loader
+    });
+
+    try {
+      final http.Response response = await http.get(Uri.parse(imageurl3D));
+      final dir = await getTemporaryDirectory();
+      var fileName = "${dir.path}/3D_Image${random.nextInt(100)}.glb";
+
+      final file = File(fileName);
+      await file.writeAsBytes(response.bodyBytes);
+
+      final params = SaveFileDialogParams(
+        sourceFilePath: file.path,
+        fileName: "3D_Image${random.nextInt(100)}.glb",
+      );
+      final finalPath = await FlutterFileDialog.saveFile(params: params);
+
+      if (finalPath != null) {
+        message = "Image saved successfully at $finalPath";
+        appTostMessage(
+          context,
+          ToastificationType.success,
+          message,
+          "assets/images/done.png",
+        );
+      } else {
+        appTostMessage(
+          context,
+          ToastificationType.error,
+          "Image not saved!",
+          "assets/images/wronge.png",
+        );
+      }
+    } catch (e) {
+      debugPrint("Error saving image: $e");
+      appTostMessage(
+        context,
+        ToastificationType.error,
+        e.toString(),
+        "assets/images/error.png",
+      );
+    } finally {
+      setState(() {
+        isLoading = false; // Hide loader
+      });
+    }
+  }
+
   void initItems() {
     items.addAll({
       TutorialItem(
@@ -675,8 +729,26 @@ class ProfileScreenState extends State<ProfileScreen>
                                                 debugPrint("Edit");
                                                 break;
                                               case 'option3':
-                                                save2DImage();
+                                                kIsWeb
+                                                    ? showAlertDialog(
+                                                        context,
+                                                        "Download 2D Avatar",
+                                                        "Sorry, Currently you can not creates 2D & 3D Avatar on web Application.",
+                                                        "Ok",
+                                                        actions: [],
+                                                      )
+                                                    : save2DImage();
                                                 break;
+                                              case 'option4':
+                                                kIsWeb
+                                                    ? showAlertDialog(
+                                                        context,
+                                                        "Download 3D Avatar",
+                                                        "Sorry, Currently you can not creates 2D & 3D Avatar on web Application.",
+                                                        "Ok",
+                                                        actions: [],
+                                                      )
+                                                    : save3DImage();
                                             }
                                           },
                                           itemBuilder: (BuildContext context) =>
@@ -691,7 +763,11 @@ class ProfileScreenState extends State<ProfileScreen>
                                             ),
                                             PopupMenuItem<String>(
                                               value: 'option3',
-                                              child: Text('Download Avatar'),
+                                              child: Text('Download 2D Avatar'),
+                                            ),
+                                            PopupMenuItem<String>(
+                                              value: 'option4',
+                                              child: Text('Download 3D Avatar'),
                                             ),
                                           ],
                                           child: GestureDetector(
