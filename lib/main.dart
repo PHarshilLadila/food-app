@@ -14,6 +14,7 @@ import 'package:food_app/functionalities/profile/help%20&%20support/provider/que
 import 'package:food_app/functionalities/profile/provider/profile_provider.dart';
 import 'package:food_app/functionalities/rest%20api%20with%20dio/provider/rest_demo.dart';
 import 'package:food_app/functionalities/spalsh/splash_screen.dart';
+import 'package:food_app/functionalities/track%20order/provider/track_order_provider.dart';
 import 'package:food_app/localization/provider/local_provider.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
@@ -120,7 +121,9 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (_) => LocalProvider()),
         ChangeNotifierProvider(create: (_) => QueryProvider()),
         ChangeNotifierProvider(create: (_) => RestDemo()),
-        ChangeNotifierProvider(create: (_) => OrderProvider()),
+        ChangeNotifierProvider(create: (_) => TrackOrderProvider()),
+
+        // ChangeNotifierProvider(create: (_) => OrderProvider()),
       ],
       child: Consumer<LocalProvider>(
         builder: (BuildContext context, LocalProvider value, Widget? child) {

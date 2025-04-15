@@ -203,7 +203,7 @@ class ProfileScreenState extends State<ProfileScreen>
         context,
         ToastificationType.error,
         e.toString(),
-        "assets/images/error.png",
+        "assets/images/wronge.png",
       );
     } finally {
       setState(() {
@@ -213,12 +213,12 @@ class ProfileScreenState extends State<ProfileScreen>
   }
 
   Future<void> save3DImage() async {
-    String? imageurl3D = threeDImage ?? AppString.defaultImage;
+    String? imageurl3D = threeDImage ?? "assets/images/avatar.glb";
     var random = Random();
 
     late String message;
     setState(() {
-      isLoading = true; // Show loader
+      isLoading = true; // Show loaderr
     });
 
     try {
@@ -257,7 +257,7 @@ class ProfileScreenState extends State<ProfileScreen>
         context,
         ToastificationType.error,
         e.toString(),
-        "assets/images/error.png",
+        "assets/images/wronge.png",
       );
     } finally {
       setState(() {

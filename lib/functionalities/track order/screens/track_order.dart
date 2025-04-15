@@ -9,6 +9,8 @@ import 'package:food_app/constant/app_button.dart';
 import 'package:food_app/functionalities/file%20operation/order_provider.dart';
 import 'package:food_app/functionalities/file%20operation/oreder_screen.dart';
 import 'package:food_app/functionalities/profile/provider/profile_provider.dart';
+import 'package:food_app/functionalities/track%20order/provider/track_order_provider.dart';
+import 'package:food_app/functionalities/track%20order/screens/order_history.dart';
 import 'package:food_app/functionalities/track%20order/widget/order_user_details.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -106,7 +108,7 @@ class _TrackOrderState extends State<TrackOrder> {
                         },
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              top: 5.0, bottom: 5, left: 12, right: 12),
+                              top: 5.0, bottom: 5, left: 10, right: 12),
                           child: Container(
                             margin: EdgeInsets.all(2),
                             decoration: BoxDecoration(
@@ -314,7 +316,7 @@ class _TrackOrderState extends State<TrackOrder> {
                                         width: width / 100,
                                       ),
                                       Text(
-                                        '\$${orderData['finalTotal'] ?? 'N/A'}',
+                                        '\$${orderData['finalTotal'].toStringAsFixed(2) ?? 'N/A'}',
                                         style: GoogleFonts.poppins(
                                             color: AppColors.blackColor,
                                             fontSize: 18,
@@ -386,7 +388,7 @@ class _TrackOrderState extends State<TrackOrder> {
                                       widths: double.infinity,
                                       name: "Order Complate",
                                       ontap: () {
-                                        Provider.of<OrderProvider>(context,
+                                        Provider.of<TrackOrderProvider>(context,
                                                 listen: false)
                                             .addOrder(orederDetails ?? []);
 
@@ -394,7 +396,7 @@ class _TrackOrderState extends State<TrackOrder> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                OrederScreen(),
+                                                OrderHistory(),
                                           ),
                                         );
                                       },
