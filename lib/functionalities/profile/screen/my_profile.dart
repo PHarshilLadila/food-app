@@ -225,29 +225,35 @@ class _UpdateProfileState extends State<UpdateProfile> {
                             future: Future.delayed(Duration(seconds: 2)),
                             builder: (BuildContext context,
                                 AsyncSnapshot<dynamic> snapshot) {
-                              if (snapshot.connectionState !=
-                                  ConnectionState.done) {
-                                return myProccesser();
-                              }
                               return Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Stack(
                                     children: [
-                                      ClipOval(
-                                        child: SizedBox.fromSize(
-                                          size: Size.fromRadius(70),
-                                          child: profileImage != null &&
-                                                  profileImage!.isNotEmpty
-                                              ? Image.memory(
-                                                  base64Decode(
-                                                      profileImage ?? ''),
-                                                  fit: BoxFit.cover)
-                                              : Image.memory(
-                                                  base64Decode(
-                                                      AppString.defaultImage),
-                                                  fit: BoxFit.cover),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: AppColors.darkGreen,
+                                                width: 0.5),
+                                            shape: BoxShape.circle),
+                                        child: ClipOval(
+                                          child: SizedBox.fromSize(
+                                            size: Size.fromRadius(70),
+                                            child: snapshot.connectionState !=
+                                                    ConnectionState.done
+                                                ? myProccesser()
+                                                : profileImage != null &&
+                                                        profileImage!.isNotEmpty
+                                                    ? Image.memory(
+                                                        base64Decode(
+                                                            profileImage ?? ''),
+                                                        fit: BoxFit.cover)
+                                                    : Image.memory(
+                                                        base64Decode(AppString
+                                                            .defaultImage),
+                                                        fit: BoxFit.cover),
+                                          ),
                                         ),
                                       ),
                                       Positioned(

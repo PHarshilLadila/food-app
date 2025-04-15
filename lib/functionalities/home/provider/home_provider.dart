@@ -302,10 +302,10 @@ class HomeProvider extends ChangeNotifier {
           (desserId) => desserId.id.toString() == (mealId.toString()));
       int canadianIndex = _canadianMealModel
           .indexWhere((canadian) => canadian.idMeal == mealId.toString());
-      int hotCoffeeIndex =
-          _coffees.indexWhere((coffee) => coffee.id == mealId.toString());
-      int icedCoffeeIndex =
-          _icedCoffee.indexWhere((coffee) => coffee.id == mealId.toString());
+      int hotCoffeeIndex = _coffees
+          .indexWhere((coffee) => coffee.id?.toString() == mealId.toString());
+      int icedCoffeeIndex = _icedCoffee
+          .indexWhere((coffee) => coffee.id?.toString() == mealId.toString());
 
       if (mealIndex != -1) {
         _mealsModel[mealIndex].isFavorite = !_mealsModel[mealIndex].isFavorite;
@@ -315,10 +315,10 @@ class HomeProvider extends ChangeNotifier {
       } else if (canadianIndex != -1) {
         _canadianMealModel[canadianIndex].isFavorite =
             !_canadianMealModel[canadianIndex].isFavorite;
-      } else if (hotCoffeeIndex != -1) {
+      } else if (hotCoffeeIndex != 1) {
         _coffees[hotCoffeeIndex].isFavorite =
             !_coffees[hotCoffeeIndex].isFavorite;
-      } else if (icedCoffeeIndex != -1) {
+      } else if (icedCoffeeIndex != 1) {
         _icedCoffee[icedCoffeeIndex].isFavorite =
             !_icedCoffee[icedCoffeeIndex].isFavorite;
       } else if (mealIndex == -1) {

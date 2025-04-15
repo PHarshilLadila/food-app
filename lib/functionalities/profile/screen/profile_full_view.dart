@@ -39,11 +39,12 @@ class _ProfileFullViewState extends State<ProfileFullView> {
           ),
         ),
         child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              physics: const BouncingScrollPhysics(),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            physics: const BouncingScrollPhysics(),
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18),
               child: Consumer<ProfileProvider>(
                 builder: (BuildContext context, value, Widget? child) {
                   var profileImage =
@@ -100,13 +101,16 @@ class _ProfileFullViewState extends State<ProfileFullView> {
                       SizedBox(
                         height: height * 0.09,
                       ),
-                      SizedBox(
-                        width: double.infinity,
-                        height: MediaQuery.of(context).size.height * 0.6,
-                        child: Center(
-                          child: Image.memory(
-                            base64Decode(profileImage),
-                            fit: BoxFit.contain,
+                      Align(
+                        alignment: Alignment.center,
+                        child: SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.7,
+                          child: Center(
+                            child: Image.memory(
+                              base64Decode(profileImage),
+                              fit: BoxFit.contain,
+                              alignment: Alignment.center,
+                            ),
                           ),
                         ),
                       ),

@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:food_app/constant/app_colors.dart';
 import 'package:food_app/constant/app_gredient_text.dart';
-import 'package:food_app/constant/app_sctring.dart';
 import 'package:food_app/functionalities/cart/screens/cart_screen.dart';
 import 'package:food_app/functionalities/home/helper/list_data.dart';
 import 'package:food_app/functionalities/home/provider/home_provider.dart';
@@ -509,9 +508,9 @@ class _CatHotCoffeeState extends State<CatHotCoffee> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => ItemDetails(
-                                          itemDescription:
-                                              AppString.mealsDescription(
-                                                  context),
+                                          itemDescription: value
+                                                  .coffees[index].description ??
+                                              "",
                                           itemImage:
                                               value.coffees[index].image ?? "",
                                           itemname:

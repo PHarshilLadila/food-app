@@ -6,13 +6,16 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:food_app/constant/app_button.dart';
 import 'package:food_app/constant/app_colors.dart';
 import 'package:food_app/constant/app_gredient_text.dart';
+import 'package:food_app/constant/app_sctring.dart';
 import 'package:food_app/functionalities/bottom%20navigation%20bar/bottom_navigation_bar.dart';
 import 'package:food_app/functionalities/home/provider/home_provider.dart';
+import 'package:food_app/functionalities/home/screen/item_details.dart';
 import 'package:food_app/functionalities/profile/provider/profile_provider.dart';
 import 'package:food_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
+import 'package:toastification/toastification.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FavoriteItems extends StatefulWidget {
@@ -76,6 +79,13 @@ class _FavoriteItemsState extends State<FavoriteItems> {
         .doc(docId)
         .delete();
 
+    setState(() {});
+    appTostMessage(
+      context,
+      ToastificationType.success,
+      "Item Removed Successfully from Favorite List",
+      "assets/images/done.png",
+    );
     const Duration(milliseconds: 600);
   }
 
@@ -206,70 +216,112 @@ class _FavoriteItemsState extends State<FavoriteItems> {
 
                               return Padding(
                                 padding: const EdgeInsets.only(bottom: 10),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color:
-                                        const Color.fromARGB(20, 143, 143, 143),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(12),
-                                    child: Row(
-                                      children: [
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          child: Image.network(
-                                            item["mealImage"] ??
-                                                "https://png.pngtree.com/png-vector/20190820/ourmid/pngtree-no-image-vector-illustration-isolated-png-image_1694547.jpg",
-                                            height: height / 12,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ItemDetails(
+                                          itemId: item["mealId"],
+                                          itemname: item["mealname"],
+                                          itemImage: item["mealImage"],
+                                          itemPrice: double.tryParse(
+                                                  item["mealPrice"]
+                                                      .toString()) ??
+                                              0.0,
+                                          itemDescription:
+                                              widget.itemDescription ??
+                                                  AppString.mealsDescription(
+                                                      context),
+                                          restroImg:
+                                              item["restroImg"].toString(),
+                                          restroName: item["restroName"],
+                                        ),
+                                      ),
+                                    );
+                                    debugPrint(
+                                      "${item["mealId"]}, ${item["mealname"]}, ${item["mealImage"]}, ${item["mealPrice"]}, ${item["restroName"]}, ${item["restroImg"]}, ${item["docId"]}",
+                                    );
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: const Color.fromARGB(
+                                          20, 143, 143, 143),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(12),
+                                      child: Row(
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            child: Image.network(
+                                              item["mealImage"] ??
+                                                  "https://png.pngtree.com/png-vector/20190820/ourmid/pngtree-no-image-vector-illustration-isolated-png-image_1694547.jpg",
+                                              height: 65,
+                                              width: 65,
+                                              fit: BoxFit.cover,
+                                              errorBuilder:
+                                                  (context, error, stackTrace) {
+                                                return Image.network(
+                                                  "https://png.pngtree.com/png-vector/20190820/ourmid/pngtree-no-image-vector-illustration-isolated-png-image_1694547.jpg",
+                                                  height: 50,
+                                                  width: 50,
+                                                  fit: BoxFit.cover,
+                                                );
+                                              },
+                                            ),
                                           ),
-                                        ),
-                                        const SizedBox(width: 10),
-                                        Expanded(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                item["mealname"] ?? "No Name",
-                                                style: GoogleFonts.poppins(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold,
+                                          const SizedBox(width: 10),
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  item["mealname"] ?? "No Name",
+                                                  style: GoogleFonts.poppins(
+                                                    fontSize: 18,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 1,
                                                 ),
-                                                overflow: TextOverflow.ellipsis,
-                                                maxLines: 1,
-                                              ),
-                                              Text(
-                                                item["restroName"] ?? "No Name",
-                                                style: GoogleFonts.poppins(
-                                                  fontSize: 16,
-                                                  color: Colors.grey,
-                                                  fontWeight: FontWeight.bold,
+                                                Text(
+                                                  item["restroName"] ??
+                                                      "No Name",
+                                                  style: GoogleFonts.poppins(
+                                                    fontSize: 16,
+                                                    color: Colors.grey,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 1,
                                                 ),
-                                                overflow: TextOverflow.ellipsis,
-                                                maxLines: 1,
-                                              ),
-                                              Text(
-                                                "\$${item["mealPrice"] ?? 0}",
-                                                style: GoogleFonts.poppins(
-                                                  fontSize: 20,
-                                                  color: AppColors.darkGreen,
-                                                  fontWeight: FontWeight.w500,
+                                                Text(
+                                                  "\$${item["mealPrice"] ?? 0}",
+                                                  style: GoogleFonts.poppins(
+                                                    fontSize: 20,
+                                                    color: AppColors.darkGreen,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                        IconButton(
-                                          onPressed: () {
-                                            toggleFavorite(item["docId"]);
-                                          },
-                                          icon: const FaIcon(
-                                              FontAwesomeIcons.solidTrashCan,
-                                              color: Colors.red),
-                                        ),
-                                      ],
+                                          IconButton(
+                                            onPressed: () {
+                                              toggleFavorite(item["docId"]);
+                                            },
+                                            icon: const FaIcon(
+                                                FontAwesomeIcons.solidTrashCan,
+                                                color: Colors.red),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
