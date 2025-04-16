@@ -92,7 +92,9 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (BuildContext context, value, Widget? child) {
           if (value.isLoading) {
             return Center(
-              child: Center(child: myProccesser()),
+              child: Center(
+                child: myProccesser(),
+              ),
             );
           }
           // final meals = value.mealsModel;

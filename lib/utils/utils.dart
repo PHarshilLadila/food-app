@@ -100,7 +100,7 @@ ToastificationItem appTostMessage(
     context: context,
     type: type,
     style: ToastificationStyle.flatColored,
-    autoCloseDuration: const Duration(seconds: 3),
+    autoCloseDuration: const Duration(seconds: 4),
     title: Text(
       title,
       style: GoogleFonts.poppins(fontWeight: FontWeight.bold),

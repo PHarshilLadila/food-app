@@ -202,7 +202,7 @@ class ProfileScreenState extends State<ProfileScreen>
       appTostMessage(
         context,
         ToastificationType.error,
-        e.toString(),
+        "Avatar not found, please create your avatar!",
         "assets/images/wronge.png",
       );
     } finally {
@@ -256,7 +256,7 @@ class ProfileScreenState extends State<ProfileScreen>
       appTostMessage(
         context,
         ToastificationType.error,
-        e.toString(),
+        "Avatar not found, please create your avatar!",
         "assets/images/wronge.png",
       );
     } finally {
