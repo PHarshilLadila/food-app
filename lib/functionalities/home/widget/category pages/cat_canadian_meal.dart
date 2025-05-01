@@ -51,11 +51,12 @@ class _CatCanadianMealState extends State<CatCanadianMeal> {
             alignment: Alignment.topCenter,
             colorFilter: ColorFilter.mode(
                 // ignore: deprecated_member_use
-                Colors.white.withOpacity(0.4),
+                Colors.white.withOpacity(0.2),
                 BlendMode.dstATop),
             image: const AssetImage(
               "assets/images/Pattern.png",
             ),
+            fit: BoxFit.cover,
           ),
         ),
         child: SafeArea(
