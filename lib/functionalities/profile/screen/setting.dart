@@ -7,7 +7,7 @@ import 'package:food_app/constant/app_gredient_text.dart';
 import 'package:food_app/localization/provider/local_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -90,8 +90,8 @@ class _SettingScreenState extends State<SettingScreen> {
                           ),
                           Flexible(
                             child: GradientText(
-                              "Update Your Setting Here",
-                              // AppLocalizations.of(context)!.updateProfile,
+                              // "Update Your Setting Here",
+                              AppLocalizations.of(context)!.updateProfile,
                               style: GoogleFonts.poppins(
                                   fontSize: 30, fontWeight: FontWeight.bold),
                               gradient: const LinearGradient(
@@ -108,8 +108,8 @@ class _SettingScreenState extends State<SettingScreen> {
                         height: height / 20,
                       ),
                       GradientText(
-                        "Settings",
-                        // AppLocalizations.of(context)!.settings,
+                        // "Settings",
+                        AppLocalizations.of(context)!.settings,
                         style: GoogleFonts.poppins(
                             fontSize: 18, fontWeight: FontWeight.bold),
                         gradient: const LinearGradient(
@@ -138,8 +138,8 @@ class _SettingScreenState extends State<SettingScreen> {
                                 width: width / 30,
                               ),
                               Text(
-                                "Languages",
-                                // AppLocalizations.of(context)!.languages,
+                                // "Languages",
+                                AppLocalizations.of(context)!.languages,
                                 style: GoogleFonts.poppins(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,

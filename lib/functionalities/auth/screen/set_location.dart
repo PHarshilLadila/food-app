@@ -11,7 +11,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:toastification/toastification.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SetLocation extends StatefulWidget {
   const SetLocation({super.key});
@@ -87,9 +87,8 @@ class _SetLocationState extends State<SetLocation> {
       appTostMessage(
           context,
           ToastificationType.error,
-          "Location services are disabled. Please enable the services.",
-          // AppLocalizations.of(context)!.locationServiceDisabled
-
+          // "Location services are disabled. Please enable the services.",
+          AppLocalizations.of(context)!.locationServiceDisabled,
           "assets/images/wronge.png");
       return false;
     }
@@ -104,9 +103,8 @@ class _SetLocationState extends State<SetLocation> {
         appTostMessage(
           context,
           ToastificationType.error,
-          "Location permissions are denied",
-          // AppLocalizations.of(context)!.locationPermissionDenied
-
+          // "Location permissions are denied",
+          AppLocalizations.of(context)!.locationPermissionDenied,
           "assets/images/wronge.png",
         );
         return false;
@@ -119,8 +117,8 @@ class _SetLocationState extends State<SetLocation> {
       appTostMessage(
           context,
           ToastificationType.error,
-          "Location permissions are permanently denied, we cannot request permissions.",
-          // AppLocalizations.of(context)!.locationPermissionPermanentlyDenied,
+          // "Location permissions are permanently denied, we cannot request permissions.",
+          AppLocalizations.of(context)!.locationPermissionPermanentlyDenied,
           "assets/images/wronge.png");
       return false;
     }
@@ -220,8 +218,8 @@ class _SetLocationState extends State<SetLocation> {
               children: [
                 SizedBox(height: height * 0.02),
                 GradientText(
-                  // AppLocalizations.of(context)!.setYourLocation,
-                  "Set Your Location",
+                  AppLocalizations.of(context)!.setYourLocation,
+                  // "Set Your Location",
                   style: GoogleFonts.poppins(
                       fontSize: 30, fontWeight: FontWeight.w600),
                   gradient: const LinearGradient(
@@ -229,8 +227,8 @@ class _SetLocationState extends State<SetLocation> {
                 ),
                 SizedBox(height: height * 0.02),
                 GradientText(
-                  // AppLocalizations.of(context)!.proccessData,
-                  "This data will be displayed in your account profile for security,",
+                  AppLocalizations.of(context)!.proccessData,
+                  // "This data will be displayed in your account profile for security,",
                   style: GoogleFonts.poppins(
                       fontSize: 16, fontWeight: FontWeight.w400),
                   gradient: const LinearGradient(
@@ -265,9 +263,9 @@ class _SetLocationState extends State<SetLocation> {
                                   ? myProccesser()
                                   : GradientText(
                                       currentAddress ??
-                                          // AppLocalizations.of(context)!
-                                          //     .setYourLocation,
-                                          "Set Your Location",
+                                          AppLocalizations.of(context)!
+                                              .setYourLocation,
+                                          // "Set Your Location",
                                       style: GoogleFonts.poppins(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600),
@@ -298,8 +296,8 @@ class _SetLocationState extends State<SetLocation> {
                             ),
                             child: Center(
                               child: Text(
-                                // AppLocalizations.of(context)!.setLocation,
-                                "Set Location",
+                                AppLocalizations.of(context)!.setLocation,
+                                // "Set Location",
                                 style: GoogleFonts.poppins(
                                     color: AppColors.whiteColor,
                                     fontSize: 16,
@@ -332,8 +330,8 @@ class _SetLocationState extends State<SetLocation> {
           ),
           child: Center(
             child: Text(
-              // AppLocalizations.of(context)!.next,
-              "Next",
+              AppLocalizations.of(context)!.next,
+              // "Next",
               style: GoogleFonts.poppins(
                   color: AppColors.whiteColor,
                   fontSize: 16,

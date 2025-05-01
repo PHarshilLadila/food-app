@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_app/constant/app_colors.dart';
 import 'package:food_app/constant/app_gredient_text.dart';
 import 'package:google_fonts/google_fonts.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Card3 extends StatelessWidget {
   const Card3({super.key});
@@ -101,8 +101,8 @@ class Card3 extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             GradientText(
-                              "Special Deal \nFor April",
-                              // AppLocalizations.of(context)!.specialDeal,
+                              // "Special Deal \nFor April",
+                              AppLocalizations.of(context)!.specialDeal,
                               style: GoogleFonts.viga(
                                   fontSize: 20, fontWeight: FontWeight.bold),
                               gradient: const LinearGradient(
@@ -124,8 +124,8 @@ class Card3 extends StatelessWidget {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 20.0, vertical: 12),
                                 child: GradientText(
-                                  "Buy Now",
-                                  // AppLocalizations.of(context)!.buyNow,
+                                  // "Buy Now",
+                                  AppLocalizations.of(context)!.buyNow,
                                   style: GoogleFonts.poppins(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w500),

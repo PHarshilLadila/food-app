@@ -22,7 +22,7 @@ import 'package:food_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -131,8 +131,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Flexible(
                             child: GradientText(
-                              // AppLocalizations.of(context)!.homeTitle,
-                              'Find Your Favorite Food',
+                              AppLocalizations.of(context)!.homeTitle,
+                              // 'Find Your Favorite Food',
                               style: GoogleFonts.poppins(
                                   fontSize: 30, fontWeight: FontWeight.bold),
                               gradient: const LinearGradient(
@@ -207,8 +207,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   const Color.fromARGB(255, 252, 255, 252),
                               focusedColor:
                                   AppColors.darkOrange.withOpacity(1.0),
-                              hintText: "What Do You Want To Order?",
-                              //  AppLocalizations.of(context)!.search,
+                              hintText:
+                              //  "What Do You Want To Order?",
+                               AppLocalizations.of(context)!.search,
                               fillColor: AppColors.lightOrange,
                               hintcolors: AppColors.darkOrange.withOpacity(1.0),
                               prefixIcon: Padding(
@@ -532,8 +533,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              // AppLocalizations.of(context)!.viewMore,
-                              'View More',
+                              AppLocalizations.of(context)!.viewMore,
+                              // 'View More',
                               style: GoogleFonts.poppins(
                                   color: AppColors.darkOrange,
                                   fontSize: 16,

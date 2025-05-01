@@ -8,7 +8,7 @@ import 'package:food_app/functionalities/auth/screen/set_location.dart';
 import 'package:food_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:toastification/toastification.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ViewAuthProfile extends StatefulWidget {
   final String? profileUrl;
@@ -105,8 +105,8 @@ class _ViewAuthProfileState extends State<ViewAuthProfile> {
                     height: height * 0.02,
                   ),
                   GradientText(
-                    "Your Uploaded Profile Picture,",
-                    // AppLocalizations.of(context)!.yourUploadedPhoto,
+                    // "Your Uploaded Profile Picture,",
+                    AppLocalizations.of(context)!.yourUploadedPhoto,
                     style: GoogleFonts.poppins(
                         fontSize: 30, fontWeight: FontWeight.w600),
                     gradient: const LinearGradient(
@@ -120,8 +120,8 @@ class _ViewAuthProfileState extends State<ViewAuthProfile> {
                     height: height * 0.02,
                   ),
                   GradientText(
-                    "This data will be displayed in your account profile for security,",
-                    // AppLocalizations.of(context)!.proccessData,
+                    // "This data will be displayed in your account profile for security,",
+                    AppLocalizations.of(context)!.proccessData,
                     style: GoogleFonts.poppins(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
@@ -170,8 +170,8 @@ class _ViewAuthProfileState extends State<ViewAuthProfile> {
                         Navigator.pop(context);
                       },
                       child: Text(
-                        "Update Image?",
-                        // AppLocalizations.of(context)!.isUploadImage,
+                        // "Update Image?",
+                        AppLocalizations.of(context)!.isUploadImage,
                         style: GoogleFonts.poppins(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -227,8 +227,8 @@ class _ViewAuthProfileState extends State<ViewAuthProfile> {
           ),
           child: Center(
             child: Text(
-              "Next",
-              // AppLocalizations.of(context)!.next,
+              // "Next",
+              AppLocalizations.of(context)!.next,
               style: GoogleFonts.poppins(
                   color: AppColors.whiteColor,
                   fontSize: 16,

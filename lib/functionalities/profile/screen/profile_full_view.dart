@@ -8,6 +8,7 @@ import 'package:food_app/constant/app_sctring.dart';
 import 'package:food_app/functionalities/profile/provider/profile_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileFullView extends StatefulWidget {
   const ProfileFullView({super.key});
@@ -83,8 +84,8 @@ class _ProfileFullViewState extends State<ProfileFullView> {
                           ),
                           Flexible(
                             child: GradientText(
-                              "Here Your Profile Image",
-                              // AppLocalizations.of(context)!.profileTitle,
+                              // "Here Your Profile Image",
+                              AppLocalizations.of(context)!.profileTitle,
                               // 'Find Your \nFavorite Food',
                               style: GoogleFonts.poppins(
                                   fontSize: 30, fontWeight: FontWeight.bold),

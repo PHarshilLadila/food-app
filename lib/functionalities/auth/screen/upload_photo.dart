@@ -11,7 +11,7 @@ import 'package:food_app/functionalities/auth/screen/view_auth_profile.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UploadPhoto extends StatefulWidget {
   const UploadPhoto({super.key});
@@ -154,7 +154,8 @@ class _UploadPhotoState extends State<UploadPhoto> {
                     height: height * 0.02,
                   ),
                   GradientText(
-                    "Upload Your Photo Profile,", // AppLocalizations.of(context)!.uploadYourProfile,
+                    // "Upload Your Photo Profile,",
+                     AppLocalizations.of(context)!.uploadYourProfile,
                     style: GoogleFonts.poppins(
                         fontSize: 30, fontWeight: FontWeight.w600),
                     gradient: const LinearGradient(
@@ -168,8 +169,8 @@ class _UploadPhotoState extends State<UploadPhoto> {
                     height: height * 0.02,
                   ),
                   GradientText(
-                    "This data will be displayed in your account profile for security,",
-                    // AppLocalizations.of(context)!.proccessData,
+                    // "This data will be displayed in your account profile for security,",
+                    AppLocalizations.of(context)!.proccessData,
                     style: GoogleFonts.poppins(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
@@ -214,8 +215,8 @@ class _UploadPhotoState extends State<UploadPhoto> {
                                 height: height * 0.01,
                               ),
                               GradientText(
-                                "From Gallery",
-                                // AppLocalizations.of(context)!.fromGallery,
+                                // "From Gallery",
+                                AppLocalizations.of(context)!.fromGallery,
                                 style: GoogleFonts.poppins(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
@@ -266,8 +267,8 @@ class _UploadPhotoState extends State<UploadPhoto> {
                                 height: height * 0.01,
                               ),
                               GradientText(
-                                "Take Photo",
-                                // AppLocalizations.of(context)!.takePhoto,
+                                // "Take Photo",
+                                AppLocalizations.of(context)!.takePhoto,
                                 style: GoogleFonts.poppins(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,

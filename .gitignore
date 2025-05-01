@@ -48,3 +48,4 @@ app.*.map.json
 
 # Ignore the following files for the Flutter SDK
 .fvm/flutter_sdk
+.vercel

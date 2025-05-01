@@ -14,7 +14,7 @@ import 'package:food_app/functionalities/bottom%20navigation%20bar/bottom_naviga
 import 'package:food_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toastification/toastification.dart';
@@ -215,8 +215,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         GradientText(
-                          // AppLocalizations.of(context)!.swiftBite,
-                          "Swift Bite",
+                          AppLocalizations.of(context)!.swiftBite,
+                          // "Swift Bite",
                           style: GoogleFonts.viga(
                               fontSize: 40, fontWeight: FontWeight.w400),
                           gradient: const LinearGradient(
@@ -227,8 +227,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         Text(
-                          // AppLocalizations.of(context)!.slogun,
-                          "Deliver Favorite Food",
+                          AppLocalizations.of(context)!.slogun,
+                          // "Deliver Favorite Food",
                           style: GoogleFonts.inter(
                               fontWeight: FontWeight.w600, fontSize: 13),
                         ),
@@ -236,8 +236,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: height * 0.10,
                         ),
                         GradientText(
-                          // AppLocalizations.of(context)!.loginAccount,
-                          "Login To Your Account",
+                          AppLocalizations.of(context)!.loginAccount,
+                          // "Login To Your Account",
                           style: GoogleFonts.viga(
                               fontSize: 20, fontWeight: FontWeight.w400),
                           gradient: const LinearGradient(
@@ -258,8 +258,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 maxline: 1,
                                 key: const Key('email'),
                                 textEditingController: emailController,
-                                hintText: "Email",
-                                //  AppLocalizations.of(context)!.email,
+                                hintText: 
+                                // "Email",
+                                 AppLocalizations.of(context)!.email,
                                 obscureText: false,
                                 fillColor:
                                     const Color.fromARGB(255, 252, 255, 252),
@@ -302,8 +303,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                 maxline: 1,
                                 textEditingController: passwordController,
-                                hintText: "Password",
-                                // AppLocalizations.of(context)!.password,
+                                hintText: 
+                                // "Password",
+                                AppLocalizations.of(context)!.password,
                                 obscureText: showPasswords,
                                 borderColor:
                                     const Color.fromARGB(255, 252, 255, 252),
@@ -380,8 +382,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   );
                                 },
                                 child: GradientText(
-                                  // AppLocalizations.of(context)!.forgotPass,
-                                  "Forgot Your Password?",
+                                  AppLocalizations.of(context)!.forgotPass,
+                                  // "Forgot Your Password?",
                                   style: GoogleFonts.poppins(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600),
@@ -402,8 +404,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             kIsWeb
                                 ? SizedBox()
                                 : GradientText(
-                                    // AppLocalizations.of(context)!.countinueWith,
-                                    "or Continue With",
+                                    AppLocalizations.of(context)!.countinueWith,
+                                    // "or Continue With",
                                     style: GoogleFonts.viga(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w400),
@@ -460,9 +462,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   width: width / 60,
                                                 ),
                                                 Text(
-                                                  // AppLocalizations.of(context)!
-                                                  //     .facebook,
-                                                  'Facebook',
+                                                  AppLocalizations.of(context)!
+                                                      .facebook,
+                                                  // 'Facebook',
                                                   style: GoogleFonts.poppins(
                                                     color: AppColors.blackColor,
                                                     fontSize: 16,
@@ -545,9 +547,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                                     width: width / 60,
                                                   ),
                                                   Text(
-                                                    // AppLocalizations.of(context)!
-                                                    //     .google,
-                                                    "Google",
+                                                    AppLocalizations.of(context)!
+                                                        .google,
+                                                    // "Google",
                                                     style: GoogleFonts.poppins(
                                                       color:
                                                           AppColors.blackColor,
@@ -591,8 +593,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    // AppLocalizations.of(context)!.login,
-                                    "Login",
+                                    AppLocalizations.of(context)!.login,
+                                    // "Login",
                                     style: GoogleFonts.poppins(
                                         color: AppColors.whiteColor,
                                         fontSize: 16,
@@ -617,8 +619,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 );
                               },
                               child: GradientText(
-                                // AppLocalizations.of(context)!.dontHaveAccount,
-                                "Don't Have An Account?",
+                                AppLocalizations.of(context)!.dontHaveAccount,
+                                // "Don't Have An Account?",
                                 style: GoogleFonts.poppins(
                                     fontSize: 16, fontWeight: FontWeight.w600),
                                 gradient: const LinearGradient(

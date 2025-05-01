@@ -38,7 +38,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:food_app/functionalities/profile/provider/profile_provider.dart';
 import 'package:http/http.dart' as http;
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toastification/toastification.dart';
@@ -671,16 +671,17 @@ class ProfileScreenState extends State<ProfileScreen>
                                       children: [
                                         Flexible(
                                           child: Semantics(
-                                            value: "Here Your Profile",
-                                            //  AppLocalizations.of(context)!.profileTitle,
+                                             value:
+                                            // "Here Your Profile",
+                                             AppLocalizations.of(context)!.profileTitle,
                                             readOnly: true,
                                             label: "Profile Page Title'",
                                             header: true,
                                             hint: 'Profile Page Title',
                                             onTapHint: 'Profile Page Title',
                                             child: GradientText(
-                                              "Here Your Profile",
-                                              // AppLocalizations.of(context)!.profileTitle,
+                                              // "Here Your Profile",
+                                              AppLocalizations.of(context)!.profileTitle,
                                               // 'Find Your \nFavorite Food',
                                               style: GoogleFonts.poppins(
                                                   fontSize: 30,
@@ -935,8 +936,9 @@ class ProfileScreenState extends State<ProfileScreen>
                                                 },
                                                 iconData: Icons.redeem,
                                                 iconColor: AppColors.darkGreen,
-                                                text: "Gifts",
-                                                // AppLocalizations.of(context)!.gifts,
+                                                text:
+                                                //  "Gifts",
+                                                AppLocalizations.of(context)!.gifts,
                                               ),
                                             ),
                                           ),
@@ -973,8 +975,9 @@ class ProfileScreenState extends State<ProfileScreen>
                                                 },
                                                 iconData: Icons.favorite,
                                                 iconColor: Colors.red,
-                                                text: "Favorites",
-                                                // AppLocalizations.of(context)!.favorites,
+                                                text: 
+                                                // "Favorites",
+                                                AppLocalizations.of(context)!.favorites,
                                               ),
                                             ),
                                           ),
@@ -1004,8 +1007,9 @@ class ProfileScreenState extends State<ProfileScreen>
                                               },
                                               iconData: Icons.shopping_bag,
                                               iconColor: Colors.blue,
-                                              text: "Orders",
-                                              // AppLocalizations.of(context)!.orders,
+                                              text: 
+                                              // "Orders",
+                                              AppLocalizations.of(context)!.orders,
                                             ),
                                           ),
                                         ],
@@ -1039,8 +1043,9 @@ class ProfileScreenState extends State<ProfileScreen>
                                           );
                                         },
                                         icons: Icons.person,
-                                        name: "My Profile",
-                                        // AppLocalizations.of(context)!.myProfile,
+                                        name: 
+                                        // "My Profile",
+                                        AppLocalizations.of(context)!.myProfile,
                                         colors: AppColors.darkGreen,
                                       ),
                                     ),
@@ -1128,8 +1133,9 @@ class ProfileScreenState extends State<ProfileScreen>
                                           );
                                         },
                                         icons: Icons.settings,
-                                        name: "Settings",
-                                        // AppLocalizations.of(context)!.setting,
+                                        name: 
+                                        // "Settings",
+                                        AppLocalizations.of(context)!.setting,
                                         colors: AppColors.darkGreen,
                                       ),
                                     ),
@@ -1160,8 +1166,9 @@ class ProfileScreenState extends State<ProfileScreen>
                                           );
                                         },
                                         icons: Icons.help_rounded,
-                                        name: "Help & Support",
-                                        //  AppLocalizations.of(context)!.help,
+                                        name: 
+                                        // "Help & Support",
+                                         AppLocalizations.of(context)!.help,
                                         colors: AppColors.darkGreen,
                                       ),
                                     ),
@@ -1193,8 +1200,9 @@ class ProfileScreenState extends State<ProfileScreen>
                                           );
                                         },
                                         icons: Icons.privacy_tip,
-                                        name: "Privacy & Policy",
-                                        // AppLocalizations.of(context)!.setting,
+                                        name: 
+                                        // "Privacy & Policy",
+                                        AppLocalizations.of(context)!.setting,
                                         colors: AppColors.darkGreen,
                                       ),
                                     ),
@@ -1226,8 +1234,9 @@ class ProfileScreenState extends State<ProfileScreen>
                                           );
                                         },
                                         icons: Icons.description,
-                                        name: "Terms & Conditions",
-                                        // AppLocalizations.of(context)!.setting,
+                                        name: 
+                                        // "Terms & Conditions",
+                                        AppLocalizations.of(context)!.setting,
                                         colors: AppColors.darkGreen,
                                       ),
                                     ),
@@ -1262,8 +1271,9 @@ class ProfileScreenState extends State<ProfileScreen>
                                           );
                                         },
                                         icons: Icons.logout,
-                                        name: "Log Out",
-                                        // AppLocalizations.of(context)!.logOut,
+                                        name:
+                                        //  "Log Out",
+                                        AppLocalizations.of(context)!.logOut,
                                         colors: Colors.red,
                                       ),
                                     ),

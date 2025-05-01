@@ -5,7 +5,7 @@ import 'package:food_app/functionalities/cart/screens/cart_screen.dart';
 import 'package:food_app/functionalities/home/screen/home_screen.dart';
 import 'package:food_app/functionalities/profile/screen/profile_screen.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BottomScreen extends StatefulWidget {
   const BottomScreen({super.key});
@@ -59,8 +59,9 @@ class _BottomScreenState extends State<BottomScreen> {
               tabs: [
                 GButton(
                   icon: CupertinoIcons.home,
-                  text: "Home",
-                  // AppLocalizations.of(context)!.home,
+                  text:
+                      // "Home",
+                      AppLocalizations.of(context)!.home,
                   textStyle: const TextStyle(
                     color: Colors.black,
                   ),
@@ -69,8 +70,9 @@ class _BottomScreenState extends State<BottomScreen> {
                 ),
                 GButton(
                   icon: CupertinoIcons.shopping_cart,
-                  text: "Cart",
-                  //  AppLocalizations.of(context)!.cart,
+                  text:
+                      //  "Cart",
+                      AppLocalizations.of(context)!.cart,
                   textStyle: const TextStyle(
                     color: Colors.black,
                   ),
@@ -83,8 +85,9 @@ class _BottomScreenState extends State<BottomScreen> {
                   textStyle: const TextStyle(
                     color: Colors.black,
                   ),
-                  text: "Profile",
-                  // AppLocalizations.of(context)!.profile,
+                  text:
+                      //  "Profile",
+                      AppLocalizations.of(context)!.profile,
                   iconColor: Colors.black,
                 ),
               ],

@@ -18,7 +18,7 @@ import 'package:food_app/localization/provider/local_provider.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:http_certificate_pinning/http_certificate_pinning.dart';
 import 'package:provider/provider.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:sentry_logging/sentry_logging.dart';
 import 'package:toastification/toastification.dart';
@@ -133,28 +133,28 @@ class _MyAppState extends State<MyApp> {
             child: MaterialApp(
               title: 'Swift Bite',
               navigatorKey: globalNavigatorKey,
-              // -- locale: value.appLocal,
+              locale: value.appLocal,
               showSemanticsDebugger: false,
-              //  -- supportedLocales: AppLocalizations.supportedLocales,
-              //    supportedLocales: const [
-              //   Locale('en'),
-              //   Locale('es'),
-              //   Locale('he'),
-              // ],
+              //  supportedLocales: AppLocalizations.supportedLocales,
+                 supportedLocales: const [
+                Locale('en'),
+                Locale('es'),
+                Locale('he'),
+              ],
               //--
-              // localizationsDelegates: AppLocalizations.localizationsDelegates,
-              // localeResolutionCallback: (locale, supportedLocales) {
-              //   if (locale == null) {
-              //     return supportedLocales.first;
-              //   }
-              //   for (var supportedLocale in supportedLocales) {
-              //     if (supportedLocale.languageCode == locale.languageCode &&
-              //         supportedLocale.countryCode == locale.countryCode) {
-              //       return supportedLocale;
-              //     }
-              //   }
-              //   return supportedLocales.first;
-              // },
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              localeResolutionCallback: (locale, supportedLocales) {
+                if (locale == null) {
+                  return supportedLocales.first;
+                }
+                for (var supportedLocale in supportedLocales) {
+                  if (supportedLocale.languageCode == locale.languageCode &&
+                      supportedLocale.countryCode == locale.countryCode) {
+                    return supportedLocale;
+                  }
+                }
+                return supportedLocales.first;
+              },
               debugShowCheckedModeBanner: false,
               theme: ThemeData(
                 colorScheme:

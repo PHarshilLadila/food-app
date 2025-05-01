@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppString {
   static String mealsDescription(BuildContext context) =>
-      "A delicious meal consists of a balanced combination of proteins, carbohydrates, and fresh vegetables, offering both nutrition and taste. Whether it's a hearty plate of grilled chicken with roasted vegetables, a comforting bowl of pasta with rich sauce, or a vibrant salad topped with fresh ingredients, every dish is crafted to satisfy cravings. Meals can range from spicy and flavorful curries to light and refreshing seafood platters, catering to diverse tastes. Served hot and fresh, each meal is a perfect blend of flavors, textures, and aromas that make dining an enjoyable experience.";
-  // AppLocalizations.of(context)!.mealDiscription;
+      AppLocalizations.of(context)!.mealDiscription;
+
+  // static String mealsDescription(BuildContext context) =>
+  //     "A delicious meal consists of a balanced combination of proteins, carbohydrates, and fresh vegetables, offering both nutrition and taste. Whether it's a hearty plate of grilled chicken with roasted vegetables, a comforting bowl of pasta with rich sauce, or a vibrant salad topped with fresh ingredients, every dish is crafted to satisfy cravings. Meals can range from spicy and flavorful curries to light and refreshing seafood platters, catering to diverse tastes. Served hot and fresh, each meal is a perfect blend of flavors, textures, and aromas that make dining an enjoyable experience.";
 
   static String sentryDNS =
       "https://29c9093eb9665092e65e27b93b792cd9@o4509071050407936.ingest.de.sentry.io/4509071060369488";

@@ -1,46 +1,48 @@
-// import 'dart:convert';
+import 'dart:convert';
 
-// import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
-// import 'package:food_app/services/local/app_localizations_delegate.dart';
-// import 'package:hive/hive.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:food_app/services/local/app_localizations_delegate.dart';
+import 'package:hive/hive.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-// class AppLocalizations {
-//   final Locale locale;
-//   final Box translationBox = Hive.box('translations');
 
-//   AppLocalizations(this.locale);
+class AppLocalizations {
+  final Locale locale;
+  final Box translationBox = Hive.box('translations');
 
-//   // Helper method to keep the code in the widgets concise
-//   // Localizations are accessed using an InheritedWidget "of" syntax
-//   static AppLocalizations? of(BuildContext context) {
-//     return Localizations.of<AppLocalizations>(context, AppLocalizations);
-//   }
+  AppLocalizations(this.locale);
 
-//   // Static member to have a simple access to the delegate from the MaterialApp
-//   static LocalizationsDelegate<AppLocalizations> delegate =
-//       const AppLocalizationsDelegate();
+  // Helper method to keep the code in the widgets concise
+  // Localizations are accessed using an InheritedWidget "of" syntax
+  static AppLocalizations? of(BuildContext context) {
+    return Localizations.of<AppLocalizations>(context, AppLocalizations);
+  }
 
-//   Map<String, String> localizedStrings = {};
+  // Static member to have a simple access to the delegate from the MaterialApp
+  static LocalizationsDelegate<AppLocalizations> delegate =
+      const AppLocalizationsDelegate();
 
-//   Future<bool> load() async {
-//     // Load the language JSON file from the "lang" folder
-//     String jsonString =
-//         await rootBundle.loadString('i18n/${locale.languageCode}.json');
-//     Map<String, dynamic> jsonMap = json.decode(jsonString);
+  Map<String, String> localizedStrings = {};
 
-//     localizedStrings = jsonMap.map((key, value) {
-//       return MapEntry(key, value.toString());
-//     });
+  Future<bool> load() async {
+    // Load the language JSON file from the "lang" folder
+    String jsonString =
+        await rootBundle.loadString('i18n/${locale.languageCode}.json');
+    Map<String, dynamic> jsonMap = json.decode(jsonString);
 
-//     return true;
-//   }
+    localizedStrings = jsonMap.map((key, value) {
+      return MapEntry(key, value.toString());
+    });
 
-//   // This method will be called from every widget which needs a localized text
-//   String? translate(String key) {
-//     final translations = translationBox.get(key, defaultValue: {}) as Map?;
-//     // return _localizedStrings[key];
+    return true;
+  }
 
-//     return translations?[locale.languageCode] ?? key;
-//   }
-// }
+  // This method will be called from every widget which needs a localized text
+  String? translate(String key) {
+    final translations = translationBox.get(key, defaultValue: {}) as Map?;
+    // return _localizedStrings[key];
+
+    return translations?[locale.languageCode] ?? key;
+  }
+}

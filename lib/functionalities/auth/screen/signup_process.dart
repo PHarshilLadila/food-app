@@ -11,7 +11,7 @@
 // import 'package:food_app/functionalities/auth/screen/upload_photo.dart';
 // import 'package:google_fonts/google_fonts.dart';
 // import 'package:provider/provider.dart';
-// // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // class SignupProcess extends StatefulWidget {
 //   const SignupProcess({super.key});
@@ -492,7 +492,8 @@ class _SignupProcessState extends State<SignupProcess> {
                       children: [
                         const SizedBox(height: 20),
                         GradientText(
-                          "Fill in your bio to get started,",
+                          AppLocalizations.of(context)!.signupProcessTitle,
+                          // "Fill in your bio to get started,",
                           style: GoogleFonts.poppins(
                             fontSize: 30,
                             fontWeight: FontWeight.w600,
@@ -506,7 +507,9 @@ class _SignupProcessState extends State<SignupProcess> {
                         ),
                         const SizedBox(height: 10),
                         GradientText(
-                          "This data will be displayed in your account profile for security,",
+                          AppLocalizations.of(context)!.proccessData,
+
+                          // "This data will be displayed in your account profile for security,",
                           style: GoogleFonts.poppins(
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
@@ -519,7 +522,6 @@ class _SignupProcessState extends State<SignupProcess> {
                           ),
                         ),
                         const SizedBox(height: 20),
-
                         // First Name
                         Center(
                           child: SizedBox(
@@ -527,7 +529,9 @@ class _SignupProcessState extends State<SignupProcess> {
                             child: CustomeTextFormField(
                               maxline: 1,
                               textEditingController: fNameController,
-                              hintText: "First Name",
+                              hintText: AppLocalizations.of(context)!.firstName,
+
+                              // "First Name",
                               obscureText: false,
                               fillColor:
                                   const Color.fromARGB(255, 252, 255, 252),
@@ -557,7 +561,8 @@ class _SignupProcessState extends State<SignupProcess> {
                             child: CustomeTextFormField(
                               maxline: 1,
                               textEditingController: lNameController,
-                              hintText: "Last Name",
+                              hintText: AppLocalizations.of(context)!.lastName,
+                              //  "Last Name",
                               obscureText: false,
                               fillColor:
                                   const Color.fromARGB(255, 252, 255, 252),
@@ -687,7 +692,8 @@ class _SignupProcessState extends State<SignupProcess> {
           ),
           child: Center(
             child: Text(
-              "Next",
+              // "Next",
+              AppLocalizations.of(context)!.next,
               style: GoogleFonts.poppins(
                 color: AppColors.whiteColor,
                 fontSize: 16,
