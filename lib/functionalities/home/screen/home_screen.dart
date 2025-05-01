@@ -18,7 +18,6 @@ import 'package:food_app/functionalities/home/widget/category%20pages/cat_hot_co
 import 'package:food_app/functionalities/home/widget/category%20pages/cat_main_meal.dart';
 import 'package:food_app/functionalities/home/widget/category%20pages/cat_pasta.dart';
 import 'package:food_app/functionalities/home/widget/grid%20and%20lists/meals_categories.dart';
-import 'package:food_app/security/ssl_pin.dart';
 import 'package:food_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -146,7 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              checkSSl("https://api.sampleapis.com/coffee/hot");
+                              // checkSSl("https://api.sampleapis.com/coffee/hot");
                               // Navigator.push(
                               //     context,
                               //     MaterialPageRoute(

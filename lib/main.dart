@@ -8,7 +8,6 @@ import 'package:food_app/constant/app_colors.dart';
 import 'package:food_app/constant/app_sctring.dart';
 import 'package:food_app/functionalities/auth/providers/auth_provider.dart';
 import 'package:food_app/functionalities/bottom%20navigation%20bar/bottom_navigation_bar.dart';
-import 'package:food_app/functionalities/file%20operation/order_provider.dart';
 import 'package:food_app/functionalities/home/provider/home_provider.dart';
 import 'package:food_app/functionalities/profile/help%20&%20support/provider/query_provider.dart';
 import 'package:food_app/functionalities/profile/provider/profile_provider.dart';
@@ -17,6 +16,7 @@ import 'package:food_app/functionalities/spalsh/splash_screen.dart';
 import 'package:food_app/functionalities/track%20order/provider/track_order_provider.dart';
 import 'package:food_app/localization/provider/local_provider.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:http_certificate_pinning/http_certificate_pinning.dart';
 import 'package:provider/provider.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
@@ -83,6 +83,8 @@ Future<void> main() async {
   runApp(SentryWidget(child: const MyApp()));
   sentryInit();
 }
+
+final HttpCertificatePinning data = HttpCertificatePinning();
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});

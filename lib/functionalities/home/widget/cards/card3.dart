@@ -101,7 +101,7 @@ class Card3 extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             GradientText(
-                              "Special Deal For\nApril",
+                              "Special Deal \nFor April",
                               // AppLocalizations.of(context)!.specialDeal,
                               style: GoogleFonts.viga(
                                   fontSize: 20, fontWeight: FontWeight.bold),

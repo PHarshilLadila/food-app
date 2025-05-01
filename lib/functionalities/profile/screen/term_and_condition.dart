@@ -170,7 +170,6 @@ class TermsAndConditionsPage extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: Colors.white,
-          border: Border.all(color: AppColors.lightGreen.withOpacity(0.4)),
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(

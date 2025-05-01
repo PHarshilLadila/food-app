@@ -63,12 +63,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void login() async {
     try {
-       await Provider.of<AuthProviders>(context, listen: false).login(
+      await Provider.of<AuthProviders>(context, listen: false).login(
         emailController.text.trim(),
         passwordController.text.trim(),
       );
 
-       
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => const BottomScreen()),
@@ -95,11 +94,8 @@ class _LoginScreenState extends State<LoginScreen> {
       //     content: Text(e.toString().replaceAll("Exception: ", "")),
       //   ),
       // );
-      appTostMessage(
-          context,
-          ToastificationType.error,
-          e.toString().replaceAll("Exception: ", ""),
-          "assets/images/wronge.png");
+      appTostMessage(context, ToastificationType.error,
+          e.toString().replaceAll("", ""), "assets/images/wronge.png");
     }
   }
 

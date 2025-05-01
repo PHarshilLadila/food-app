@@ -122,8 +122,7 @@ class _FavoriteItemsState extends State<FavoriteItems> {
                             Navigator.pop(context);
                           },
                           child: Padding(
-                            padding: const EdgeInsets.only(
-                                top: 5.0, bottom: 5, left: 12, right: 12),
+                            padding: const EdgeInsets.only(right: 12),
                             child: Container(
                               margin: EdgeInsets.all(2),
                               decoration: BoxDecoration(

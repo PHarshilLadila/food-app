@@ -67,8 +67,7 @@ class _SettingScreenState extends State<SettingScreen> {
                               Navigator.pop(context);
                             },
                             child: Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 5.0, bottom: 5, left: 12, right: 12),
+                              padding: const EdgeInsets.only(right: 12),
                               child: Container(
                                 margin: EdgeInsets.all(2),
                                 decoration: BoxDecoration(
@@ -91,7 +90,7 @@ class _SettingScreenState extends State<SettingScreen> {
                           ),
                           Flexible(
                             child: GradientText(
-                              "Update Your Profile Here",
+                              "Update Your Setting Here",
                               // AppLocalizations.of(context)!.updateProfile,
                               style: GoogleFonts.poppins(
                                   fontSize: 30, fontWeight: FontWeight.bold),

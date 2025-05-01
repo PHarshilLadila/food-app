@@ -55,7 +55,7 @@ class _CatHotCoffeeState extends State<CatHotCoffee> {
             image: const AssetImage(
               "assets/images/Pattern.png",
             ),
-          ),
+           ),
         ),
         child: SafeArea(
           child: Padding(

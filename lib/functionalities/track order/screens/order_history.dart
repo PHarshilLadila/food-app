@@ -27,7 +27,7 @@ class OrderHistoryState extends State<OrderHistory> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
+    // double width = MediaQuery.of(context).size.width;
     return Consumer<TrackOrderProvider>(
       builder: (BuildContext context, value, Widget? child) {
         var orders = value.oreders;

@@ -52,7 +52,7 @@ class PrivacyPolicyPage extends StatelessWidget {
           opacity: const AlwaysStoppedAnimation(0.3),
           alignment: Alignment.topCenter,
           image: AssetImage('assets/images/Pattern.png'),
-          fit: BoxFit.fitWidth,
+          fit: BoxFit.cover,
         ),
         centerTitle: false,
         backgroundColor: Colors.transparent,
