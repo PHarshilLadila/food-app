@@ -136,7 +136,7 @@ class _MyAppState extends State<MyApp> {
               locale: value.appLocal,
               showSemanticsDebugger: false,
               //  supportedLocales: AppLocalizations.supportedLocales,
-                 supportedLocales: const [
+              supportedLocales: const [
                 Locale('en'),
                 Locale('es'),
                 Locale('he'),

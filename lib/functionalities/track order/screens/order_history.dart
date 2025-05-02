@@ -51,7 +51,7 @@ class OrderHistoryState extends State<OrderHistory> {
     return Consumer<TrackOrderProvider>(
       builder: (context, value, child) {
         final orders = value.oreders;
-        final lastOrder = orders.isNotEmpty ? orders.last : null;
+        // final lastOrder = orders.isNotEmpty ? orders.last : null;
 
         return Scaffold(
           body: Container(
@@ -75,7 +75,7 @@ class OrderHistoryState extends State<OrderHistory> {
                   physics: const AlwaysScrollableScrollPhysics(),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 18, vertical: 12),
+                        horizontal: 16, vertical: 12),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -140,6 +140,12 @@ class OrderHistoryState extends State<OrderHistory> {
                                     final order =
                                         orders[orders.length - 1 - index];
                                     final isLastOrder = index == 0;
+                                    final discount =
+                                        (order['itemdiscount'] ?? 0.0)
+                                            .toStringAsFixed(2);
+                                    final finalTotal =
+                                        (order['finalTotal'] ?? 0.0)
+                                            .toStringAsFixed(2);
 
                                     return Container(
                                       margin: const EdgeInsets.only(bottom: 16),
@@ -288,15 +294,15 @@ class OrderHistoryState extends State<OrderHistory> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: List.generate(
-                                              (lastOrder?['orderDetails']
-                                                          as List? ??
+                                              (order['orderDetails'] as List? ??
                                                       [])
                                                   .length,
-                                              (detailIndex) {
+                                              (imageIndex) {
                                                 final item =
-                                                    (lastOrder?['orderDetails']
+                                                    (order['orderDetails']
                                                             as List? ??
-                                                        [])[detailIndex];
+                                                        [])[imageIndex];
+
                                                 return Padding(
                                                   padding:
                                                       const EdgeInsets.only(
@@ -324,25 +330,25 @@ class OrderHistoryState extends State<OrderHistory> {
                                                             "x${item['quantity'] ?? 1}",
                                                             style: GoogleFonts
                                                                 .poppins(
-                                                              fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                              color: Colors.grey
-                                                                  .shade700,
-                                                            ),
+                                                                    fontSize:
+                                                                        14,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    color: Colors
+                                                                        .black),
                                                           ),
                                                           Text(
                                                             " (\$${item['itemPrice'] ?? 1})",
                                                             style: GoogleFonts
                                                                 .poppins(
-                                                              fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                              color: Colors.grey
-                                                                  .shade700,
-                                                            ),
+                                                                    fontSize:
+                                                                        14,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    color: Colors
+                                                                        .black),
                                                           ),
                                                         ],
                                                       ),
@@ -358,6 +364,50 @@ class OrderHistoryState extends State<OrderHistory> {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
+                                                "Delivery Charges",
+                                                style: GoogleFonts.poppins(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.grey.shade700,
+                                                ),
+                                              ),
+                                              Text(
+                                                "\$6",
+                                                style: GoogleFonts.poppins(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: AppColors.blackColor,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                "Discount (5%)",
+                                                style: GoogleFonts.poppins(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.grey.shade700,
+                                                ),
+                                              ),
+                                              Text(
+                                                "\$${(discount ?? "0.0")}",
+                                                style: GoogleFonts.poppins(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: AppColors.blackColor,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
                                                 "${(order['orderDetails'] as List? ?? []).length} Items",
                                                 style: GoogleFonts.poppins(
                                                   fontSize: 14,
@@ -366,7 +416,7 @@ class OrderHistoryState extends State<OrderHistory> {
                                                 ),
                                               ),
                                               Text(
-                                                "\$${order['finalTotal'] ?? '0.00'}",
+                                                "\$${finalTotal ?? '0.00'}",
                                                 style: GoogleFonts.poppins(
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.bold,
