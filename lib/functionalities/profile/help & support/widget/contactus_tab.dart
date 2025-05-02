@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ContactUsTab extends StatelessWidget {
   const ContactUsTab({super.key});
@@ -60,7 +61,7 @@ class ContactUsTab extends StatelessWidget {
                       width: width / 30,
                     ),
                     Text(
-                      "Contact us",
+                      AppLocalizations.of(context)!.contactUs,
                       style: GoogleFonts.poppins(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
@@ -99,7 +100,7 @@ class ContactUsTab extends StatelessWidget {
                       width: width / 30,
                     ),
                     Text(
-                      "Whatsapp",
+                      AppLocalizations.of(context)!.whatsapp,
                       style: GoogleFonts.poppins(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
@@ -138,7 +139,7 @@ class ContactUsTab extends StatelessWidget {
                       width: width / 30,
                     ),
                     Text(
-                      "Facebook",
+                      AppLocalizations.of(context)!.facebook,
                       style: GoogleFonts.poppins(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
@@ -177,7 +178,7 @@ class ContactUsTab extends StatelessWidget {
                       width: width / 30,
                     ),
                     Text(
-                      "Instagram",
+                      AppLocalizations.of(context)!.insta,
                       style: GoogleFonts.poppins(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
@@ -216,7 +217,7 @@ class ContactUsTab extends StatelessWidget {
                       width: width / 30,
                     ),
                     Text(
-                      "Web Site",
+                      AppLocalizations.of(context)!.website,
                       style: GoogleFonts.poppins(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,

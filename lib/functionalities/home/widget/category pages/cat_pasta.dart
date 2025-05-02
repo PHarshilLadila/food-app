@@ -13,6 +13,7 @@ import 'package:food_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:toastification/toastification.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CatPasta extends StatefulWidget {
   const CatPasta({super.key});
@@ -84,7 +85,7 @@ class _CatPastaState extends State<CatPasta> {
                     ),
                     Flexible(
                       child: GradientText(
-                        'Pasta',
+                        AppLocalizations.of(context)!.pasta,
                         style: GoogleFonts.poppins(
                             fontSize: 30, fontWeight: FontWeight.bold),
                         gradient: const LinearGradient(
@@ -650,7 +651,7 @@ class _CatPastaState extends State<CatPasta> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Add to Cart (drag & drop)",
+                                    AppLocalizations.of(context)!.addtocartdrag,
                                     style: GoogleFonts.poppins(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 20,
@@ -670,7 +671,7 @@ class _CatPastaState extends State<CatPasta> {
                                         width: width / 60,
                                       ),
                                       AutoSizeText(
-                                        "Note ",
+                                        "${AppLocalizations.of(context)!.not} : ",
                                         minFontSize: 16,
                                         maxFontSize: 16,
                                         style: GoogleFonts.poppins(
@@ -680,7 +681,8 @@ class _CatPastaState extends State<CatPasta> {
                                       ),
                                       Flexible(
                                         child: AutoSizeText(
-                                          " : Tap Here for Add This Item in to Cart.",
+                                          AppLocalizations.of(context)!
+                                              .dragnoteTwo,
                                           minFontSize: 14,
                                           maxFontSize: 14,
                                           style: GoogleFonts.poppins(
@@ -725,7 +727,9 @@ class _CatPastaState extends State<CatPasta> {
                                             child: Text(
                                               _isDropped
                                                   ? '${_droppedItem?["itemName"] ?? ""}'
-                                                  : 'Drag and Drop Here',
+                                                  : AppLocalizations.of(
+                                                          context)!
+                                                      .dragAndDropHere,
                                               style: const TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 20,

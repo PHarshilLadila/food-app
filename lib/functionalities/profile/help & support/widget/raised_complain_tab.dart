@@ -61,9 +61,9 @@ class RaisedComplainTab extends StatelessWidget {
                     disabledColor: AppColors.darkGreen.withOpacity(1.0),
                     enabledColor: AppColors.darkGreen.withOpacity(1.0),
                     focusedColor: AppColors.darkGreen.withOpacity(1.0),
-                    hintText: 
-                    // "Explain Your Query",
-                     AppLocalizations.of(context)!.explainQuery,
+                    hintText:
+                        // "Explain Your Query",
+                        AppLocalizations.of(context)!.explainQuery,
                     fillColor: const Color.fromARGB(55, 232, 255, 227),
                     hintcolors: AppColors.darkGreen.withOpacity(1.0),
                   ),
@@ -91,11 +91,11 @@ class RaisedComplainTab extends StatelessWidget {
                         blurRadius: 10),
                   ],
                 ),
-                child: const Padding(
+                child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 12.0),
                     child: Center(
                       child: Text(
-                        "Raise Your Query",
+                        AppLocalizations.of(context)!.raisedyourquiery,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
@@ -113,7 +113,7 @@ class RaisedComplainTab extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Note : ',
+                  '${AppLocalizations.of(context)!.not} : ',
                   style: GoogleFonts.poppins(
                     color: AppColors.blackColor,
                     fontWeight: FontWeight.bold,
@@ -122,7 +122,7 @@ class RaisedComplainTab extends StatelessWidget {
                 ),
                 Flexible(
                   child: Text(
-                    'We will identify and answers your Query within 1 to 2 hours.',
+                    AppLocalizations.of(context)!.complainNote,
                     style: GoogleFonts.poppins(
                       color: AppColors.blackColor,
                       fontWeight: FontWeight.w500,
@@ -136,7 +136,7 @@ class RaisedComplainTab extends StatelessWidget {
               height: height / 50,
             ),
             Text(
-              'Your Queries',
+              AppLocalizations.of(context)!.yourQuiry,
               style: GoogleFonts.poppins(
                 color: AppColors.blackColor,
                 fontWeight: FontWeight.bold,
@@ -184,7 +184,8 @@ class RaisedComplainTab extends StatelessWidget {
                                     children: [
                                       RichText(
                                         text: TextSpan(
-                                          text: 'Ticket ',
+                                          text: AppLocalizations.of(context)!
+                                              .ticket,
                                           style: GoogleFonts.poppins(
                                             color: AppColors.blackColor,
                                             fontWeight: FontWeight.bold,

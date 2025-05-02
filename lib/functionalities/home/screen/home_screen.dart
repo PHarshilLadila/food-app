@@ -208,8 +208,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               focusedColor:
                                   AppColors.darkOrange.withOpacity(1.0),
                               hintText:
-                              //  "What Do You Want To Order?",
-                               AppLocalizations.of(context)!.search,
+                                  //  "What Do You Want To Order?",
+                                  AppLocalizations.of(context)!.search,
                               fillColor: AppColors.lightOrange,
                               hintcolors: AppColors.darkOrange.withOpacity(1.0),
                               prefixIcon: Padding(
@@ -407,7 +407,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Padding(
                                 padding: EdgeInsets.only(top: 10, bottom: 15),
                                 child: Text(
-                                  "Categories",
+                                  AppLocalizations.of(context)!.categories,
                                   style: GoogleFonts.poppins(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold),
@@ -416,7 +416,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               GridView.builder(
                                 shrinkWrap: true,
                                 physics: NeverScrollableScrollPhysics(),
-                                itemCount: foodCategoriesList.length,
+                                itemCount: foodCategoriesList(context).length,
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisSpacing: 15,
@@ -452,14 +452,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                         children: [
                                           Image.asset(
                                             key: Key("foodCategoryList"),
-                                            foodCategoriesList[index]["image"],
+                                            foodCategoriesList(context)[index]
+                                                ["image"],
                                             height: 50,
                                           ),
                                           Padding(
                                             padding:
                                                 const EdgeInsets.only(top: 8.0),
                                             child: Text(
-                                              foodCategoriesList[index]["name"],
+                                              foodCategoriesList(context)[index]
+                                                  ["name"],
                                               style: GoogleFonts.poppins(
                                                   fontSize: 14),
                                               textAlign: TextAlign.center,
@@ -515,7 +517,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Icon(Icons.category_rounded),
                               SizedBox(width: width / 40),
                               Text(
-                                "Other Categories",
+                                AppLocalizations.of(context)!.otherCategories,
                                 style: GoogleFonts.poppins(),
                               ),
                             ],
@@ -528,7 +530,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Popular Menu",
+                              AppLocalizations.of(context)!.populerMenu,
                               style: GoogleFonts.poppins(
                                   fontSize: 18, fontWeight: FontWeight.bold),
                             ),

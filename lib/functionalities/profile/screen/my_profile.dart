@@ -193,10 +193,10 @@ class _UpdateProfileState extends State<UpdateProfile> {
                               ),
                               Flexible(
                                 child: Semantics(
-                                  value: 
-                                  // "Here Your Profile",
-                                   AppLocalizations.of(context)!
-                                        .profileTitle,
+                                  value:
+                                      // "Here Your Profile",
+                                      AppLocalizations.of(context)!
+                                          .profileTitle,
                                   readOnly: true,
                                   label: "Profile Page Title'",
                                   header: true,
@@ -429,7 +429,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                           CustomeButton(
                             heights: 50,
                             widths: textFieldWidth,
-                            name: "Done",
+                            name: AppLocalizations.of(context)!.done,
                             ontap: updateProfile,
                           ),
                         ],

@@ -671,9 +671,10 @@ class ProfileScreenState extends State<ProfileScreen>
                                       children: [
                                         Flexible(
                                           child: Semantics(
-                                             value:
-                                            // "Here Your Profile",
-                                             AppLocalizations.of(context)!.profileTitle,
+                                            value:
+                                                // "Here Your Profile",
+                                                AppLocalizations.of(context)!
+                                                    .profileTitle,
                                             readOnly: true,
                                             label: "Profile Page Title'",
                                             header: true,
@@ -681,7 +682,8 @@ class ProfileScreenState extends State<ProfileScreen>
                                             onTapHint: 'Profile Page Title',
                                             child: GradientText(
                                               // "Here Your Profile",
-                                              AppLocalizations.of(context)!.profileTitle,
+                                              AppLocalizations.of(context)!
+                                                  .profileTitle,
                                               // 'Find Your \nFavorite Food',
                                               style: GoogleFonts.poppins(
                                                   fontSize: 30,
@@ -756,19 +758,31 @@ class ProfileScreenState extends State<ProfileScreen>
                                               <PopupMenuEntry<String>>[
                                             PopupMenuItem<String>(
                                               value: 'option1',
-                                              child: Text('Remove Avatar'),
+                                              child: Text(
+                                                AppLocalizations.of(context)!
+                                                    .removeAvatar,
+                                              ),
                                             ),
                                             PopupMenuItem<String>(
                                               value: 'option2',
-                                              child: Text('View Profile Image'),
+                                              child: Text(
+                                                AppLocalizations.of(context)!
+                                                    .viewProfileImg,
+                                              ),
                                             ),
                                             PopupMenuItem<String>(
                                               value: 'option3',
-                                              child: Text('Download 2D Avatar'),
+                                              child: Text(
+                                                AppLocalizations.of(context)!
+                                                    .download2D,
+                                              ),
                                             ),
                                             PopupMenuItem<String>(
                                               value: 'option4',
-                                              child: Text('Download 3D Avatar'),
+                                              child: Text(
+                                                AppLocalizations.of(context)!
+                                                    .download3D,
+                                              ),
                                             ),
                                           ],
                                           child: GestureDetector(
@@ -937,8 +951,10 @@ class ProfileScreenState extends State<ProfileScreen>
                                                 iconData: Icons.redeem,
                                                 iconColor: AppColors.darkGreen,
                                                 text:
-                                                //  "Gifts",
-                                                AppLocalizations.of(context)!.gifts,
+                                                    //  "Gifts",
+                                                    AppLocalizations.of(
+                                                            context)!
+                                                        .gifts,
                                               ),
                                             ),
                                           ),
@@ -975,9 +991,11 @@ class ProfileScreenState extends State<ProfileScreen>
                                                 },
                                                 iconData: Icons.favorite,
                                                 iconColor: Colors.red,
-                                                text: 
-                                                // "Favorites",
-                                                AppLocalizations.of(context)!.favorites,
+                                                text:
+                                                    // "Favorites",
+                                                    AppLocalizations.of(
+                                                            context)!
+                                                        .favorites,
                                               ),
                                             ),
                                           ),
@@ -1007,9 +1025,10 @@ class ProfileScreenState extends State<ProfileScreen>
                                               },
                                               iconData: Icons.shopping_bag,
                                               iconColor: Colors.blue,
-                                              text: 
-                                              // "Orders",
-                                              AppLocalizations.of(context)!.orders,
+                                              text:
+                                                  // "Orders",
+                                                  AppLocalizations.of(context)!
+                                                      .orders,
                                             ),
                                           ),
                                         ],
@@ -1043,9 +1062,10 @@ class ProfileScreenState extends State<ProfileScreen>
                                           );
                                         },
                                         icons: Icons.person,
-                                        name: 
-                                        // "My Profile",
-                                        AppLocalizations.of(context)!.myProfile,
+                                        name:
+                                            // "My Profile",
+                                            AppLocalizations.of(context)!
+                                                .myProfile,
                                         colors: AppColors.darkGreen,
                                       ),
                                     ),
@@ -1088,7 +1108,9 @@ class ProfileScreenState extends State<ProfileScreen>
                                                 width: width / 30,
                                               ),
                                               Text(
-                                                "3D Avatar",
+                                                AppLocalizations.of(context)!
+                                                    .threeDAvatar,
+                                                // "3D Avatar",
                                                 style: GoogleFonts.poppins(
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.w500,
@@ -1133,9 +1155,10 @@ class ProfileScreenState extends State<ProfileScreen>
                                           );
                                         },
                                         icons: Icons.settings,
-                                        name: 
-                                        // "Settings",
-                                        AppLocalizations.of(context)!.setting,
+                                        name:
+                                            // "Settings",
+                                            AppLocalizations.of(context)!
+                                                .setting,
                                         colors: AppColors.darkGreen,
                                       ),
                                     ),
@@ -1166,9 +1189,9 @@ class ProfileScreenState extends State<ProfileScreen>
                                           );
                                         },
                                         icons: Icons.help_rounded,
-                                        name: 
-                                        // "Help & Support",
-                                         AppLocalizations.of(context)!.help,
+                                        name:
+                                            // "Help & Support",
+                                            AppLocalizations.of(context)!.help,
                                         colors: AppColors.darkGreen,
                                       ),
                                     ),
@@ -1200,9 +1223,10 @@ class ProfileScreenState extends State<ProfileScreen>
                                           );
                                         },
                                         icons: Icons.privacy_tip,
-                                        name: 
-                                        // "Privacy & Policy",
-                                        AppLocalizations.of(context)!.setting,
+                                        name:
+                                            // "Privacy & Policy",
+                                            AppLocalizations.of(context)!
+                                                .privacy,
                                         colors: AppColors.darkGreen,
                                       ),
                                     ),
@@ -1234,9 +1258,9 @@ class ProfileScreenState extends State<ProfileScreen>
                                           );
                                         },
                                         icons: Icons.description,
-                                        name: 
-                                        // "Terms & Conditions",
-                                        AppLocalizations.of(context)!.setting,
+                                        name:
+                                            // "Terms & Conditions",
+                                            AppLocalizations.of(context)!.terms,
                                         colors: AppColors.darkGreen,
                                       ),
                                     ),
@@ -1272,8 +1296,9 @@ class ProfileScreenState extends State<ProfileScreen>
                                         },
                                         icons: Icons.logout,
                                         name:
-                                        //  "Log Out",
-                                        AppLocalizations.of(context)!.logOut,
+                                            //  "Log Out",
+                                            AppLocalizations.of(context)!
+                                                .logOut,
                                         colors: Colors.red,
                                       ),
                                     ),

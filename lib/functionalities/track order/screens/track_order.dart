@@ -389,12 +389,13 @@ class _TrackOrderState extends State<TrackOrder> {
                                                 listen: false)
                                             .addOrder(orederDetails ?? []);
 
-                                        Navigator.push(
+                                        Navigator.pushAndRemoveUntil(
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
                                                 OrderHistory(),
                                           ),
+                                          (route) => false,
                                         );
                                       },
                                     ),

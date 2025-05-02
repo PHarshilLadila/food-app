@@ -16,6 +16,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:food_app/functionalities/home/provider/home_provider.dart';
 import 'package:toastification/toastification.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CatCanadianMeal extends StatefulWidget {
   const CatCanadianMeal({super.key});
@@ -51,7 +52,7 @@ class _CatCanadianMealState extends State<CatCanadianMeal> {
             alignment: Alignment.topCenter,
             colorFilter: ColorFilter.mode(
                 // ignore: deprecated_member_use
-                Colors.white.withOpacity(0.2),
+                Colors.white.withOpacity(0.4),
                 BlendMode.dstATop),
             image: const AssetImage(
               "assets/images/Pattern.png",
@@ -96,7 +97,7 @@ class _CatCanadianMealState extends State<CatCanadianMeal> {
                     ),
                     Flexible(
                       child: GradientText(
-                        'Canadian Meals',
+                        AppLocalizations.of(context)!.canadianMeal,
                         style: GoogleFonts.poppins(
                             fontSize: 30, fontWeight: FontWeight.bold),
                         gradient: const LinearGradient(
@@ -739,12 +740,7 @@ class _CatCanadianMealState extends State<CatCanadianMeal> {
                       _isDropped = true;
                       _droppedItem = data;
                     });
-                    // ScaffoldMessenger.of(context).showSnackBar(
-                    //   SnackBar(
-                    //     backgroundColor: AppColors.darkGreen,
-                    //     content: Text('${data["itemName"]} added to cart!'),
-                    //   ),
-                    // );
+
                     appTostMessage(
                       context,
                       ToastificationType.success,
@@ -789,138 +785,6 @@ class _CatCanadianMealState extends State<CatCanadianMeal> {
                           droppedItem: _droppedItem,
                           isDropped: _isDropped,
                         ),
-                        // Container(
-                        //   width: double.infinity,
-                        //   decoration: BoxDecoration(
-                        //     color: const Color.fromARGB(169, 201, 240, 201),
-                        //   ),
-                        //   child: DottedBorder(
-                        //     borderType: BorderType.RRect,
-                        //     child: Padding(
-                        //       padding: EdgeInsets.symmetric(
-                        //           vertical: height / 100, horizontal: 8),
-                        //       child: Column(
-                        //         mainAxisAlignment: MainAxisAlignment.start,
-                        //         crossAxisAlignment: CrossAxisAlignment.start,
-                        //         children: [
-                        //           Text(
-                        //             "Add to Cart (drag & drop)",
-                        //             style: GoogleFonts.poppins(
-                        //                 fontWeight: FontWeight.bold,
-                        //                 fontSize: 20,
-                        //                 color: Colors.black),
-                        //           ),
-                        //           Row(
-                        //             mainAxisAlignment: MainAxisAlignment.start,
-                        //             crossAxisAlignment: CrossAxisAlignment.center,
-                        //             children: [
-                        //               AutoSizeText(
-                        //                 _isDropped ? "Note " : "",
-                        //                 minFontSize: 16,
-                        //                 maxFontSize: 16,
-                        //                 style: GoogleFonts.poppins(
-                        //                     color: AppColors.blackColor,
-                        //                     fontSize: width / 25,
-                        //                     fontWeight: FontWeight.bold),
-                        //               ),
-                        //               FaIcon(
-                        //                 FontAwesomeIcons.infoCircle,
-                        //                 size: 14,
-                        //                 color: _isDropped
-                        //                     ? Colors.black
-                        //                     : Color.fromARGB(255, 209, 236, 209),
-                        //               ),
-                        //               Flexible(
-                        //                 child: AutoSizeText(
-                        //                   _isDropped
-                        //                       ? " : Tap Here for Add This Item in to Cart."
-                        //                       : "",
-                        //                   minFontSize: 14,
-                        //                   maxFontSize: 14,
-                        //                   style: GoogleFonts.poppins(
-                        //                       color: AppColors.blackColor,
-                        //                       fontWeight: FontWeight.w500),
-                        //                 ),
-                        //               ),
-                        //             ],
-                        //           ),
-                        //           SizedBox(
-                        //             height: height / 100,
-                        //           ),
-                        //           Row(
-                        //             mainAxisAlignment: MainAxisAlignment.start,
-                        //             crossAxisAlignment: CrossAxisAlignment.center,
-                        //             children: [
-                        //               Padding(
-                        //                 padding: const EdgeInsets.all(8.0),
-                        //                 child: ClipRRect(
-                        //                   borderRadius: BorderRadius.circular(15),
-                        //                   child: Image.network(
-                        //                     _droppedItem?["itemImage"] ??
-                        //                         "https://cdn-icons-png.flaticon.com/512/624/624826.png",
-                        //                     height: height / 14,
-                        //                   ),
-                        //                 ),
-                        //               ),
-                        //               SizedBox(
-                        //                 width: width / 50,
-                        //               ),
-                        //               Column(
-                        //                 mainAxisAlignment: MainAxisAlignment.start,
-                        //                 crossAxisAlignment: CrossAxisAlignment.start,
-                        //                 children: [
-                        //                   Row(
-                        //                     mainAxisAlignment:
-                        //                         MainAxisAlignment.start,
-                        //                     crossAxisAlignment:
-                        //                         CrossAxisAlignment.start,
-                        //                     children: [
-                        //                       Text(
-                        //                         _isDropped
-                        //                             ? '${_droppedItem?["itemName"] ?? ""}'
-                        //                             : 'Drag and Drop Here',
-                        //                         style: const TextStyle(
-                        //                             fontWeight: FontWeight.bold,
-                        //                             fontSize: 18,
-                        //                             color: Colors.black),
-                        //                       ),
-                        //                       Text(
-                        //                         _isDropped
-                        //                             ? ' (\$ ${_droppedItem?["itemPrice"] ?? ""})'
-                        //                             : '',
-                        //                         style: const TextStyle(
-                        //                             fontWeight: FontWeight.bold,
-                        //                             fontSize: 18,
-                        //                             color: Colors.green),
-                        //                       ),
-                        //                     ],
-                        //                   ),
-                        //                   SizedBox(
-                        //                     height: height / 210,
-                        //                   ),
-                        //                   SizedBox(
-                        //                     width: width / 1.5,
-                        //                     child: Text(
-                        //                       _isDropped
-                        //                           ? '${_droppedItem?["itemDiscription"] ?? ""}'
-                        //                           : ' ',
-                        //                       style: const TextStyle(
-                        //                           fontWeight: FontWeight.w500,
-                        //                           fontSize: 16,
-                        //                           color: Colors.black45),
-                        //                       maxLines: 2,
-                        //                       overflow: TextOverflow.ellipsis,
-                        //                     ),
-                        //                   ),
-                        //                 ],
-                        //               ),
-                        //             ],
-                        //           ),
-                        //         ],
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
                       ),
                     );
                   },

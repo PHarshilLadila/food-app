@@ -15,7 +15,8 @@ import 'package:food_app/functionalities/home/widget/dropped_cart_button.dart';
 import 'package:food_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:toastification/toastification.dart';
+import 'package:toastification/toastification.dart';import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class CatDessertMeal extends StatefulWidget {
   const CatDessertMeal({super.key});
@@ -96,7 +97,7 @@ class _CatDessertMealState extends State<CatDessertMeal> {
                     ),
                     Flexible(
                       child: GradientText(
-                        'Desserts',
+                        AppLocalizations.of(context)!.dessert,
                         style: GoogleFonts.poppins(
                             fontSize: 30, fontWeight: FontWeight.bold),
                         gradient: const LinearGradient(

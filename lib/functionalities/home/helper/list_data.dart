@@ -1,3 +1,7 @@
+// ignore: implementation_imports
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 List<int> mealPrice = [15, 20, 21, 30, 27, 36, 40, 33, 17];
 
 List<Map<String, dynamic>> nearestRestaurant = [
@@ -204,38 +208,38 @@ List<Map<String, dynamic>> canadianMealNearestRestaurant = [
   },
 ];
 
-List<Map<String, dynamic>> foodCategoriesList = [
-  {
-    "id": 1,
-    "image": "assets/images/foodcate/Pasta.png",
-    "name": "Pasta",
-  },
-  {
-    "id": 2,
-    "image": "assets/images/foodcate/hotcoffee.png",
-    "name": "Hot Coffee",
-  },
-  {
-    "id": 3,
-    "image": "assets/images/foodcate/coldcoffee.png",
-    "name": "Cold Coffee",
-  },
-  {
-    "id": 4,
-    "image": "assets/images/foodcate/Donut.png",
-    "name": "Desserts",
-  },
-  {
-    "id": 5,
-    "image": "assets/images/foodcate/mealss.png",
-    "name": "Canadian Meals",
-  },
-  {
-    "id": 6,
-    "image": "assets/images/foodcate/chikenmeal.png",
-    "name": "Chiken Meals",
-  },
-];
+List<Map<String, dynamic>> foodCategoriesList(BuildContext buildContext) => [
+      {
+        "id": 1,
+        "image": "assets/images/foodcate/Pasta.png",
+        "name": AppLocalizations.of(buildContext)!.pasta,
+      },
+      {
+        "id": 2,
+        "image": "assets/images/foodcate/hotcoffee.png",
+        "name": AppLocalizations.of(buildContext)!.hotCofffee,
+      },
+      {
+        "id": 3,
+        "image": "assets/images/foodcate/coldcoffee.png",
+        "name": AppLocalizations.of(buildContext)!.coldCoffee,
+      },
+      {
+        "id": 4,
+        "image": "assets/images/foodcate/Donut.png",
+        "name": AppLocalizations.of(buildContext)!.dessert,
+      },
+      {
+        "id": 5,
+        "image": "assets/images/foodcate/mealss.png",
+        "name": AppLocalizations.of(buildContext)!.canadianMeal,
+      },
+      {
+        "id": 6,
+        "image": "assets/images/foodcate/chikenmeal.png",
+        "name": AppLocalizations.of(buildContext)!.chikenMeal,
+      },
+    ];
 
 List<Map<String, dynamic>> pastaMenu = [
   {

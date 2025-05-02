@@ -15,6 +15,8 @@ import 'package:food_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:toastification/toastification.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class CatHotCoffee extends StatefulWidget {
   const CatHotCoffee({super.key});
@@ -95,7 +97,7 @@ class _CatHotCoffeeState extends State<CatHotCoffee> {
                     ),
                     Flexible(
                       child: GradientText(
-                        'Hot Coffees',
+                        AppLocalizations.of(context)!.hotCofffee,
                         style: GoogleFonts.poppins(
                             fontSize: 30, fontWeight: FontWeight.bold),
                         gradient: const LinearGradient(

@@ -142,10 +142,16 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
             labelColor: AppColors.blackColor,
             indicatorColor: AppColors.darkGreen,
             unselectedLabelColor: Colors.grey,
-            tabs: const [
-              Tab(text: "Raised Complains"),
-              Tab(text: "Contact Us"),
-              Tab(text: "FAQ"),
+            tabs: [
+              Tab(
+                text: AppLocalizations.of(context)!.raisedcomplain,
+              ),
+              Tab(
+                text: AppLocalizations.of(context)!.contactus,
+              ),
+              Tab(
+                text: AppLocalizations.of(context)!.faq,
+              ),
             ],
           ),
         ),

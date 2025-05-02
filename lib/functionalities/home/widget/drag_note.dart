@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:food_app/constant/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DragNote extends StatelessWidget {
   const DragNote({
@@ -28,7 +29,7 @@ class DragNote extends StatelessWidget {
             width: width / 80,
           ),
           AutoSizeText(
-            "Note ",
+            "${AppLocalizations.of(context)!.not} :",
             minFontSize: 14,
             maxFontSize: 14,
             style: GoogleFonts.poppins(
@@ -38,7 +39,7 @@ class DragNote extends StatelessWidget {
           ),
           Flexible(
             child: AutoSizeText(
-              " : Drag & Drop Item (with Longpress) in to Cart, Ensure that Drop the Item in Middel of Cart Box.",
+              AppLocalizations.of(context)!.dragNote,
               minFontSize: 14,
               maxFontSize: 14,
               style: GoogleFonts.poppins(

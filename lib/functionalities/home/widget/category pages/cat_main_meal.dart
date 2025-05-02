@@ -14,6 +14,8 @@ import 'package:food_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:toastification/toastification.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class CatMainMeal extends StatefulWidget {
   const CatMainMeal({super.key});
@@ -95,7 +97,7 @@ class _CatMainMealState extends State<CatMainMeal> {
                     ),
                     Flexible(
                       child: GradientText(
-                        'Chicken Meals',
+                        AppLocalizations.of(context)!.chikenMeal,
                         style: GoogleFonts.poppins(
                             fontSize: 30, fontWeight: FontWeight.bold),
                         gradient: const LinearGradient(

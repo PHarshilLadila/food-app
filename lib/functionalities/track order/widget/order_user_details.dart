@@ -95,7 +95,7 @@ class UserDetails extends StatelessWidget {
                     ),
                     const Spacer(),
                     Text(
-                      'Mar 25, 2025',
+                      'May 18, 2025',
                       style: GoogleFonts.poppins(
                           color: AppColors.blackColor,
                           fontSize: 16,
