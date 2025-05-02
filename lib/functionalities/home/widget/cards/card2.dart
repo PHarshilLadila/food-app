@@ -53,7 +53,7 @@ class Card2 extends StatelessWidget {
                           children: [
                             GradientText(
                               AppLocalizations.of(context)!.specialDeal,
-                              style: GoogleFonts.poppins(
+                              style: GoogleFonts.viga(
                                   fontSize: 16, fontWeight: FontWeight.bold),
                               gradient: const LinearGradient(
                                 colors: [
@@ -72,7 +72,7 @@ class Card2 extends StatelessWidget {
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 20.0, vertical: 10),
+                                    horizontal: 12.0, vertical: 12),
                                 child: GradientText(
                                   AppLocalizations.of(context)!.buyNow,
                                   style: GoogleFonts.poppins(

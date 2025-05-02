@@ -91,7 +91,7 @@ class Card1 extends StatelessWidget {
                           // "Special Deal For April",
                           AppLocalizations.of(context)!.specialDeal,
                           style: GoogleFonts.viga(
-                              fontSize: 20, fontWeight: FontWeight.bold),
+                              fontSize: 16, fontWeight: FontWeight.bold),
                           gradient: const LinearGradient(
                             colors: [
                               AppColors.whiteColor,
@@ -109,7 +109,7 @@ class Card1 extends StatelessWidget {
                           ),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 20.0, vertical: 12),
+                                horizontal: 12.0, vertical: 12),
                             child: GradientText(
                               // "Buy Now",
                               AppLocalizations.of(context)!.buyNow,

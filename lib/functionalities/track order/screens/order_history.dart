@@ -263,7 +263,7 @@ class OrderHistoryState extends State<OrderHistory> {
                                                                     child: Image
                                                                         .network(
                                                                       item['itemImage'] ??
-                                                                          "",
+                                                                          "https://thumb.ac-illust.com/b1/b170870007dfa419295d949814474ab2_t.jpeg",
                                                                       height:
                                                                           100,
                                                                       width:
@@ -273,8 +273,16 @@ class OrderHistoryState extends State<OrderHistory> {
                                                                       errorBuilder: (context,
                                                                               error,
                                                                               stackTrace) =>
-                                                                          const Icon(
-                                                                              Icons.broken_image),
+                                                                          Image
+                                                                              .network(
+                                                                        "https://thumb.ac-illust.com/b1/b170870007dfa419295d949814474ab2_t.jpeg",
+                                                                        height:
+                                                                            100,
+                                                                        width:
+                                                                            100,
+                                                                        fit: BoxFit
+                                                                            .cover,
+                                                                      ),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -358,7 +366,9 @@ class OrderHistoryState extends State<OrderHistory> {
                                               },
                                             ),
                                           ),
-                                          const SizedBox(height: 10),
+                                          const SizedBox(height: 08),
+                                          Divider(),
+                                          const SizedBox(height: 08),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,

@@ -72,7 +72,7 @@ class Card3 extends StatelessWidget {
             ),
             child: Padding(
               padding: const EdgeInsets.only(
-                  top: 10.0, right: 10, left: 10, bottom: 0),
+                  top: 5.0, right: 0, left: 0, bottom: 0),
               child: Stack(
                 children: [
                   Align(
@@ -95,7 +95,7 @@ class Card3 extends StatelessWidget {
                           borderRadius: BorderRadius.circular(12)),
                       child: Padding(
                         padding: EdgeInsets.symmetric(
-                            horizontal: width / 50, vertical: height / 60),
+                            horizontal: width / 50, vertical: height / 50),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,7 +104,7 @@ class Card3 extends StatelessWidget {
                               // "Special Deal \nFor April",
                               AppLocalizations.of(context)!.specialDeal,
                               style: GoogleFonts.viga(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
+                                  fontSize: 16, fontWeight: FontWeight.bold),
                               gradient: const LinearGradient(
                                 colors: [
                                   AppColors.whiteColor,
@@ -122,7 +122,7 @@ class Card3 extends StatelessWidget {
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 20.0, vertical: 12),
+                                    horizontal: 12.0, vertical: 12),
                                 child: GradientText(
                                   // "Buy Now",
                                   AppLocalizations.of(context)!.buyNow,
