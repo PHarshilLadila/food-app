@@ -412,6 +412,8 @@ class _CatPastaState extends State<CatPasta> {
                                           ['nearestRestaurant'],
                                       restroImg: pastaMenu[index]
                                           ['restaurantImageUrl'],
+                                      foodCategory:
+                                          AppLocalizations.of(context)!.pasta,
                                     ),
                                   ),
                                 );

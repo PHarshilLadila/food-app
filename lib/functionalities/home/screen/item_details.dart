@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:food_app/constant/app_button.dart';
 import 'package:food_app/constant/app_colors.dart';
 import 'package:food_app/constant/app_gredient_text.dart';
 import 'package:food_app/functionalities/home/provider/home_provider.dart';
+import 'package:food_app/functionalities/home/widget/review/review_form.dart';
 import 'package:food_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive_flutter/adapters.dart';
-import 'package:provider/provider.dart';
+ import 'package:provider/provider.dart';
 import 'package:toastification/toastification.dart';
 
 class ItemDetails extends StatefulWidget {
@@ -19,6 +18,7 @@ class ItemDetails extends StatefulWidget {
   final double? itemPrice;
   final String? restroName;
   final String? restroImg;
+  final String? foodCategory;
 
   const ItemDetails({
     super.key,
@@ -29,6 +29,7 @@ class ItemDetails extends StatefulWidget {
     this.itemId,
     this.restroName,
     this.restroImg,
+    this.foodCategory,
   });
 
   @override
@@ -239,12 +240,6 @@ class _ItemDetailsState extends State<ItemDetails>
                             SizedBox(
                               height: height / 80,
                             ),
-                            RatingBars(
-                              itemid: widget.itemId,
-                            ),
-                            SizedBox(
-                              height: height / 80,
-                            ),
                             Text(
                               widget.itemDescription ?? "",
                               style: GoogleFonts.poppins(
@@ -252,6 +247,15 @@ class _ItemDetailsState extends State<ItemDetails>
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500),
                               textAlign: TextAlign.start,
+                            ),
+                            SizedBox(
+                              height: height / 80,
+                            ),
+                            ReviewForm(
+                              itemId: "${widget.itemId}",
+                              foodName: "${widget.itemname}",
+                              foodCategory:
+                                  widget.foodCategory ?? "category not found",
                             ),
                             SizedBox(
                               height: height / 20,
@@ -286,20 +290,7 @@ class _ItemDetailsState extends State<ItemDetails>
               widget.itemPrice!.toDouble(),
               widget.restroName!,
             );
-            // ScaffoldMessenger.of(context).showSnackBar(
-            //   SnackBar(
-            //     padding: const EdgeInsets.all(15),
-            //     shape: BeveledRectangleBorder(
-            //         borderRadius: BorderRadius.circular(5)),
-            //     backgroundColor: AppColors.darkGreen,
-            //     dismissDirection: DismissDirection.endToStart,
-            //     behavior: SnackBarBehavior.floating,
-            //     content: Text(
-            //       "Yup..! ${widget.itemname!} added to cart Successfully.",
-            //       style: TextStyle(color: Colors.white),
-            //     ),
-            //   ),
-            // );
+
             appTostMessage(
               context,
               ToastificationType.success,
@@ -309,53 +300,6 @@ class _ItemDetailsState extends State<ItemDetails>
           },
         ),
       ),
-    );
-  }
-}
-
-class RatingBars extends StatelessWidget {
-  final String? itemid;
-  const RatingBars({
-    super.key,
-    this.itemid,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return RatingBar.builder(
-      initialRating: 3,
-      minRating: 1,
-      direction: Axis.horizontal,
-      allowHalfRating: true,
-      glowColor: const Color.fromARGB(255, 191, 183, 108),
-      updateOnDrag: true,
-      itemCount: 5,
-      itemSize: 30.0,
-      itemBuilder: (context, _) => const Icon(
-        Icons.star,
-        color: Colors.amber,
-      ),
-      onRatingUpdate: (rating) async {
-        final ratingBox = await Hive.openBox("ratingData");
-
-        await ratingBox.put("ratingData", rating);
-        debugPrint("rating data ==> $rating");
-
-        await ratingBox.putAll(
-          {
-            "itemId": itemid,
-            "ratingData": rating,
-          },
-        );
-
-        double getRating = await ratingBox.get("ratingData");
-
-        var getAllRating = ratingBox.toMap();
-
-        debugPrint(getAllRating.toString());
-
-        debugPrint("==> ${getRating.toString()}");
-      },
     );
   }
 }

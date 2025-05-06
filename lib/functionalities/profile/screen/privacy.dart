@@ -5,7 +5,6 @@ import 'package:food_app/constant/app_gredient_text.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 class PrivacyPolicyPage extends StatelessWidget {
   const PrivacyPolicyPage({super.key});
 
@@ -17,7 +16,7 @@ class PrivacyPolicyPage extends StatelessWidget {
         iconTheme: IconThemeData(color: Colors.black),
         title: GradientText(
           // "Pricacy & Policy",
-          AppLocalizations.of(context)!.helpAndSupportTitle,
+          AppLocalizations.of(context)!.privacy,
           style: GoogleFonts.poppins(fontSize: 25, fontWeight: FontWeight.w400),
           gradient: const LinearGradient(
             colors: [

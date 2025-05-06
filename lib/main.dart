@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:food_app/constant/app_colors.dart';
@@ -10,6 +11,7 @@ import 'package:food_app/constant/app_sctring.dart';
 import 'package:food_app/functionalities/auth/providers/auth_provider.dart';
 import 'package:food_app/functionalities/bottom%20navigation%20bar/bottom_navigation_bar.dart';
 import 'package:food_app/functionalities/home/provider/home_provider.dart';
+import 'package:food_app/functionalities/home/provider/review_provider.dart';
 import 'package:food_app/functionalities/profile/help%20&%20support/provider/query_provider.dart';
 import 'package:food_app/functionalities/profile/provider/profile_provider.dart';
 import 'package:food_app/functionalities/rest%20api%20with%20dio/provider/rest_demo.dart';
@@ -21,6 +23,7 @@ import 'package:http_certificate_pinning/http_certificate_pinning.dart';
 import 'package:provider/provider.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:sentry_logging/sentry_logging.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:toastification/toastification.dart';
 
 final GlobalKey<NavigatorState> globalNavigatorKey =
@@ -31,6 +34,10 @@ WebViewEnvironment? webViewEnvironment;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // flutterDeepLink();
+  await dotenv.load();
+  String supabaseUrl = dotenv.env['SUPABASE_URL'] ?? '';
+  String supabaseKey = dotenv.env['SUPABASE_KEY'] ?? '';
+  await Supabase.initialize(url: supabaseUrl, anonKey: supabaseKey);
 
   if (!kIsWeb && defaultTargetPlatform == TargetPlatform.windows) {
     final availableVersion = await WebViewEnvironment.getAvailableVersion();
@@ -124,8 +131,8 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (_) => QueryProvider()),
         ChangeNotifierProvider(create: (_) => RestDemo()),
         ChangeNotifierProvider(create: (_) => TrackOrderProvider()),
+        ChangeNotifierProvider(create: (_) => ReviewProvider()),
 
-        // ChangeNotifierProvider(create: (_) => OrderProvider()),
       ],
       child: Consumer<LocalProvider>(
         builder: (BuildContext context, LocalProvider value, Widget? child) {

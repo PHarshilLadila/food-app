@@ -544,6 +544,9 @@ class _CatCanadianMealState extends State<CatCanadianMeal> {
                                           restroImg:
                                               canadianMealNearestRestaurant[
                                                   index]['image'],
+                                          foodCategory:
+                                              AppLocalizations.of(context)!
+                                                  .canadianMeal,
                                         ),
                                       ),
                                     );

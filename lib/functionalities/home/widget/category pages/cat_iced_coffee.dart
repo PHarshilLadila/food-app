@@ -540,6 +540,9 @@ class _CatIcedCoffeeState extends State<CatIcedCoffee> {
                                           restroImg:
                                               hotCoffeeNearestRestaurant[index]
                                                   ['image'],
+                                          foodCategory:
+                                              AppLocalizations.of(context)!
+                                                  .coldCoffee,
                                         ),
                                       ),
                                     );

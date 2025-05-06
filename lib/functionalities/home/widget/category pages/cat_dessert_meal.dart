@@ -554,6 +554,9 @@ class _CatDessertMealState extends State<CatDessertMeal> {
                                           restroImg:
                                               dessertNearestRestaurant[index]
                                                   ['image'],
+                                          foodCategory:
+                                              AppLocalizations.of(context)!
+                                                  .dessert,
                                         ),
                                       ),
                                     );

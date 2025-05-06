@@ -4,7 +4,6 @@ import 'package:food_app/constant/app_gredient_text.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 class TermsAndConditionsPage extends StatelessWidget {
   const TermsAndConditionsPage({super.key});
 
@@ -15,7 +14,7 @@ class TermsAndConditionsPage extends StatelessWidget {
         iconTheme: IconThemeData(color: Colors.black),
         title: GradientText(
           // "Terms & Conditions",
-          AppLocalizations.of(context)!.helpAndSupportTitle,
+          AppLocalizations.of(context)!.terms,
           style: GoogleFonts.poppins(fontSize: 25, fontWeight: FontWeight.w400),
           gradient: const LinearGradient(
             colors: [

@@ -531,6 +531,9 @@ class _CatMainMealState extends State<CatMainMeal> {
                                               ['name'],
                                           restroImg: nearestRestaurant[index]
                                               ['image'],
+                                          foodCategory:
+                                              AppLocalizations.of(context)!
+                                                  .chikenMeal,
                                         ),
                                       ),
                                     );
