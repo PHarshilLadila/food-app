@@ -57,7 +57,6 @@ class _ReviewFormState extends State<ReviewForm> {
     final reviewProvider = Provider.of<ReviewProvider>(context, listen: false);
     final profileData =
         Provider.of<ProfileProvider>(context, listen: false).profile;
-
     final reviews = reviewProvider.reviews;
     final double averageRating = reviews.isNotEmpty
         ? reviews
@@ -177,14 +176,12 @@ class _ReviewFormState extends State<ReviewForm> {
           ),
           onPressed: () async {
             if (_commentController.text.trim().isEmpty) {
-              // Show SnackBar if the comment is empty
               appTostMessage(
                 context,
                 ToastificationType.error,
                 "Please write a comment before submitting.",
                 "assets/images/wronge.png",
               );
-
               return;
             }
 
@@ -200,6 +197,7 @@ class _ReviewFormState extends State<ReviewForm> {
               comment: _commentController.text,
               foodName: widget.foodName,
               foodCategory: widget.foodCategory,
+              averageRating: getRatingDescription(averageRating),
             );
 
             _commentController.clear();

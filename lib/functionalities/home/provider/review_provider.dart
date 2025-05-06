@@ -23,15 +23,15 @@ class ReviewProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> submitReview({
-    required String itemId,
-    required String userId,
-    required String username,
-    required double rating,
-    required String comment,
-    required String foodName,
-    required String foodCategory,
-  }) async {
+  Future<void> submitReview(
+      {required String itemId,
+      required String userId,
+      required String username,
+      required double rating,
+      required String comment,
+      required String foodName,
+      required String foodCategory,
+      required String averageRating}) async {
     try {
       final databaseBox = Hive.box('userProfile');
       final id = await databaseBox.get("userid");
@@ -44,6 +44,7 @@ class ReviewProvider extends ChangeNotifier {
         'comment': comment,
         'foodName': foodName,
         'foodCategory': foodCategory,
+        'averageRating': averageRating,
         'created_at': Timestamp.now(),
       };
 
