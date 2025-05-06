@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:food_app/constant/app_colors.dart';
 import 'package:food_app/constant/app_sctring.dart';
@@ -18,7 +19,6 @@ import 'package:food_app/localization/provider/local_provider.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:http_certificate_pinning/http_certificate_pinning.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:sentry_logging/sentry_logging.dart';
 import 'package:toastification/toastification.dart';
@@ -186,6 +186,7 @@ class _MyAppState extends State<MyApp> {
 
 //  flutter gen-l10n
 //       allow read, write: if request.auth!=null;  firebase rules
+// C:\Users\Admin\.jdks\corretto-17.0.11
 
 void sentryInit() async {
   FlutterError.onError = (FlutterErrorDetails details) async {
