@@ -70,8 +70,9 @@ class _ReviewFormState extends State<ReviewForm> {
       if (rating >= 4.5) return "Excellent";
       if (rating >= 3.5) return "Good";
       if (rating >= 2.5) return "Average";
-      if (rating >= 1.5) return "Bad";
-      return "Low";
+      if (rating >= 1.5) return "Low";
+      if (rating <= 0) return "No Review";
+      return "Bad";
     }
 
     return Column(
@@ -130,8 +131,6 @@ class _ReviewFormState extends State<ReviewForm> {
           ],
         ),
         const Divider(height: 30, thickness: 1),
-
-        // Section: Your Review
         Text(
           "Your Review",
           style: GoogleFonts.poppins(
@@ -185,24 +184,7 @@ class _ReviewFormState extends State<ReviewForm> {
                 "Please write a comment before submitting.",
                 "assets/images/wronge.png",
               );
-              // ScaffoldMessenger.of(context).showSnackBar(
-              //   SnackBar(
-              //     content: Text(
-              //       "Please write a comment before submitting.",
-              //       style: GoogleFonts.poppins(
-              //         fontSize: 14,
-              //         fontWeight: FontWeight.w500,
-              //         color: Colors.white,
-              //       ),
-              //     ),
-              //     backgroundColor: Colors.red,
-              //     behavior: SnackBarBehavior.floating,
-              //     margin: const EdgeInsets.all(16),
-              //     shape: RoundedRectangleBorder(
-              //       borderRadius: BorderRadius.circular(12),
-              //     ),
-              //   ),
-              // );
+
               return;
             }
 
@@ -238,8 +220,6 @@ class _ReviewFormState extends State<ReviewForm> {
           ),
         ),
         const Divider(height: 30, thickness: 1),
-
-        // Section: Recent Reviews
         Text(
           "Recent Reviews",
           style: GoogleFonts.poppins(
@@ -287,7 +267,7 @@ class _ReviewFormState extends State<ReviewForm> {
                     ],
                   ),
                   child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       CircleAvatar(
                         radius: 24,
@@ -325,14 +305,26 @@ class _ReviewFormState extends State<ReviewForm> {
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 4),
-                            Text(
-                              review['comment'] ?? "No comment provided.",
-                              style: GoogleFonts.poppins(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.grey.shade700,
-                              ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  review['comment'] ?? "No comment provided.",
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.grey.shade900,
+                                  ),
+                                ),
+                                Text(
+                                  review['rating'].toString(),
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.grey.shade900,
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),

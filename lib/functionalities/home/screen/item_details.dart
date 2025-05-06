@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
- import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:food_app/constant/app_button.dart';
 import 'package:food_app/constant/app_colors.dart';
 import 'package:food_app/constant/app_gredient_text.dart';
@@ -7,7 +7,7 @@ import 'package:food_app/functionalities/home/provider/home_provider.dart';
 import 'package:food_app/functionalities/home/widget/review/review_form.dart';
 import 'package:food_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
- import 'package:provider/provider.dart';
+import 'package:provider/provider.dart';
 import 'package:toastification/toastification.dart';
 
 class ItemDetails extends StatefulWidget {
@@ -42,9 +42,12 @@ class _ItemDetailsState extends State<ItemDetails>
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: AppColors.whiteColor,
       extendBodyBehindAppBar: true,
+      resizeToAvoidBottomInset:
+          true, // Ensures the layout adjusts for the keyboard
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
@@ -73,7 +76,6 @@ class _ItemDetailsState extends State<ItemDetails>
           ),
         ),
         title: GradientText(
-          // AppLocalizations.of(context)!.homeTitle,
           widget.itemname ?? "",
           style: GoogleFonts.poppins(fontSize: 30, fontWeight: FontWeight.bold),
           gradient: const LinearGradient(
@@ -89,15 +91,17 @@ class _ItemDetailsState extends State<ItemDetails>
           decoration: BoxDecoration(
             color: Colors.transparent,
             image: DecorationImage(
-                colorFilter: ColorFilter.mode(
-                    Colors.white.withOpacity(0.4), BlendMode.dstATop),
-                image: AssetImage("assets/images/Pattern.png"),
-                fit: BoxFit.cover),
+              colorFilter: ColorFilter.mode(
+                  Colors.white.withOpacity(0.4), BlendMode.dstATop),
+              image: AssetImage("assets/images/Pattern.png"),
+              fit: BoxFit.cover,
+            ),
           ),
         ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           scrollDirection: Axis.vertical,
           physics: const BouncingScrollPhysics(),
           child: LayoutBuilder(
@@ -109,31 +113,24 @@ class _ItemDetailsState extends State<ItemDetails>
               if (screenWidth > 1300) {
                 imgHeight = height / 2;
                 imgWidth = width / 5.5;
-                debugPrint("screenWidth > 1300");
               } else if (screenWidth > 1200 && screenWidth < 1300) {
                 imgHeight = height / 2;
                 imgWidth = width / 4;
-                debugPrint("screenWidth > 1200 && screenWidth < 1300");
               } else if (screenWidth > 1000 && screenWidth < 1200) {
                 imgHeight = height / 2.5;
                 imgWidth = width / 3.5;
-                debugPrint("screenWidth > 1000 && screenWidth < 1200");
               } else if (screenWidth > 800 && screenWidth < 1000) {
                 imgHeight = height / 3;
                 imgWidth = width / 3;
-                debugPrint("screenWidth > 800 && screenWidth < 1000");
               } else if (screenWidth > 600) {
                 imgHeight = height / 3.5;
                 imgWidth = width / 2.5;
-                debugPrint("screenWidth > 600 ");
               } else if (screenWidth > 500) {
                 imgHeight = height / 3.5;
                 imgWidth = width / 2;
-                debugPrint("screenWidth > 500");
               } else if (screenWidth > 350) {
                 imgHeight = height / 4;
                 imgWidth = width / 2;
-                debugPrint("screenWidth > 350");
               }
 
               return Column(
