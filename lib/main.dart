@@ -184,10 +184,6 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-//  flutter gen-l10n
-//       allow read, write: if request.auth!=null;  firebase rules
-// C:\Users\Admin\.jdks\corretto-17.0.11
-
 void sentryInit() async {
   FlutterError.onError = (FlutterErrorDetails details) async {
     await Sentry.captureException(
@@ -198,7 +194,14 @@ void sentryInit() async {
   };
 }
 
-// kotlinOptions {
-//         jvmTarget = JavaVersion.VERSION_1_8
-//     }
-// adb shell am start -a android.intent.action.VIEW \-d "flutterDeepLink://swift-bite/#/home/hello-world"
+//  flutter gen-l10n
+
+//  allow read, write: if request.auth!=null;  firebase rules
+
+//  C:\Users\Admin\.jdks\corretto-17.0.11
+
+//  kotlinOptions {
+//          jvmTarget = JavaVersion.VERSION_1_8
+//  }
+
+//  adb shell am start -a android.intent.action.VIEW \-d "flutterDeepLink://swift-bite/#/home/hello-world"
