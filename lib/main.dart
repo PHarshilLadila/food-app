@@ -132,7 +132,6 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (_) => RestDemo()),
         ChangeNotifierProvider(create: (_) => TrackOrderProvider()),
         ChangeNotifierProvider(create: (_) => ReviewProvider()),
-
       ],
       child: Consumer<LocalProvider>(
         builder: (BuildContext context, LocalProvider value, Widget? child) {

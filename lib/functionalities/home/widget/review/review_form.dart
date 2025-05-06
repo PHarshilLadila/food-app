@@ -58,9 +58,79 @@ class _ReviewFormState extends State<ReviewForm> {
     final profileData =
         Provider.of<ProfileProvider>(context, listen: false).profile;
 
+    final reviews = reviewProvider.reviews;
+    final double averageRating = reviews.isNotEmpty
+        ? reviews
+                .map((review) => review['rating'] as double)
+                .reduce((a, b) => a + b) /
+            reviews.length
+        : 0.0;
+
+    String getRatingDescription(double rating) {
+      if (rating >= 4.5) return "Excellent";
+      if (rating >= 3.5) return "Good";
+      if (rating >= 2.5) return "Average";
+      if (rating >= 1.5) return "Bad";
+      return "Low";
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Average Rating",
+                  style: GoogleFonts.poppins(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.darkGreen,
+                  ),
+                ),
+                const SizedBox(height: 5),
+                Row(
+                  children: [
+                    Text(
+                      averageRating.toStringAsFixed(1),
+                      style: GoogleFonts.poppins(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.amber,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      "(${getRatingDescription(averageRating)})",
+                      style: GoogleFonts.poppins(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.grey.shade700,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Row(
+              children: List.generate(
+                5,
+                (index) => Icon(
+                  Icons.star,
+                  size: 20,
+                  color: index < averageRating.round()
+                      ? Colors.amber
+                      : Colors.grey.shade300,
+                ),
+              ),
+            ),
+          ],
+        ),
+        const Divider(height: 30, thickness: 1),
+
         // Section: Your Review
         Text(
           "Your Review",
@@ -107,6 +177,35 @@ class _ReviewFormState extends State<ReviewForm> {
             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
           ),
           onPressed: () async {
+            if (_commentController.text.trim().isEmpty) {
+              // Show SnackBar if the comment is empty
+              appTostMessage(
+                context,
+                ToastificationType.error,
+                "Please write a comment before submitting.",
+                "assets/images/wronge.png",
+              );
+              // ScaffoldMessenger.of(context).showSnackBar(
+              //   SnackBar(
+              //     content: Text(
+              //       "Please write a comment before submitting.",
+              //       style: GoogleFonts.poppins(
+              //         fontSize: 14,
+              //         fontWeight: FontWeight.w500,
+              //         color: Colors.white,
+              //       ),
+              //     ),
+              //     backgroundColor: Colors.red,
+              //     behavior: SnackBarBehavior.floating,
+              //     margin: const EdgeInsets.all(16),
+              //     shape: RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.circular(12),
+              //     ),
+              //   ),
+              // );
+              return;
+            }
+
             final databaseBox = Hive.box('userProfile');
             final id = await databaseBox.get("userid");
             final username = profileData?.name;
@@ -188,7 +287,7 @@ class _ReviewFormState extends State<ReviewForm> {
                     ],
                   ),
                   child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CircleAvatar(
                         radius: 24,
@@ -202,13 +301,10 @@ class _ReviewFormState extends State<ReviewForm> {
                         ),
                       ),
                       const SizedBox(width: 12),
-
-                      // Review Content
                       Expanded(
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // Username and Rating
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -230,27 +326,13 @@ class _ReviewFormState extends State<ReviewForm> {
                               ],
                             ),
                             const SizedBox(height: 4),
-
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  review['comment'] ?? "No comment provided.",
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.black87,
-                                  ),
-                                ),
-                                Text(
-                                  review['rating'].toString(),
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.black87,
-                                  ),
-                                ),
-                              ],
+                            Text(
+                              review['comment'] ?? "No comment provided.",
+                              style: GoogleFonts.poppins(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.grey.shade700,
+                              ),
                             ),
                           ],
                         ),
