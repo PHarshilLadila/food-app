@@ -3,6 +3,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:food_app/a_b_testing/ab_provider.dart';
 import 'package:food_app/constant/app_button.dart';
 import 'package:food_app/constant/app_colors.dart';
 import 'package:food_app/constant/app_gredient_text.dart';
@@ -187,19 +188,25 @@ class _FavoriteItemsState extends State<FavoriteItems> {
                                     style: GoogleFonts.poppins(fontSize: 18),
                                   ),
                                   const SizedBox(height: 10),
-                                  CustomeButton(
-                                    heights: height / 20,
-                                    widths: width / 2.5,
-                                    name:
-                                    //  "Explore Foods",
-                                    AppLocalizations.of(context)!
-                                    .exploreFood,
-                                    ontap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const BottomScreen()),
+                                  Consumer<AbProvider>(
+                                    builder: (BuildContext context, value,
+                                        Widget? child) {
+                                      return CustomeButton(
+                                        heights: height / 20,
+                                        widths: width / 2.5,
+                                        name: Provider.of<AbProvider>(context)
+                                            .buttonLabel,
+                                        //  "Explore Foods",
+                                        // AppLocalizations.of(context)!
+                                        // .exploreFood,
+                                        ontap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const BottomScreen()),
+                                          );
+                                        },
                                       );
                                     },
                                   ),

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:food_app/a_b_testing/ab_provider.dart';
 import 'package:food_app/constant/app_colors.dart';
 import 'package:food_app/constant/app_sctring.dart';
 import 'package:food_app/functionalities/auth/providers/auth_provider.dart';
@@ -132,6 +133,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (_) => RestDemo()),
         ChangeNotifierProvider(create: (_) => TrackOrderProvider()),
         ChangeNotifierProvider(create: (_) => ReviewProvider()),
+        ChangeNotifierProvider(create: (_) => AbProvider()),
       ],
       child: Consumer<LocalProvider>(
         builder: (BuildContext context, LocalProvider value, Widget? child) {
