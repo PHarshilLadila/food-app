@@ -108,5 +108,12 @@
   "dragNote": " Drag & Drop Item (with Longpress) in to Cart, Ensure that Drop the Item in Middel of Cart Box.",
   "addtocartdrag": "Add to Cart (drag & drop)",
   "dragnoteTwo": "Tap Here for Add This Item in to Cart.",
-  "dragAndDropHere": "Drag and Drop Here"
+  "dragAndDropHere": "Drag and Drop Here",
+  "theme": "Theme",
+  "light": "Light",
+  "dark": "Dark",
+  "dinnerMenu" : "Dinner Menu",
+  "lunch" : "Lunch Menu",
+  "breakfast" : "Breakfast"
+
 }

@@ -4,8 +4,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/constant/app_colors.dart';
 import 'package:food_app/constant/app_gredient_text.dart';
+import 'package:food_app/functionalities/bottom%20navigation%20bar/bottom_navigation_bar.dart';
 import 'package:food_app/functionalities/spalsh/onboarding.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -15,8 +17,22 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  String userUid = "";
+
+  void getUserId() async {
+    final databaseBox = Hive.box('userProfile');
+    final id = await databaseBox.get("userid");
+    debugPrint("Hive user id : $id");
+
+    setState(() {
+      userUid = id ?? "";
+    });
+    debugPrint("user Uid :$userUid");
+  }
+
   @override
   void initState() {
+    getUserId();
     super.initState();
     Timer(
       const Duration(seconds: 3),
@@ -25,7 +41,9 @@ class _SplashScreenState extends State<SplashScreen> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => const OnBoardingPage(),
+              builder: (context) => userUid.isEmpty || userUid == ""
+                  ? OnBoardingPage()
+                  : BottomScreen(),
             ),
           );
         }

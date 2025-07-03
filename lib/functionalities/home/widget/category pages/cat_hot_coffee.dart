@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:food_app/constant/app_colors.dart';
@@ -16,7 +17,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:toastification/toastification.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 
 class CatHotCoffee extends StatefulWidget {
   const CatHotCoffee({super.key});
@@ -147,6 +147,9 @@ class _CatHotCoffeeState extends State<CatHotCoffee> {
                             crossAxisCount = 2;
                             childAspectRatio = 0.75;
                           }
+                          if (value.isLoading) {
+                            return Center(child: myProccesser());
+                          }
                           return GridView.builder(
                             padding: const EdgeInsets.all(8.0),
                             itemCount: value.coffees.length,
@@ -158,11 +161,17 @@ class _CatHotCoffeeState extends State<CatHotCoffee> {
                               childAspectRatio: childAspectRatio,
                             ),
                             itemBuilder: (context, index) {
+                              print(
+                                  "this is the coffee index : ${value.coffees.length}");
                               final meal = value.coffees[index];
+                              print(
+                                  "---------------------> This is the index : ${hotCoffeeNearestRestaurant[index]}");
+
                               return LongPressDraggable<Map<String, dynamic>>(
                                 data: {
                                   "itemName": meal.title,
-                                  "itemPrice": meal.price,
+                                  "itemPrice": coffeePriceList[index]["price"]
+                                      .toString(),
                                   "itemImage": meal.image,
                                   "itemId": meal.id,
                                   "itemDiscription": meal.description,
@@ -206,11 +215,34 @@ class _CatHotCoffeeState extends State<CatHotCoffee> {
                                               ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(15),
-                                                child: Image.network(
-                                                  value.coffees[index].image!,
+                                                child: CachedNetworkImage(
+                                                  imageUrl: value
+                                                      .coffees[index].image!,
                                                   height: 150,
+                                                  width: 150,
                                                   fit: BoxFit.cover,
+                                                  placeholder: (context, url) =>
+                                                      Container(
+                                                    height: 150,
+                                                    width: 150,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.grey[300],
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15),
+                                                    ),
+                                                  ),
+                                                  errorWidget:
+                                                      (context, url, error) =>
+                                                          Icon(Icons.error),
                                                 ),
+
+                                                //  Image.network(
+                                                //   value.coffees[index].image!,
+                                                //   height: 150,
+                                                //   width: 150,
+                                                //   fit: BoxFit.cover,
+                                                // ),
                                               ),
                                               Positioned(
                                                 bottom: -10,
@@ -235,7 +267,7 @@ class _CatHotCoffeeState extends State<CatHotCoffee> {
                                                           const EdgeInsets.all(
                                                               10.0),
                                                       child: AutoSizeText(
-                                                        "\$ ${value.coffees[index].price}",
+                                                        "\$ ${coffeePriceList[index]["price"].toString()}",
                                                         minFontSize: 16,
                                                         maxFontSize: 18,
                                                         style:
@@ -272,9 +304,13 @@ class _CatHotCoffeeState extends State<CatHotCoffee> {
                                                           value.coffees[index]
                                                               .id!
                                                               .toString(),
-                                                          value.coffees[index]
-                                                              .price
+                                                          coffeePriceList[index]
+                                                                  ["price"]
                                                               .toString(),
+
+                                                          // value.coffees[index]
+                                                          //     .price
+                                                          //     .toString(),
                                                           hotCoffeeNearestRestaurant[
                                                               index]['name'],
                                                           hotCoffeeNearestRestaurant[
@@ -374,11 +410,33 @@ class _CatHotCoffeeState extends State<CatHotCoffee> {
                                             ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(15),
-                                              child: Image.network(
-                                                value.coffees[index].image!,
+                                              child: CachedNetworkImage(
+                                                imageUrl:
+                                                    value.coffees[index].image!,
                                                 height: 150,
                                                 fit: BoxFit.cover,
+                                                placeholder: (context, url) =>
+                                                    Container(
+                                                  height: 150,
+                                                  width: 150,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.grey[300],
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15),
+                                                  ),
+                                                ),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        Icon(Icons.error),
                                               ),
+
+                                              // Image.network(
+                                              //   value.coffees[index].image!,
+                                              //   height: 150,
+
+                                              //   fit: BoxFit.cover,
+                                              // ),
                                             ),
                                             Positioned(
                                               bottom: -10,
@@ -402,7 +460,7 @@ class _CatHotCoffeeState extends State<CatHotCoffee> {
                                                         const EdgeInsets.all(
                                                             10.0),
                                                     child: AutoSizeText(
-                                                      "\$ ${value.coffees[index].price}",
+                                                      "\$ ${coffeePriceList[index]["price"].toString()}",
                                                       minFontSize: 16,
                                                       maxFontSize: 18,
                                                       style:
@@ -436,9 +494,12 @@ class _CatHotCoffeeState extends State<CatHotCoffee> {
                                                           .toggleFavoriteStatus(
                                                         value.coffees[index].id!
                                                             .toString(),
-                                                        value.coffees[index]
-                                                            .price
+                                                        coffeePriceList[index]
+                                                                ["price"]
                                                             .toString(),
+                                                        // value.coffees[index]
+                                                        //     .price
+                                                        //     .toString(),
                                                         hotCoffeeNearestRestaurant[
                                                             index]['name'],
                                                         hotCoffeeNearestRestaurant[
@@ -518,8 +579,14 @@ class _CatHotCoffeeState extends State<CatHotCoffee> {
                                               value.coffees[index].image ?? "",
                                           itemname:
                                               value.coffees[index].title ?? "",
-                                          itemPrice: value.coffees[index].price
-                                              ?.toDouble(),
+                                          itemPrice: double.tryParse(
+                                                  coffeePriceList[index]
+                                                          ["price"]
+                                                      .toString()) ??
+                                              0.0,
+
+                                          // value.coffees[index].price
+                                          //     ?.toDouble(),
                                           itemId: value.coffees[index].id
                                               .toString(),
                                           restroName:
@@ -569,12 +636,40 @@ class _CatHotCoffeeState extends State<CatHotCoffee> {
                                               ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(15),
-                                                child: Image.network(
-                                                  value.coffees[index].image!,
+                                                child: CachedNetworkImage(
+                                                  imageUrl: value
+                                                      .coffees[index].image!,
                                                   height: 150,
                                                   width: 150,
+                                                  useOldImageOnUrlChange: true,
+                                                  fadeInDuration: Duration.zero,
+                                                  fadeOutDuration:
+                                                      Duration.zero,
                                                   fit: BoxFit.cover,
+                                                  placeholder: (context, url) =>
+                                                      Container(
+                                                    height: 150,
+                                                    width: 150,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.grey[300],
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15),
+                                                    ),
+                                                  ),
+                                                  errorWidget:
+                                                      (context, url, error) =>
+                                                          Icon(
+                                                    Icons.broken_image,
+                                                    size: 30,
+                                                  ),
                                                 ),
+                                                //  Image.network(
+                                                //   value.coffees[index].image!,
+                                                //   height: 150,
+                                                //   width: 150,
+                                                //   fit: BoxFit.cover,
+                                                // ),
                                               ),
                                               Positioned(
                                                 bottom: -10,
@@ -599,7 +694,7 @@ class _CatHotCoffeeState extends State<CatHotCoffee> {
                                                           const EdgeInsets.all(
                                                               10.0),
                                                       child: AutoSizeText(
-                                                        "\$ ${value.coffees[index].price}",
+                                                        "\$ ${coffeePriceList[index]["price"].toString()}",
                                                         minFontSize: 16,
                                                         maxFontSize: 18,
                                                         style:
@@ -636,9 +731,13 @@ class _CatHotCoffeeState extends State<CatHotCoffee> {
                                                           value.coffees[index]
                                                               .id!
                                                               .toString(),
-                                                          value.coffees[index]
-                                                              .price
+                                                          coffeePriceList[index]
+                                                                  ["price"]
                                                               .toString(),
+
+                                                          // value.coffees[index]
+                                                          //     .price
+                                                          //     .toString(),
                                                           hotCoffeeNearestRestaurant[
                                                               index]['name'],
                                                           hotCoffeeNearestRestaurant[
@@ -756,7 +855,12 @@ class _CatHotCoffeeState extends State<CatHotCoffee> {
                             _droppedItem?["itemName"],
                             _droppedItem?["itemImage"],
                             _droppedItem?["itemDiscription"],
-                            _droppedItem?["itemPrice"].toDouble(),
+                            (_droppedItem?["itemPrice"] is num)
+                                ? (_droppedItem?["itemPrice"] as num).toDouble()
+                                : double.tryParse(_droppedItem?["itemPrice"]
+                                            ?.toString() ??
+                                        '') ??
+                                    0.0,
                             _droppedItem?["itemRestro"]["name"],
                           );
 
@@ -768,6 +872,7 @@ class _CatHotCoffeeState extends State<CatHotCoffee> {
                           );
                         },
                         child: DroppedCartButton(
+                          isLightTheme: true,
                           height: height,
                           width: width,
                           droppedItem: _droppedItem,

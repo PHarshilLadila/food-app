@@ -7,8 +7,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:food_app/a_b_testing/ab_provider.dart';
-import 'package:food_app/constant/app_colors.dart';
-import 'package:food_app/constant/app_sctring.dart';
+import 'package:food_app/constant/app_string.dart';
 import 'package:food_app/functionalities/auth/providers/auth_provider.dart';
 import 'package:food_app/functionalities/bottom%20navigation%20bar/bottom_navigation_bar.dart';
 import 'package:food_app/functionalities/home/provider/home_provider.dart';
@@ -19,6 +18,8 @@ import 'package:food_app/functionalities/rest%20api%20with%20dio/provider/rest_d
 import 'package:food_app/functionalities/spalsh/splash_screen.dart';
 import 'package:food_app/functionalities/track%20order/provider/track_order_provider.dart';
 import 'package:food_app/localization/provider/local_provider.dart';
+import 'package:food_app/services/api_service.dart';
+import 'package:food_app/utils/theme/provider/app_theme_provider.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:http_certificate_pinning/http_certificate_pinning.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +36,8 @@ WebViewEnvironment? webViewEnvironment;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // flutterDeepLink();
-  await dotenv.load();
+  await dotenv.load(); // Load .env file
+  await ApiService().initialize();
   String supabaseUrl = dotenv.env['SUPABASE_URL'] ?? '';
   String supabaseKey = dotenv.env['SUPABASE_KEY'] ?? '';
   await Supabase.initialize(url: supabaseUrl, anonKey: supabaseKey);
@@ -53,16 +55,24 @@ Future<void> main() async {
     await InAppWebViewController.setWebContentsDebuggingEnabled(kDebugMode);
   }
 
+  String apiKey = dotenv.env['APIKEY'] ?? '';
+  String authDomain = dotenv.env['AUTHDOMAIN'] ?? '';
+  String projectId = dotenv.env['PROJECTID'] ?? '';
+  String storageBucket = dotenv.env['STORAGEBUCKET'] ?? '';
+  String messagingSenderId = dotenv.env['MESSAGINGSENDERID'] ?? '';
+  String appId = dotenv.env['APPID'] ?? '';
+  String measurementId = dotenv.env['MEASUREMENTID'] ?? '';
+
   if (kIsWeb) {
     await Firebase.initializeApp(
-      options: const FirebaseOptions(
-        apiKey: "AIzaSyA7obPRfXUDK2uzKT4NCyf0jq9u4DZngog",
-        authDomain: "swift-bite-690e5.firebaseapp.com",
-        projectId: "swift-bite-690e5",
-        storageBucket: "swift-bite-690e5.firebasestorage.app",
-        messagingSenderId: "648059370095",
-        appId: "1:648059370095:web:70c1fafc9f6b40200eeb9a",
-        measurementId: "G-YZKXW4RX65",
+      options: FirebaseOptions(
+        apiKey: apiKey,
+        authDomain: authDomain,
+        projectId: projectId,
+        storageBucket: storageBucket,
+        messagingSenderId: messagingSenderId,
+        appId: appId,
+        measurementId: measurementId,
       ),
     );
   } else {
@@ -134,6 +144,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (_) => TrackOrderProvider()),
         ChangeNotifierProvider(create: (_) => ReviewProvider()),
         ChangeNotifierProvider(create: (_) => AbProvider()),
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
       ],
       child: Consumer<LocalProvider>(
         builder: (BuildContext context, LocalProvider value, Widget? child) {
@@ -164,11 +175,13 @@ class _MyAppState extends State<MyApp> {
                 return supportedLocales.first;
               },
               debugShowCheckedModeBanner: false,
-              theme: ThemeData(
-                colorScheme:
-                    ColorScheme.fromSeed(seedColor: AppColors.lightGreen),
-                useMaterial3: false,
-              ),
+              theme: Provider.of<ThemeProvider>(context).themeData,
+
+              //  ThemeData(
+              //   colorScheme:
+              //       ColorScheme.fromSeed(seedColor: AppColors.lightGreen),
+              //   useMaterial3: false,
+              // ),
               // routes: {
               //   "home": (context) => HomeScreen(),
               //   "login": (context) => const LoginScreen(),
@@ -179,9 +192,10 @@ class _MyAppState extends State<MyApp> {
               // },
               home: Consumer<AuthProviders>(
                 builder: (context, auth, _) {
-                  return userUid.isEmpty
-                      ? const SplashScreen()
-                      : const BottomScreen();
+                  return SplashScreen();
+                  // userUid.isEmpty
+                  //     ? const SplashScreen()
+                  //     : const BottomScreen();
                 },
               ),
             ),

@@ -15,7 +15,6 @@ import 'package:provider/provider.dart';
 import 'package:toastification/toastification.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 class CatIcedCoffee extends StatefulWidget {
   const CatIcedCoffee({super.key});
 
@@ -148,6 +147,9 @@ class _CatIcedCoffeeState extends State<CatIcedCoffee> {
                           } else if (screenWidth > 350) {
                             crossAxisCount = 2;
                             childAspectRatio = 0.60;
+                          }
+                          if (value.isLoading) {
+                            return Center(child: myProccesser());
                           }
                           return GridView.builder(
                             padding: const EdgeInsets.all(8.0),
@@ -771,7 +773,12 @@ class _CatIcedCoffeeState extends State<CatIcedCoffee> {
                             _droppedItem?["itemName"],
                             _droppedItem?["itemImage"],
                             _droppedItem?["itemDiscription"],
-                            _droppedItem?["itemPrice"].toDouble(),
+                            (_droppedItem?["itemPrice"] is num)
+                                ? (_droppedItem?["itemPrice"] as num).toDouble()
+                                : double.tryParse(_droppedItem?["itemPrice"]
+                                            ?.toString() ??
+                                        '') ??
+                                    0.0,
                             _droppedItem?["itemRestro"]["name"],
                           );
 
@@ -783,6 +790,7 @@ class _CatIcedCoffeeState extends State<CatIcedCoffee> {
                           );
                         },
                         child: DroppedCartButton(
+                          isLightTheme: true,
                           height: height,
                           width: width,
                           droppedItem: _droppedItem,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/constant/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomeTextFormField extends StatelessWidget {
@@ -52,13 +53,15 @@ class CustomeTextFormField extends StatelessWidget {
       initialValue: initialValues,
       controller: textEditingController,
       keyboardType: keyboradType,
+      cursorColor: AppColors.darkOrange,
       style: const TextStyle(color: Colors.black),
       autocorrect: true,
       obscureText: obscureText!,
       decoration: InputDecoration(
         hintText: hintText,
         counterText: "",
-        hintStyle: GoogleFonts.poppins(color: hintcolors, fontSize: 14, fontWeight: FontWeight.w400),
+        hintStyle: GoogleFonts.poppins(
+            color: hintcolors, fontSize: 14, fontWeight: FontWeight.w400),
         filled: true,
         prefixIcon: prefixIcon,
         fillColor: fillColor,

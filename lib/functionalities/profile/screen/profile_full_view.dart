@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/constant/app_colors.dart';
 import 'package:food_app/constant/app_gredient_text.dart';
-import 'package:food_app/constant/app_sctring.dart';
+import 'package:food_app/constant/app_string.dart';
 import 'package:food_app/functionalities/profile/provider/profile_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';

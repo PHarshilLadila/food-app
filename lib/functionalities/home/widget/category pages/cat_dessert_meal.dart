@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:food_app/constant/app_colors.dart';
 import 'package:food_app/constant/app_gredient_text.dart';
-import 'package:food_app/constant/app_sctring.dart';
+import 'package:food_app/constant/app_string.dart';
 import 'package:food_app/functionalities/cart/screens/cart_screen.dart';
 import 'package:food_app/functionalities/home/helper/list_data.dart';
 import 'package:food_app/functionalities/home/provider/home_provider.dart';
@@ -15,8 +15,8 @@ import 'package:food_app/functionalities/home/widget/dropped_cart_button.dart';
 import 'package:food_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:toastification/toastification.dart';import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import 'package:toastification/toastification.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CatDessertMeal extends StatefulWidget {
   const CatDessertMeal({super.key});
@@ -164,6 +164,9 @@ class _CatDessertMealState extends State<CatDessertMeal> {
                             childAspectRatio = 0.60;
                           }
 
+                          if (value.isLoading) {
+                            return Center(child: myProccesser());
+                          }
                           return GridView.builder(
                             padding: const EdgeInsets.all(8.0),
                             itemCount: value.dessertModel.length,
@@ -796,6 +799,7 @@ class _CatDessertMealState extends State<CatDessertMeal> {
                           );
                         },
                         child: DroppedCartButton(
+                          isLightTheme: true,
                           height: height,
                           width: width,
                           droppedItem: _droppedItem,

@@ -105,6 +105,7 @@ dependencies:
   flutter_dotenv: ^5.1.0
   firebase_analytics: ^11.4.5
   firebase_remote_config: ^5.4.3
+  cached_network_image: ^3.4.1
 
 dev_dependencies:
   flutter_test:

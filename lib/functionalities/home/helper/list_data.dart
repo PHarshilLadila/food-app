@@ -138,6 +138,101 @@ List<Map<String, dynamic>> hotCoffeeNearestRestaurant = [
     "name": "Vegan Restro",
     "duration": "3 km",
   },
+  {
+    "image": "assets/images/home/nearRestaurant/near6.png",
+    "name": "Smart Restro",
+    "duration": "1.9 km",
+  },
+  {
+    "image": "assets/images/home/nearRestaurant/near5.png",
+    "name": "Vegan Restro",
+    "duration": "3 km",
+  },
+  {
+    "image": "assets/images/home/nearRestaurant/near2.png",
+    "name": "Healthy food",
+    "duration": "1.5 km",
+  },
+  {
+    "image": "assets/images/home/nearRestaurant/near4.png",
+    "name": "Smart Restro",
+    "duration": "700 mt",
+  },
+  {
+    "image": "assets/images/home/nearRestaurant/near5.png",
+    "name": "Vegan Restro",
+    "duration": "3 km",
+  },
+  {
+    "image": "assets/images/home/nearRestaurant/near4.png",
+    "name": "Smart Restro",
+    "duration": "700 mt",
+  },
+  {
+    "image": "assets/images/home/nearRestaurant/near1.png",
+    "name": "Vegan Restro",
+    "duration": "2.4 km",
+  },
+  {
+    "image": "assets/images/home/nearRestaurant/near2.png",
+    "name": "Healthy Food",
+    "duration": "1.5 km",
+  },
+  {
+    "image": "assets/images/home/nearRestaurant/near3.png",
+    "name": "Good Food",
+    "duration": "2 km",
+  },
+  {
+    "image": "assets/images/home/nearRestaurant/near5.png",
+    "name": "Vegan Restro",
+    "duration": "3 km",
+  },
+  {
+    "image": "assets/images/home/nearRestaurant/near6.png",
+    "name": "Smart Restro",
+    "duration": "1.9 km",
+  },
+  {
+    "image": "assets/images/home/nearRestaurant/near5.png",
+    "name": "Vegan Restro",
+    "duration": "3 km",
+  },
+  {
+    "image": "assets/images/home/nearRestaurant/near2.png",
+    "name": "Healthy food",
+    "duration": "1.5 km",
+  },
+  {
+    "image": "assets/images/home/nearRestaurant/near4.png",
+    "name": "Smart Restro",
+    "duration": "700 mt",
+  },
+  {
+    "image": "assets/images/home/nearRestaurant/near5.png",
+    "name": "Vegan Restro",
+    "duration": "3 km",
+  },
+  {
+    "image": "assets/images/home/nearRestaurant/near6.png",
+    "name": "Smart Restro",
+    "duration": "1.9 km",
+  },
+  {
+    "image": "assets/images/home/nearRestaurant/near5.png",
+    "name": "Vegan Restro",
+    "duration": "3 km",
+  },
+  {
+    "image": "assets/images/home/nearRestaurant/near2.png",
+    "name": "Healthy food",
+    "duration": "1.5 km",
+  },
+  {
+    "image": "assets/images/home/nearRestaurant/near4.png",
+    "name": "Smart Restro",
+    "duration": "700 mt",
+  },
 ];
 
 List<Map<String, dynamic>> canadianMealNearestRestaurant = [
@@ -238,6 +333,21 @@ List<Map<String, dynamic>> foodCategoriesList(BuildContext buildContext) => [
         "id": 6,
         "image": "assets/images/foodcate/chikenmeal.png",
         "name": AppLocalizations.of(buildContext)!.chikenMeal,
+      },
+      {
+        "id": 7,
+        "image": "assets/images/home/dinner_main.png",
+        "name": AppLocalizations.of(buildContext)!.dinnerMenu,
+      },
+      {
+        "id": 8,
+        "image": "assets/images/home/lunch.png",
+        "name": AppLocalizations.of(buildContext)!.lunch,
+      },
+      {
+        "id": 8,
+        "image": "assets/images/home/breakfast_main.png",
+        "name": AppLocalizations.of(buildContext)!.breakfast,
       },
     ];
 
@@ -349,4 +459,36 @@ List<Map<String, dynamic>> popularItems = [
     "image": "assets/images/home/item1.png",
     "price": 20.0,
   },
+];
+
+List<Map<String, dynamic>> coffeePriceList = [
+  {"id": "1", "price": "21.0"},
+  {"id": "2", "price": "18.0"},
+  {"id": "3", "price": "16.0"},
+  {"id": "4", "price": "25.0"},
+  {"id": "5", "price": "27.0"},
+  {"id": "6", "price": "30.0"},
+  {"id": "7", "price": "19.0"},
+  {"id": "8", "price": "35.0"},
+  {"id": "9", "price": "13.0"},
+  {"id": "10", "price": "10.0"},
+  {"id": "11", "price": "34.0"},
+  {"id": "12", "price": '23.0'},
+  {"id": "13", "price": '16.0'},
+  {"id": "14", "price": '21.0'},
+  {"id": "15", "price": '25.0'},
+  {"id": "16", "price": '28.0'},
+  {"id": "17", "price": '32.0'},
+  {"id": "18", "price": '50.0'},
+  {"id": "19", "price": '40.0'},
+  {"id": "20", "price": '23.0'},
+  {"id": "21", "price": '28.0'},
+  {"id": "22", "price": '29.0'},
+  {"id": "23", "price": '30.0'},
+  {"id": "24", "price": '36.0'},
+  {"id": "25", "price": '20.0'},
+  {"id": "26", "price": '15.0'},
+  {"id": "27", "price": '19.0'},
+  {"id": "28", "price": '33.0'},
+  {"id": "29", "price": '21.0'},
 ];

@@ -7,7 +7,7 @@ import 'package:food_app/a_b_testing/ab_provider.dart';
 import 'package:food_app/constant/app_button.dart';
 import 'package:food_app/constant/app_colors.dart';
 import 'package:food_app/constant/app_gredient_text.dart';
-import 'package:food_app/constant/app_sctring.dart';
+import 'package:food_app/constant/app_string.dart';
 import 'package:food_app/functionalities/bottom%20navigation%20bar/bottom_navigation_bar.dart';
 import 'package:food_app/functionalities/home/provider/home_provider.dart';
 import 'package:food_app/functionalities/home/screen/item_details.dart';

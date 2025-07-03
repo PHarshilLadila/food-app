@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:food_app/constant/app_colors.dart';
 import 'package:food_app/constant/app_gredient_text.dart';
-import 'package:food_app/constant/app_sctring.dart';
+import 'package:food_app/constant/app_string.dart';
 import 'package:food_app/functionalities/auth/screen/set_location.dart';
 import 'package:food_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';

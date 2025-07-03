@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:food_app/constant/app_button.dart';
 import 'package:food_app/constant/app_colors.dart';
 import 'package:food_app/constant/app_gredient_text.dart';
-import 'package:food_app/constant/app_sctring.dart';
+import 'package:food_app/constant/app_string.dart';
 import 'package:food_app/constant/app_textform_field.dart';
 import 'package:food_app/functionalities/auth/providers/auth_provider.dart';
 import 'package:food_app/functionalities/profile/provider/profile_provider.dart';

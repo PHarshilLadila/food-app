@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:food_app/constant/app_colors.dart';
-import 'package:food_app/constant/app_sctring.dart';
+import 'package:food_app/constant/app_string.dart';
 import 'package:food_app/functionalities/home/model/meal_model.dart';
 import 'package:food_app/functionalities/home/provider/home_provider.dart';
 import 'package:food_app/functionalities/home/screen/item_details.dart';

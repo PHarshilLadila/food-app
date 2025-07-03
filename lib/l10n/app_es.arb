@@ -108,5 +108,11 @@
   "dragNote": " Arrastre y suelte el artículo (manteniendo pulsado) al carrito. Asegúrese de colocarlo en el centro del carrito.",
   "addtocartdrag": "Añadir al carrito (arrastrar y soltar)",
   "dragnoteTwo": "Pulse aquí para añadir este artículo al carrito.",
-  "dragAndDropHere": "Arrastre y suelte aquí"
+  "dragAndDropHere": "Arrastre y suelte aquí",
+    "theme": "Tema",
+  "light": "Luz",
+  "dark": "Oscuro",
+  "dinnerMenu" : "Menú de la cena", 
+   "lunch" : "Menú del almuerzo",
+  "breakfast" : "Desayuno"
 }

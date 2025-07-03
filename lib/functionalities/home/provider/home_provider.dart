@@ -7,6 +7,7 @@ import 'package:food_app/functionalities/home/model/dessert_model.dart';
 import 'package:food_app/functionalities/home/model/food_categories_model.dart';
 import 'package:food_app/functionalities/home/model/hot_coffee_model.dart';
 import 'package:food_app/functionalities/home/model/meal_model.dart';
+import 'package:food_app/functionalities/home/model/recipes_model.dart';
 import 'package:food_app/services/api_service.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -37,6 +38,15 @@ class HomeProvider extends ChangeNotifier {
 
   List<CoffeeModel> _icedCoffee = [];
   List<CoffeeModel> get icedCoffee => _icedCoffee;
+
+  List<Recipe> _dinnerMenu = [];
+  List<Recipe> get dinnerMenu => _dinnerMenu;
+
+  List<Recipe> _lunchMenu = [];
+  List<Recipe> get lunchMenu => _lunchMenu;
+
+  List<Recipe> _breakfastMenu = [];
+  List<Recipe> get breakfastMenu => _breakfastMenu;
 
   // ** for search items **
 
@@ -241,6 +251,51 @@ class HomeProvider extends ChangeNotifier {
       }
     } catch (e) {
       _errorMessage = e.toString();
+    } finally {
+      isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> loadDinnerData() async {
+    isLoading = true;
+    notifyListeners();
+
+    try {
+      _dinnerMenu = await _service.getDinnerMenu();
+    } catch (e) {
+      print("Provider Error: $e");
+      _dinnerMenu = [];
+    } finally {
+      isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> loadLunchData() async {
+    isLoading = true;
+    notifyListeners();
+
+    try {
+      _lunchMenu = await _service.getLunchMenu();
+    } catch (e) {
+      print("Provider Error: $e");
+      _lunchMenu = [];
+    } finally {
+      isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> loadBreakFastData() async {
+    isLoading = true;
+    notifyListeners();
+
+    try {
+      _breakfastMenu = await _service.getBreakFastMenu();
+    } catch (e) {
+      print("Provider Error: $e");
+      _breakfastMenu = [];
     } finally {
       isLoading = false;
       notifyListeners();
