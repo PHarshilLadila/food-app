@@ -288,7 +288,9 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:food_app/functionalities/profile/model/profile_model.dart';
 import 'package:food_app/utils/utils.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -453,6 +455,153 @@ class AuthProviders extends ChangeNotifier {
       return false;
     }
   }
+
+  // Future<bool> signInWithFacebook(BuildContext context) async {
+  //   final SharedPreferences preferences = await SharedPreferences.getInstance();
+  //   try {
+  //     final LoginResult loginResult;
+
+  //     if (kIsWeb) {
+  //       loginResult = await FacebookAuth.instance.login(
+  //         permissions: ['email', 'public_profile'],
+  //       );
+  //     } else {
+  //       loginResult = await FacebookAuth.instance.login();
+  //     }
+
+  //     debugPrint("Login Status: ${loginResult.status}");
+
+  //     if (loginResult.status == LoginStatus.success) {
+  //       final accessToken = loginResult.accessToken!;
+  //       final credential =
+  //           FacebookAuthProvider.credential(accessToken.tokenString);
+
+  //       final authResult = await auth.signInWithCredential(credential);
+  //       gUser = authResult.user;
+
+  //       final userData = await FacebookAuth.instance.getUserData(
+  //         fields: "email,name,picture.width(200)",
+  //       );
+
+  //       final doc = firestore.collection("users").doc(gUser!.uid);
+  //       final snapshot = await doc.get();
+
+  //       await preferences.setString("facebookUID", gUser!.uid);
+
+  //       if (snapshot.exists) {
+  //         _user = ProfileModel.fromMap(snapshot.data() as Map<String, dynamic>);
+  //       } else {
+  //         _user = ProfileModel(
+  //           uid: gUser!.uid,
+  //           name: userData['name'] ?? '',
+  //           email: userData['email'] ?? '',
+  //           profileImage: userData["picture"]["data"]["url"] ?? '',
+  //         );
+  //         await doc.set(_user!.toMap());
+  //       }
+
+  //       notifyListeners();
+  //       return true;
+  //     } else {
+  //       debugPrint("Facebook login failed: ${loginResult.message}");
+  //       return false;
+  //     }
+  //   } on FirebaseAuthException catch (e) {
+  //     debugPrint("FirebaseAuthException: ${e.message}");
+  //     return false;
+  //   } catch (e, st) {
+  //     debugPrint("Exception: $e");
+  //     debugPrint("StackTrace: $st");
+  //     return false;
+  //   }
+  // }
+
+  Future<bool> signInWithFacebook() async {
+    print('Facebook Login ======');
+    final LoginResult result = await FacebookAuth.instance.login(permissions: [
+      "public_profile",
+      "email"
+    ]); // by default we request the email and the public profile
+    if (result.status == LoginStatus.success) {
+      print("=====> FB ${result.accessToken}");
+
+      // get the user data
+      // by default we get the userId, email,name and picture
+      var userData = await FacebookAuth.instance.getUserData();
+      // final userData = await FacebookAuth.instance.getUserData(fields: "email");
+      print('User Profile --->}');
+      print('User Profile ---> ${userData.toString()}');
+      print('User Profile ---> ${userData['email']}');
+      print('User Profile ---> ${userData.length}');
+      //Todo: savingData Locally
+
+      userData = userData;
+      return true;
+    } else {
+      print(result.status);
+      print(result.message);
+      return false;
+    }
+  }
+
+  // Future<bool> signInWithFacebook(BuildContext context) async {
+  //   SharedPreferences preferences = await SharedPreferences.getInstance();
+  //   try {
+  //     final LoginResult loginResult = await FacebookAuth.instance.login(
+  //         // permissions: ['email', 'public_profile'],
+  //         );
+
+  //     if (loginResult.status == LoginStatus.success) {
+  //       final OAuthCredential facebookAuthCredential =
+  //           FacebookAuthProvider.credential(
+  //               loginResult.accessToken!.tokenString);
+
+  //       final authResult =
+  //           await auth.signInWithCredential(facebookAuthCredential);
+
+  //       gUser = authResult.user;
+
+  //       final userData = await FacebookAuth.instance.getUserData(
+  //         fields: "email,name,picture.width(200)",
+  //       );
+
+  //       DocumentSnapshot snapshot =
+  //           await firestore.collection("users").doc(gUser!.uid).get();
+
+  //       await preferences.setString("facebookUID", gUser!.uid);
+
+  //       if (snapshot.exists) {
+  //         _user = ProfileModel.fromMap(snapshot.data() as Map<String, dynamic>);
+  //       } else {
+  //         _user = ProfileModel(
+  //           uid: gUser!.uid,
+  //           name: userData['name'] ?? '',
+  //           email: userData['email'] ?? '',
+  //           profileImage: userData["picture"]["data"]["url"] ?? '',
+  //         );
+
+  //         await firestore
+  //             .collection("users")
+  //             .doc(gUser!.uid)
+  //             .set(_user!.toMap());
+  //       }
+
+  //       notifyListeners();
+  //       return true;
+  //     } else {
+  //       debugPrint("Facebook login failed: ${loginResult.message}");
+  //       return false;
+  //     }
+  //   } on FirebaseAuthException catch (e) {
+  //     debugPrint("Facebook Sign-In Firebase Error: ${e.message}");
+  //     return false;
+  //   } catch (e, stackTrace) {
+  //     debugPrint("Facebook Login Error: $e");
+  //     debugPrint("StackTrace: $stackTrace");
+  //     debugPrint("Facebook Login Error: $e");
+  //     return false;
+  //   }
+  // }
 
   Future<void> updateUserData(Map<String, dynamic> data) async {
     if (_user != null) {

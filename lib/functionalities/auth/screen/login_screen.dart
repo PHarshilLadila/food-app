@@ -258,9 +258,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 maxline: 1,
                                 key: const Key('email'),
                                 textEditingController: emailController,
-                                hintText: 
-                                // "Email",
-                                 AppLocalizations.of(context)!.email,
+                                hintText:
+                                    // "Email",
+                                    AppLocalizations.of(context)!.email,
                                 obscureText: false,
                                 fillColor:
                                     const Color.fromARGB(255, 252, 255, 252),
@@ -300,12 +300,11 @@ class _LoginScreenState extends State<LoginScreen> {
                               width: textFieldWidth,
                               child: CustomeTextFormField(
                                 key: const Key('password'),
-
                                 maxline: 1,
                                 textEditingController: passwordController,
-                                hintText: 
-                                // "Password",
-                                AppLocalizations.of(context)!.password,
+                                hintText:
+                                    // "Password",
+                                    AppLocalizations.of(context)!.password,
                                 obscureText: showPasswords,
                                 borderColor:
                                     const Color.fromARGB(255, 252, 255, 252),
@@ -430,48 +429,133 @@ class _LoginScreenState extends State<LoginScreen> {
                                     children: [
                                       Flexible(
                                         flex: 1,
-                                        child: Container(
-                                          width: containerWidth,
-                                          height: containerHeight,
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: const Color(0xffF4F4F4),
-                                                width: 2),
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                            gradient: const LinearGradient(
-                                              begin: Alignment(-0.95, 0.0),
-                                              end: Alignment(1.0, 0.0),
-                                              colors: [
-                                                AppColors.whiteColor,
-                                                AppColors.whiteColor,
-                                              ],
-                                              stops: [0.0, 1.0],
-                                            ),
-                                          ),
-                                          child: Center(
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Image.asset(
-                                                  "assets/images/fb.png",
-                                                  height: height * 0.04,
-                                                ),
-                                                SizedBox(
-                                                  width: width / 60,
-                                                ),
-                                                Text(
-                                                  AppLocalizations.of(context)!
-                                                      .facebook,
-                                                  // 'Facebook',
-                                                  style: GoogleFonts.poppins(
-                                                    color: AppColors.blackColor,
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w500,
+                                        child: GestureDetector(
+                                          onTap: () async {
+                                            final authProvider =
+                                                Provider.of<AuthProviders>(
+                                                    context,
+                                                    listen: false);
+                                            final success = await authProvider
+                                                .signInWithFacebook();
+
+                                            if (success) {
+                                              final user = authProvider.user;
+                                              // final gUser = authProvider.gUser;
+
+                                              if (user != null) {
+                                                // ✅ Print in terminal
+                                                debugPrint(
+                                                    "✅ Facebook Login Successful");
+                                                debugPrint("UID: ${user.uid}");
+                                                debugPrint(
+                                                    "Name: ${user.name}");
+                                                debugPrint(
+                                                    "Email: ${user.email}");
+                                                debugPrint(
+                                                    "Mobile: ${user.mobile}");
+                                                debugPrint(
+                                                    "Location: ${user.location}");
+                                                debugPrint(
+                                                    "Profile Image URL: ${user.profileImage}");
+
+                                                // ✅ Show dialog
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (context) =>
+                                                      AlertDialog(
+                                                    title: const Text(
+                                                        "Facebook Login Successful"),
+                                                    content: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                            "UID: ${user.uid ?? 'N/A'}"),
+                                                        Text(
+                                                            "Name: ${user.name ?? 'N/A'}"),
+                                                        Text(
+                                                            "Email: ${user.email ?? 'N/A'}"),
+                                                        Text(
+                                                            "Mobile: ${user.mobile ?? 'N/A'}"),
+                                                        Text(
+                                                            "Location: ${user.location ?? 'N/A'}"),
+                                                        Text(
+                                                            "Profile Image: ${user.profileImage ?? 'N/A'}"),
+                                                      ],
+                                                    ),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop(),
+                                                        child: const Text("OK"),
+                                                      ),
+                                                    ],
                                                   ),
-                                                ),
-                                              ],
+                                                );
+                                              }
+                                            } else {
+                                              debugPrint(
+                                                  "❌ Facebook Login Failed");
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                const SnackBar(
+                                                    content: Text(
+                                                        "Facebook login failed")),
+                                              );
+                                            }
+                                          },
+                                          child: Container(
+                                            width: containerWidth,
+                                            height: containerHeight,
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color:
+                                                      const Color(0xffF4F4F4),
+                                                  width: 2),
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              gradient: const LinearGradient(
+                                                begin: Alignment(-0.95, 0.0),
+                                                end: Alignment(1.0, 0.0),
+                                                colors: [
+                                                  AppColors.whiteColor,
+                                                  AppColors.whiteColor,
+                                                ],
+                                                stops: [0.0, 1.0],
+                                              ),
+                                            ),
+                                            child: Center(
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/images/fb.png",
+                                                    height: height * 0.04,
+                                                  ),
+                                                  SizedBox(
+                                                    width: width / 60,
+                                                  ),
+                                                  Text(
+                                                    AppLocalizations.of(
+                                                            context)!
+                                                        .facebook,
+                                                    // 'Facebook',
+                                                    style: GoogleFonts.poppins(
+                                                      color:
+                                                          AppColors.blackColor,
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -547,7 +631,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                                     width: width / 60,
                                                   ),
                                                   Text(
-                                                    AppLocalizations.of(context)!
+                                                    AppLocalizations.of(
+                                                            context)!
                                                         .google,
                                                     // "Google",
                                                     style: GoogleFonts.poppins(

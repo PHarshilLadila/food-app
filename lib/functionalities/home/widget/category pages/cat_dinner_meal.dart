@@ -780,8 +780,8 @@ class _CatDinnerMealState extends State<CatDinnerMeal> {
                                                     CrossAxisAlignment.center,
                                                 children: [
                                                   AutoSizeText(
-                                                    value.dinnerMenu[index]
-                                                        .name!,
+                                                    value
+                                                        .dinnerMenu[index].name,
                                                     textAlign: TextAlign.start,
                                                     minFontSize: 16,
                                                     maxFontSize: 16,

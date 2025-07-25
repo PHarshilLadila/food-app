@@ -1347,7 +1347,6 @@ import 'package:food_app/functionalities/profile/screen/three_avatar_error_handl
 import 'package:food_app/functionalities/profile/widgets/vertocal_container_button.dart';
 import 'package:food_app/functionalities/profile/widgets/widgets.dart';
 import 'package:food_app/functionalities/track%20order/screens/order_history.dart';
-import 'package:food_app/functionalities/track%20order/screens/track_order.dart';
 import 'package:food_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logging/logging.dart';
@@ -1452,6 +1451,7 @@ class ProfileScreenState extends State<ProfileScreen>
       var fileName = "${dir.path}/2D_Image${random.nextInt(100)}.png";
 
       final file = File(fileName);
+
       await file.writeAsBytes(response.bodyBytes);
 
       final params = SaveFileDialogParams(

@@ -161,10 +161,10 @@ class _CatHotCoffeeState extends State<CatHotCoffee> {
                               childAspectRatio: childAspectRatio,
                             ),
                             itemBuilder: (context, index) {
-                              print(
+                              debugPrint(
                                   "this is the coffee index : ${value.coffees.length}");
                               final meal = value.coffees[index];
-                              print(
+                              debugPrint(
                                   "---------------------> This is the index : ${hotCoffeeNearestRestaurant[index]}");
 
                               return LongPressDraggable<Map<String, dynamic>>(

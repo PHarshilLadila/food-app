@@ -264,7 +264,7 @@ class HomeProvider extends ChangeNotifier {
     try {
       _dinnerMenu = await _service.getDinnerMenu();
     } catch (e) {
-      print("Provider Error: $e");
+      debugPrint("Provider Error: $e");
       _dinnerMenu = [];
     } finally {
       isLoading = false;
@@ -279,7 +279,7 @@ class HomeProvider extends ChangeNotifier {
     try {
       _lunchMenu = await _service.getLunchMenu();
     } catch (e) {
-      print("Provider Error: $e");
+      debugPrint("Provider Error: $e");
       _lunchMenu = [];
     } finally {
       isLoading = false;
@@ -294,7 +294,7 @@ class HomeProvider extends ChangeNotifier {
     try {
       _breakfastMenu = await _service.getBreakFastMenu();
     } catch (e) {
-      print("Provider Error: $e");
+      debugPrint("Provider Error: $e");
       _breakfastMenu = [];
     } finally {
       isLoading = false;

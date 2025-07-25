@@ -9,7 +9,6 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:food_app/a_b_testing/ab_provider.dart';
 import 'package:food_app/constant/app_string.dart';
 import 'package:food_app/functionalities/auth/providers/auth_provider.dart';
-import 'package:food_app/functionalities/bottom%20navigation%20bar/bottom_navigation_bar.dart';
 import 'package:food_app/functionalities/home/provider/home_provider.dart';
 import 'package:food_app/functionalities/home/provider/review_provider.dart';
 import 'package:food_app/functionalities/profile/help%20&%20support/provider/query_provider.dart';
@@ -227,3 +226,7 @@ void sentryInit() async {
 //  }
 
 //  adb shell am start -a android.intent.action.VIEW \-d "flutterDeepLink://swift-bite/#/home/hello-world"
+
+// flutter clean
+// flutter pub get
+// flutter gen-l10n

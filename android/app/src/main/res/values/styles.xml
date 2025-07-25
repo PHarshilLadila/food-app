@@ -15,4 +15,8 @@
     <style name="NormalTheme" parent="@android:style/Theme.Light.NoTitleBar">
         <item name="android:windowBackground">?android:colorBackground</item>
     </style>
+    <string name="app_name">Swift Bite</string>
+    <string name="facebook_app_id">1081108890079073</string>
+    <string name="facebook_client_token">096004fe64e94aebcbc2a6330abb19c9</string>
+    <string name="fb_login_protocol_scheme">fb1081108890079073</string>
 </resources>
