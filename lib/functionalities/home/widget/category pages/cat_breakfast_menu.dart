@@ -1868,7 +1868,7 @@ class _CatBreakFastMealState extends State<CatBreakFastMeal> {
             mainAxisSpacing: 8,
             crossAxisSpacing: 8,
             crossAxisCount: gridConfig.crossAxisCount,
-            childAspectRatio: gridConfig.childAspectRatio,
+            childAspectRatio: 0.6,
           ),
           itemBuilder: (context, index) {
             final item = homeProvider.breakfastMenu[index];
@@ -2017,6 +2017,8 @@ class _CatBreakFastMealState extends State<CatBreakFastMeal> {
               textAlign: TextAlign.start,
               minFontSize: 16,
               maxFontSize: 16,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
               style: GoogleFonts.poppins(
                 color: textColor,
                 fontSize: width / 30,

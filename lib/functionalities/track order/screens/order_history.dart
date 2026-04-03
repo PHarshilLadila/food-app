@@ -639,22 +639,28 @@ class OrderHistoryState extends State<OrderHistory> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Row(
+                                            mainAxisSize: MainAxisSize.min,
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Text(
-                                                "Order ID : ${order['orderid'] ?? 'N/A'}",
-                                                style: GoogleFonts.poppins(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: AppColors.darkGreen,
+                                              Flexible(
+                                                child: Text(
+                                                  "Order ID : ${order['orderid'] ?? 'N/A'}",
+                                                  maxLines: 2,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: GoogleFonts.poppins(
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: AppColors.darkGreen,
+                                                  ),
                                                 ),
                                               ),
                                               Text(
                                                 _formatTimestamp(
                                                     order['timestamp']),
                                                 style: GoogleFonts.poppins(
-                                                  fontSize: 16,
+                                                  fontSize: 14,
                                                   fontWeight: FontWeight.bold,
                                                   color: AppColors.darkGreen,
                                                 ),

@@ -265,7 +265,7 @@ class _ReviewFormState extends State<ReviewForm> {
                     ],
                   ),
                   child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CircleAvatar(
                         radius: 24,
@@ -286,12 +286,14 @@ class _ReviewFormState extends State<ReviewForm> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  review['username'] ?? "User",
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black87,
+                                Flexible(
+                                  child: Text(
+                                    review['username'] ?? "User",
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black87,
+                                    ),
                                   ),
                                 ),
                                 Row(
@@ -304,14 +306,17 @@ class _ReviewFormState extends State<ReviewForm> {
                               ],
                             ),
                             Row(
+                              mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  review['comment'] ?? "No comment provided.",
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.grey.shade900,
+                                Flexible(
+                                  child: Text(
+                                    review['comment'] ?? "No comment provided.",
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.grey.shade900,
+                                    ),
                                   ),
                                 ),
                                 Text(
